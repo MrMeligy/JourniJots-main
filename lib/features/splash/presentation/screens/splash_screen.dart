@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/splash/presentation/screens/widgets/splash_view_body.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -31,16 +32,20 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF68B0F8),
-      body: SblashViewBody(
-          animation: _animation, positionanimation: _positionanimation),
+      backgroundColor: ksplashcolor,
+      body: SafeArea(
+        child: SblashViewBody(
+          animation: _animation,
+          positionanimation: _positionanimation,
+        ),
+      ),
     );
   }
 
   void animationSetub() {
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
     )..forward();
 
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);

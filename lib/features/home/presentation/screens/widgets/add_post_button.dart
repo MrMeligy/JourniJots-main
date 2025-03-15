@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/utils/constants.dart';
 
 class AddPostButton extends StatelessWidget {
@@ -13,7 +14,7 @@ class AddPostButton extends StatelessWidget {
       duration: const Duration(milliseconds: 150),
       opacity: _isVisible ? 1.0 : 0.0,
       child: Align(
-        alignment: const Alignment(0.9, 0.855),
+        alignment: Alignment(1.w, 1.08.h),
         child: FloatingActionButton(
           onPressed: () {},
           backgroundColor: kprimarycolor,

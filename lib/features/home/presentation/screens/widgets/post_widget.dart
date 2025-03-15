@@ -1,7 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/utils/constants.dart';
+import 'package:journijots/core/utils/text_styles.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/image_swiper_widget.dart';
+import 'package:journijots/features/home/presentation/screens/widgets/post_profile.dart';
 
 class PostWidget extends StatefulWidget {
   const PostWidget({super.key, required this.postContent});
@@ -29,94 +32,62 @@ class _PostWidgetState extends State<PostWidget> {
         widget.postContent.length > maxlength; //if it long will show see more
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2),
+      padding: EdgeInsets.symmetric(vertical: 5.h),
       child: Card(
         color: kbodycolor,
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(12.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
+              const PostProfile(),
+              SizedBox(
+                height: 16.h,
+              ),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipOval(
-                    child: Image.asset(
-                      "assets/images/pp.jpg",
-                      fit: BoxFit.cover,
-                      width: 60,
-                      height: 60,
-                    ),
+                  Text(
+                    "A day In Zamalek",
+                    style: TextStyles.font18BlackBold,
                   ),
-                  const SizedBox(
-                    width: 8,
+                  RichText(
+                    text: TextSpan(
+                        text: isLong
+                            ? (isExpanded
+                                ? widget.postContent
+                                : "${widget.postContent.substring(0, maxlength)}...")
+                            : widget.postContent,
+                        style: TextStyles.font18Black,
+                        children: isLong
+                            ? [
+                                TextSpan(
+                                  text: isExpanded ? " See less" : " See more",
+                                  style: const TextStyle(
+                                    color: kprimarycolor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      setState(() {
+                                        isExpanded = !isExpanded;
+                                      });
+                                    },
+                                ),
+                              ]
+                            : []),
                   ),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Karius",
-                        style: TextStyle(color: Colors.black, fontSize: 22),
-                      ),
-                      Text(
-                        "2h ago",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey,
-                        ),
-                      )
-                    ],
-                  )
                 ],
               ),
-              const SizedBox(
-                height: 16,
-              ),
-              const Text(
-                "A day In Zamalek",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-              RichText(
-                text: TextSpan(
-                    text: isLong
-                        ? (isExpanded
-                            ? widget.postContent
-                            : "${widget.postContent.substring(0, maxlength)}...")
-                        : widget.postContent,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                    children: isLong
-                        ? [
-                            TextSpan(
-                              text: isExpanded ? " See less" : " See more",
-                              style: const TextStyle(
-                                color: kprimarycolor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  setState(() {
-                                    isExpanded = !isExpanded;
-                                  });
-                                },
-                            ),
-                          ]
-                        : []),
-              ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               ImageSwiper(
                 imageUrls: imageUrls,
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -127,8 +98,8 @@ class _PostWidgetState extends State<PostWidget> {
                         "23 Likes",
                         style: TextStyle(fontSize: 16),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: 10.h,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -143,35 +114,32 @@ class _PostWidgetState extends State<PostWidget> {
                               color: kprimarycolor,
                               size: 30,
                             ),
-                            Text(
-                              isLiked ? "Liked" : "Like",
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )
+                            Text(isLiked ? "Liked" : "Like",
+                                style: TextStyles.font20BlueBold)
                           ],
                         ),
                       )
                     ],
                   ),
-                  const Column(
+                  Column(
                     children: [
-                      Text(
+                      const Text(
                         "12 Comments",
                         style: TextStyle(fontSize: 16),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.comment,
                             size: 30,
                             color: kprimarycolor,
                           ),
                           Text(
                             "Comment",
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyles.font20BlueBold,
                           )
                         ],
                       )

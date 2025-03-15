@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/splash/presentation/screens/widgets/animated_logo.dart';
 
 class SblashViewBody extends StatelessWidget {
@@ -23,7 +24,7 @@ class SblashViewBody extends StatelessWidget {
             radius: 0.6, // حجم الهالة
             colors: [
               Colors.white.withValues(alpha: 0.8), // منتصف الهالة (فاتح جدًا)
-              const Color(0xFF68B0F8), // لون الخلفية الأساسي
+              ksplashcolor, // لون الخلفية الأساسي
             ],
           ),
         ),

@@ -5,14 +5,14 @@ import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/profile/presentation/screens/profile_screen.dart';
 import 'package:journijots/core/utils/widgets/custom_nav_bar.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+class SharedScreen extends StatefulWidget {
+  const SharedScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<SharedScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<SharedScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [

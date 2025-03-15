@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:journijots/builders/text_field_builder.dart';
+import 'package:journijots/core/helper/extensions.dart';
+import 'package:journijots/core/routes/routes.dart';
+import 'package:journijots/core/utils/constants.dart';
+import 'package:journijots/core/utils/text_styles.dart';
 import 'package:journijots/core/utils/widgets/custom_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -40,10 +44,9 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {},
-                      child: const Text(
+                      child: Text(
                         "Forgot password?",
-                        style:
-                            TextStyle(color: Color(0xff8CB6DC), fontSize: 14),
+                        style: TextStyles.font16blue,
                       ),
                     ),
                   ],
@@ -52,24 +55,24 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 25),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, 'mainscreen');
+                  context.pushNamed(Routes.homeScreen);
                 },
                 child: CustomButton(
                   text: 'Login',
-                  backgroundColor: const Color(0xff8CB6DC),
-                  borderColor: const Color(0xff8CB6DC),
+                  backgroundColor: kprimarycolor,
+                  borderColor: kprimarycolor,
                   textColor: Colors.white,
                 ),
               ),
               const SizedBox(height: 25),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, 'signupPage');
+                  context.pushNamed(Routes.interestsScreen);
                 },
                 child: CustomButton(
                   text: 'Sign up',
-                  backgroundColor: const Color(0xff8CB6DC),
-                  borderColor: const Color(0xff8CB6DC),
+                  backgroundColor: kprimarycolor,
+                  borderColor: kprimarycolor,
                   textColor: Colors.white,
                 ),
               ),

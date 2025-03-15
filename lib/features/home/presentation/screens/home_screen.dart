@@ -4,7 +4,6 @@ import 'package:journijots/features/home/presentation/screens/widgets/add_post_b
 import 'package:journijots/core/utils/widgets/custom_appbar.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/home_view_body.dart';
 
-// محتاج statemanagement هنا
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

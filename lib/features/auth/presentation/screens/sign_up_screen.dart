@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:journijots/builders/text_field_builder.dart';
+import 'package:journijots/core/helper/extensions.dart';
+import 'package:journijots/core/routes/routes.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/widgets/custom_button.dart';
 
@@ -50,7 +52,7 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, 'interests');
+                  context.pushNamed(Routes.interestsScreen);
                 },
                 child: CustomButton(
                   text: 'Sign up',
