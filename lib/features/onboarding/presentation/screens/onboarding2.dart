@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/features/onboarding/presentation/screens/widgets/onboarding2_body.dart';
+import 'package:journijots/features/onboarding/presentation/screens/widgets/tween_animated_amico.dart';
 
 class Onboarding2 extends StatelessWidget {
   const Onboarding2({super.key});
@@ -20,9 +21,12 @@ class Onboarding2 extends StatelessWidget {
                 bottom: -60.h,
                 left: 0,
                 right: 0,
-                child: Image.asset(
-                  'assets/images/Rectangle 27_2.png',
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: 'bgonb',
+                  child: Image.asset(
+                    'assets/images/Rectangle 27_2.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
 
@@ -31,9 +35,8 @@ class Onboarding2 extends StatelessWidget {
                 top: height / 6,
                 left: 0,
                 right: 0,
-                child: Image.asset(
-                  'assets/images/amico2.png',
-                  width: double.infinity,
+                child: const TweenAnimatedAmico(
+                  imageUrl: 'assets/images/amico2.png',
                 ),
               ),
               const Onboarding2Body(),

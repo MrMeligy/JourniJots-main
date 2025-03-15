@@ -10,7 +10,7 @@ class TextStyles {
   );
   static TextStyle font16Blue = TextStyle(
     fontSize: 16.sp,
-    color: const Color(0xff2052B3),
+    color: kprimarycolor,
   );
   static TextStyle font40WhiteBold = TextStyle(
     fontSize: 40.sp,

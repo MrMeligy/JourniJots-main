@@ -1,0 +1,2 @@
+E:/Graduation Project/Application/journijots-main/android/app/.cxx/RelWithDebInfo/334n5212/x86_64/CMakeFiles/edit_cache.dir
+E:/Graduation Project/Application/journijots-main/android/app/.cxx/RelWithDebInfo/334n5212/x86_64/CMakeFiles/rebuild_cache.dir

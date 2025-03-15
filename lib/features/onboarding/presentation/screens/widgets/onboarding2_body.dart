@@ -15,30 +15,43 @@ class Onboarding2Body extends StatelessWidget {
     double hieght = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Positioned(
-      bottom: hieght / 25,
+      top: hieght / 1.55,
       left: width / 18,
       right: width / 18,
-      child: Column(
-        children: [
-          Text('Make your own memories',
-              textAlign: TextAlign.left, style: TextStyles.font40WhiteBold),
-          SizedBox(height: 20.h),
-          Text(
-            'With our travel services, you will explore the world with ease and comfort. Discover new destinations, enjoy delicious food.',
-            style: TextStyles.font16White,
-          ),
-          SizedBox(height: hieght / 25),
+      child: TweenAnimationBuilder(
+        tween: Tween<double>(begin: 0, end: 1),
+        duration: const Duration(seconds: 1),
+        builder: (context, value, child) {
+          return Opacity(
+            opacity: value,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: value * 20),
+              child: child,
+            ),
+          );
+        },
+        child: Column(
+          children: [
+            Text('Make your own memories',
+                textAlign: TextAlign.left, style: TextStyles.font40WhiteBold),
+            SizedBox(height: 20.h),
+            Text(
+              'With our travel services, you will explore the world with ease and comfort. Discover new destinations, enjoy delicious food.',
+              style: TextStyles.font16White,
+            ),
+            SizedBox(height: hieght / 25),
 
-          // Next Button
-          OnBoardingButton(
-            text: 'Next',
-            onTap: () {
-              context.pushNamed(Routes.onBoarding3);
-            },
-            color: Colors.transparent,
-            borderColor: Colors.white,
-          ),
-        ],
+            // Next Button
+            OnBoardingButton(
+              text: 'Next',
+              onTap: () {
+                context.pushNamed(Routes.onBoarding3);
+              },
+              color: Colors.transparent,
+              borderColor: Colors.white,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/features/onboarding/presentation/screens/widgets/onboarding3_body.dart';
+import 'package:journijots/features/onboarding/presentation/screens/widgets/tween_animated_amico.dart';
 
 class Onboarding3 extends StatelessWidget {
   const Onboarding3({super.key});
@@ -18,22 +19,23 @@ class Onboarding3 extends StatelessWidget {
                 top: 0,
                 left: 0,
                 right: 0,
-                child: Image.asset(
-                  'assets/images/Rectangle 27.png',
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: 'bgonb',
+                  child: Image.asset(
+                    'assets/images/Rectangle 27.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
 
               // Pana Image
               Positioned(
-                top: height / 10,
-                left: 0,
-                right: 0,
-                child: Image.asset(
-                  'assets/images/pana.png',
-                  width: double.infinity,
-                ),
-              ),
+                  top: height / 10,
+                  left: 0,
+                  right: 0,
+                  child: const TweenAnimatedAmico(
+                    imageUrl: 'assets/images/pana.png',
+                  )),
 
               // Text
               const OnBoarding3Body(),
