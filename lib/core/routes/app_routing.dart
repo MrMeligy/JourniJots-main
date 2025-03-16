@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/core/routes/routes.dart';
-// import 'package:journijots/features/auth/presentation/screens/login_screen.dart';
-// import 'package:journijots/features/auth/presentation/screens/sign_up_screen.dart';
-// import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
-// import 'package:journijots/features/home/presentation/screens/home_screen.dart';
-// import 'package:journijots/features/interests/presentation/screens/intersts_screen.dart';
+import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding1.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding2.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding3.dart';
@@ -31,8 +27,8 @@ class AppRouting {
       //   return MaterialPageRoute(builder: (_) => const SignUpScreen());
       // case Routes.interestsScreen:
       //   return MaterialPageRoute(builder: (_) => const InterstsScreen());
-      // case Routes.homeScreen:
-      //   return MaterialPageRoute(builder: (_) => const HomeScreen());
+      case Routes.homeScreen:
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
       // case Routes.exploreScreen:
       //   return MaterialPageRoute(builder: (_) => const ExploreScreen());
       default:

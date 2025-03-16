@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/routes/app_routing.dart';
+import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding1.dart';
 
 class JournijotsApp extends StatelessWidget {
@@ -14,7 +15,7 @@ class JournijotsApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const Onboarding1(),
+        home: const HomeScreen(),
         onGenerateRoute: appRouting.generateRoute,
         theme: ThemeData(
           fontFamily: 'Acme',
