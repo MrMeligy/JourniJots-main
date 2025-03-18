@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/routes/routes.dart';
-import 'package:journijots/core/utils/constants.dart';
+import 'package:journijots/core/utils/text_styles.dart';
 import 'package:journijots/features/onboarding/presentation/screens/widgets/onboarding_button.dart';
 
 class Onboarding1Body extends StatelessWidget {
@@ -36,19 +36,12 @@ class Onboarding1Body extends StatelessWidget {
             children: [
               Text(
                 'Get ready for an unforgettable adventure',
-                style: TextStyle(
-                  color: kprimarycolor,
-                  fontSize: 32.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyles.font32W600Blue,
               ),
               SizedBox(height: 20.h),
               Text(
                 'With our travel services, you will explore the world with ease and comfort. Discover new destinations, enjoy delicious food.',
-                style: TextStyle(
-                  color: kprimarycolor,
-                  fontSize: 16.sp,
-                ),
+                style: TextStyles.font16Blue,
               ),
               SizedBox(height: hieght / 25),
 
