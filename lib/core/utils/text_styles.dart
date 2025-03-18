@@ -27,23 +27,24 @@ class TextStyles {
   );
   static TextStyle font22black = TextStyle(
     color: Colors.black,
-    fontSize: 22.sp,
+    fontWeight: FontWeight.bold,
+    fontSize: 19.sp,
   );
   static TextStyle font16grey = TextStyle(
-    fontSize: 16.sp,
+    fontSize: 14.sp,
     color: Colors.grey,
   );
   static TextStyle font18BlackBold = TextStyle(
     color: Colors.black,
-    fontSize: 18.sp,
+    fontSize: 15.sp,
     fontWeight: FontWeight.bold,
   );
   static TextStyle font18Black = TextStyle(
     color: Colors.black,
-    fontSize: 18.sp,
+    fontSize: 15.sp,
   );
   static TextStyle font20BlueBold = const TextStyle(
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: FontWeight.bold,
     color: kprimarycolor,
   );
