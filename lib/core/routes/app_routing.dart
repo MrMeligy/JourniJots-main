@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/core/routes/routes.dart';
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
+import 'package:journijots/features/interests/presentation/screens/interests.dart';
+import 'package:journijots/features/login-signup/presentation/screens/login.dart';
+import 'package:journijots/features/login-signup/presentation/screens/sign_up.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding1.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding2.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding3.dart';
@@ -21,12 +24,12 @@ class AppRouting {
         return MaterialPageRoute(builder: (_) => const Onboarding2());
       case Routes.onBoarding3:
         return MaterialPageRoute(builder: (_) => const Onboarding3());
-      // case Routes.logInScreen:
-      //   return MaterialPageRoute(builder: (_) => const LoginScreen());
-      // case Routes.signUpScreen:
-      //   return MaterialPageRoute(builder: (_) => const SignUpScreen());
-      // case Routes.interestsScreen:
-      //   return MaterialPageRoute(builder: (_) => const InterstsScreen());
+      case Routes.logInScreen:
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case Routes.signUpScreen:
+        return MaterialPageRoute(builder: (_) => const SignUpScreen());
+      case Routes.interestsScreen:
+        return MaterialPageRoute(builder: (_) => InterestsScreen());
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       // case Routes.exploreScreen:
