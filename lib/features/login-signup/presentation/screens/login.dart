@@ -71,7 +71,8 @@ class LoginScreen extends StatelessWidget {
                     // Email Label
                     const Text(
                       "Email",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: screenHeight * 0.001),
 
@@ -83,12 +84,14 @@ class LoginScreen extends StatelessWidget {
                     // Password Label
                     const Text(
                       "Password",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: screenHeight * 0.001),
 
                     // Password Text Field with Icon
-                    const CustomTextField(label: 'Password', icon: Icons.lock, isPassword: true),
+                    const CustomTextField(
+                        label: 'Password', icon: Icons.lock, isPassword: true),
 
                     SizedBox(height: screenHeight * 0.02),
 
@@ -101,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, '/SignUp'); 
+                                Navigator.pushNamed(context, '/SignUp');
                               },
                               child: const Text(
                                 "Don't have an account? Sign up",
@@ -149,7 +152,7 @@ class LoginScreen extends StatelessWidget {
                       height: screenHeight * 0.06,
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/home');
+                          Navigator.pushNamed(context, '/profile');
                         },
                         child: CustomButton(
                           text: 'Log in',

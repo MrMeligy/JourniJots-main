@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/routes/app_routing.dart';
 
+// ignore: unused_import
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/login-signup/presentation/screens/login.dart';
-
 
 class JournijotsApp extends StatelessWidget {
   const JournijotsApp({super.key, required this.appRouting});
@@ -17,9 +17,7 @@ class JournijotsApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-
         home: const LoginScreen(),
-
         onGenerateRoute: appRouting.generateRoute,
         theme: ThemeData(
           fontFamily: 'Acme',

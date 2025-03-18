@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/core/routes/routes.dart';
+import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/interests/presentation/screens/interests.dart';
 import 'package:journijots/features/login-signup/presentation/screens/login.dart';
@@ -8,6 +9,7 @@ import 'package:journijots/features/onboarding/presentation/screens/onboarding1.
 import 'package:journijots/features/onboarding/presentation/screens/onboarding2.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding3.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:journijots/features/profile/presentation/screens/widgets/profile_page.dart';
 
 class AppRouting {
   Route generateRoute(RouteSettings settings) {
@@ -32,8 +34,10 @@ class AppRouting {
         return MaterialPageRoute(builder: (_) => InterestsScreen());
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
-      // case Routes.exploreScreen:
-      //   return MaterialPageRoute(builder: (_) => const ExploreScreen());
+      case Routes.exploreScreen:
+        return MaterialPageRoute(builder: (_) => const ExploreScreen());
+      case Routes.profileScreen:
+        return MaterialPageRoute(builder: (_) => const ProfilePage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

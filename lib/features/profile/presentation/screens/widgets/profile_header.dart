@@ -98,7 +98,6 @@ class ProfileHeader extends StatelessWidget {
                   color: const Color.fromARGB(255, 6, 6, 6),
                 ),
               ),
-              
               SizedBox(width: 4.w),
               Icon(
                 Icons.verified,

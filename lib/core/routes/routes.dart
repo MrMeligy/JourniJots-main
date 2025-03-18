@@ -8,4 +8,5 @@ class Routes {
   static const interestsScreen = '/Interests';
   static const homeScreen = '/home';
   static const exploreScreen = '/Explore';
+  static const profileScreen = '/profile';
 }
