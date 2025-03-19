@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/widgets/custom_button.dart';
-import 'package:journijots/features/login-signup/presentation/screens/widgets/custom_textfeild.dart';
+import 'package:journijots/features/auth/presentation/screens/widgets/custom_textfeild.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -64,66 +64,64 @@ class SignUpScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color:  kprimarycolor,
+                          color: kprimarycolor,
                         ),
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.015),
-
                     const Text(
                       "Frist Name",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: screenHeight * 0.001),
-
-                    const CustomTextField(label: 'First Name', icon: Icons.person),
+                    const CustomTextField(
+                        label: 'First Name', icon: Icons.person),
                     SizedBox(height: screenHeight * 0.01),
-
                     const Text(
                       "Last Name",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: screenHeight * 0.001),
-
-                    const CustomTextField(label: 'Last Name', icon: Icons.person),
+                    const CustomTextField(
+                        label: 'Last Name', icon: Icons.person),
                     SizedBox(height: screenHeight * 0.01),
-
                     const Text(
                       "User Name",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: screenHeight * 0.001),
-
-                    const CustomTextField(label: 'Username', icon: Icons.person_outline),
+                    const CustomTextField(
+                        label: 'Username', icon: Icons.person_outline),
                     SizedBox(height: screenHeight * 0.01),
-
                     const Text(
                       "Date of Birth",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: screenHeight * 0.001),
-
-                    const CustomTextField(label: 'Date of Birth', icon: Icons.cake),
+                    const CustomTextField(
+                        label: 'Date of Birth', icon: Icons.cake),
                     SizedBox(height: screenHeight * 0.01),
-
                     const Text(
                       "Email",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: screenHeight * 0.001),
-
                     const CustomTextField(label: 'Email', icon: Icons.email),
                     SizedBox(height: screenHeight * 0.01),
-
                     const Text(
                       "Password",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: screenHeight * 0.001),
-
-                    const CustomTextField(label: 'Password', icon: Icons.lock, isPassword: true),
+                    const CustomTextField(
+                        label: 'Password', icon: Icons.lock, isPassword: true),
                     SizedBox(height: screenHeight * 0.02),
-
                     Center(
                       child: GestureDetector(
                         onTap: () {
@@ -131,7 +129,8 @@ class SignUpScreen extends StatelessWidget {
                         },
                         child: const Text(
                           "Already have an account? Login",
-                          style: TextStyle(color: ksplashcolor, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: ksplashcolor, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -143,7 +142,6 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.02),
-
                     SizedBox(
                       width: double.infinity,
                       height: screenHeight * 0.06,

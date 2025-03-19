@@ -4,19 +4,21 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final IconData icon;
   final bool isPassword;
-
+  final TextEditingController? controller;
   const CustomTextField({
     super.key,
     required this.label,
     required this.icon,
     this.isPassword = false,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
-      child: TextField(
+      child: TextFormField(
+        controller: controller,
         obscureText: isPassword,
         decoration: InputDecoration(
           prefixIcon: Icon(icon, color: Colors.blue),
@@ -24,7 +26,8 @@ class CustomTextField extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         ),
       ),
     );
