@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/widgets/custom_button.dart';
+
 // ignore: use_key_in_widget_constructors
 class InterestsScreen extends StatefulWidget {
   @override
@@ -49,7 +50,6 @@ class _InterestsScreenState extends State<InterestsScreen> {
                 children: [
                   SizedBox(height: screenHeight * 0.02),
 
-                  
                   const Text(
                     "Interests",
                     style: TextStyle(
@@ -60,21 +60,20 @@ class _InterestsScreenState extends State<InterestsScreen> {
                   ),
                   SizedBox(height: screenHeight * 0.01),
 
-                  
                   const Text(
                     "In your adventure, tell us what are you looking for?",
                     style: TextStyle(fontSize: 16, color: Colors.black54),
                   ),
                   SizedBox(height: screenHeight * 0.02),
 
-                  
                   Expanded(
                     child: SingleChildScrollView(
                       child: Wrap(
                         spacing: screenWidth * 0.02,
                         runSpacing: screenHeight * 0.005,
                         children: interests.map((interest) {
-                          bool isSelected = selectedInterests.contains(interest["title"]);
+                          bool isSelected =
+                              selectedInterests.contains(interest["title"]);
 
                           return ChoiceChip(
                             label: Row(
@@ -89,7 +88,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
                                 Text(
                                   interest["title"],
                                   style: TextStyle(
-                                    color: isSelected ? Colors.white : kprimarycolor,
+                                    color: isSelected
+                                        ? Colors.white
+                                        : kprimarycolor,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),

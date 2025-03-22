@@ -5,8 +5,56 @@ import 'package:journijots/core/utils/widgets/custom_button.dart';
 import 'package:journijots/features/auth/presentation/manager/user_cubit/user_cubit.dart';
 import 'package:journijots/features/auth/presentation/screens/widgets/custom_textfeild.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final Map<String, bool> _fieldErrors = {
+    'email': false,
+    'password': false,
+  };
+
+  final Map<String, String> _errorMessages = {
+    'email': 'Email is required',
+    'password': 'Password is required',
+  };
+
+  void _validateFields() {
+    final userCubit = context.read<UserCubit>();
+
+    setState(() {
+      // Reset all errors first
+      _fieldErrors.updateAll((key, value) => false);
+
+      // Validate Email with Regex
+      final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+      if (userCubit.logInEmail.text.isEmpty) {
+        _fieldErrors['email'] = true;
+      } else if (!emailRegex.hasMatch(userCubit.logInEmail.text)) {
+        _fieldErrors['email'] = true;
+        _errorMessages['email'] = 'Please enter a valid email address';
+      }
+
+      // Validate Password
+      if (userCubit.logInPassword.text.isEmpty) {
+        _fieldErrors['password'] = true;
+      } else if (userCubit.logInPassword.text.length < 8) {
+        _fieldErrors['password'] = true;
+        _errorMessages['password'] = 'Password must be at least 8 characters';
+      }
+    });
+
+    // Check if all fields are valid
+    final bool hasErrors = _fieldErrors.values.any((isError) => isError);
+
+    if (!hasErrors) {
+      context.read<UserCubit>().logIn();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +64,17 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is LogInSuccess) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Login Success')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Login Success'),
+            ),
+          );
         } else if (state is LogInFailure) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.errMessag)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errMessag),
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -96,6 +150,8 @@ class LoginScreen extends StatelessWidget {
                             label: 'Email',
                             icon: Icons.email,
                             controller: context.read<UserCubit>().logInEmail,
+                            showError: _fieldErrors['email'] ?? false,
+                            errorText: _errorMessages['email'],
                           ),
 
                           SizedBox(height: screenHeight * 0.01),
@@ -114,6 +170,8 @@ class LoginScreen extends StatelessWidget {
                             icon: Icons.lock,
                             isPassword: true,
                             controller: context.read<UserCubit>().logInPassword,
+                            showError: _fieldErrors['password'] ?? false,
+                            errorText: _errorMessages['password'],
                           ),
 
                           SizedBox(height: screenHeight * 0.02),
@@ -176,9 +234,8 @@ class LoginScreen extends StatelessWidget {
                                   width: double.infinity,
                                   height: screenHeight * 0.06,
                                   child: GestureDetector(
-                                    onTap: () async {
-                                      await context.read<UserCubit>().logIn();
-                                      // Navigator.pushNamed(context, '/profile');
+                                    onTap: () {
+                                      _validateFields();
                                     },
                                     child: CustomButton(
                                       text: 'Log in',

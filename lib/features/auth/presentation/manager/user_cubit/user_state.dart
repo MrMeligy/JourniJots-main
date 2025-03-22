@@ -14,3 +14,13 @@ final class LogInFailure extends UserState {
 
   LogInFailure({required this.errMessag});
 }
+
+final class SignUpLoading extends UserState {}
+
+final class SignUpSuccess extends UserState {}
+
+final class SignUpFailure extends UserState {
+  final String errMessag;
+
+  SignUpFailure({required this.errMessag});
+}

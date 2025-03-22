@@ -1,17 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:journijots/core/api/api_consumer.dart';
-import 'package:journijots/core/api/end_ponits.dart';
-import 'package:journijots/core/cache/cache_helper.dart';
-import 'package:journijots/features/auth/data/models/login_response_model.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:meta/meta.dart';
+import 'package:journijots/features/auth/data/auth_model/auth_model.dart';
+import 'package:journijots/features/auth/presentation/manager/repos/user_repo.dart';
 
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit(this.api) : super(UserInitial());
-  final ApiConsumer api;
+  UserCubit(this.userRepo) : super(UserInitial());
   //Sign in Form key
   GlobalKey<FormState> logInFormKey = GlobalKey();
   //Sign in email
@@ -23,30 +18,87 @@ class UserCubit extends Cubit<UserState> {
   //Profile Pic
   //XFile? profilePic;
   //Sign up name
-  TextEditingController signUpName = TextEditingController();
-  //Sign up phone number
-  TextEditingController signUpPhoneNumber = TextEditingController();
+  TextEditingController signUpFirstName = TextEditingController();
+  TextEditingController signUpLastName = TextEditingController();
+  TextEditingController signUpUserName = TextEditingController();
   //Sign up email
   TextEditingController signUpEmail = TextEditingController();
   //Sign up password
   TextEditingController signUpPassword = TextEditingController();
   //Sign up confirm password
   TextEditingController confirmPassword = TextEditingController();
-  LoginResponseModel? user;
+  AuthModel? user;
+
+  final UserRepo userRepo;
   logIn() async {
-    try {
-      emit(LogInLoading());
-      final response = await api.post(EndPoint.logIn, data: {
-        ApiKey.email: logInEmail.text,
-        ApiKey.password: logInPassword.text,
-      });
-      user = LoginResponseModel.fromJson(response);
-      final decodedToken = JwtDecoder.decode(user!.token);
-      CacheHelper().saveData(key: ApiKey.token, value: user!.token);
-      CacheHelper().saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
-      emit(LogInSuccess());
-    } catch (e) {
-      emit(LogInFailure(errMessag: e.toString()));
-    }
+    emit(LogInLoading());
+
+    final response = await userRepo.logIn(
+      logInEmail: logInEmail.text,
+      logInPassword: logInPassword.text,
+    );
+    response.fold(
+      (errMessage) => emit(LogInFailure(errMessag: errMessage)),
+      (user) => emit(LogInSuccess()),
+    );
+    // try {
+    //   emit(LogInLoading());
+    //   final response = await api.post(EndPoint.logIn, data: {
+    //     ApiKey.email: logInEmail.text,
+    //     ApiKey.password: logInPassword.text,
+    //   });
+
+    //   user = AuthModel.fromJson(response);
+    //   final decodedToken = JwtDecoder.decode(user!.token!);
+    //   getIt<CacheHelper>().saveData(key: ApiKey.token, value: user!.token);
+    //   getIt<CacheHelper>()
+    //       .saveData(key: ApiKey.id, value: decodedToken[ApiKey.tokenId]);
+    //   emit(LogInSuccess());
+    // } on ServerException catch (e) {
+    //   emit(LogInFailure(errMessag: e.errModel.errorMessage));
+    // }
+  }
+
+  signUp() async {
+    emit(SignUpLoading());
+
+    final response = await userRepo.signUp(
+        signUpFirstName: signUpFirstName.text,
+        signUpLastName: signUpLastName.text,
+        signUpUserName: signUpUserName.text,
+        signUpEmail: signUpEmail.text,
+        signUpPassword: signUpPassword.text);
+    response.fold(
+      (errMessage) => emit(
+        SignUpFailure(errMessag: errMessage),
+      ),
+      (user) => emit(
+        SignUpSuccess(),
+      ),
+    );
+    // try {
+    //   emit(SignUpLoading());
+    //   final response = await api.post(EndPoint.register, data: {
+    //     ApiKey.firstName: signUpFirstName.text,
+    //     ApiKey.lastName: signUpLastName.text,
+    //     ApiKey.userName: signUpUserName.text,
+    //     ApiKey.email: signUpEmail.text,
+    //     ApiKey.password: signUpPassword.text,
+    //   });
+
+    //   user = AuthModel.fromJson(response);
+    //   final decodedToken = JwtDecoder.decode(user!.token!);
+    //   getIt<CacheHelper>().saveData(
+    //     key: ApiKey.token,
+    //     value: user!.token,
+    //   );
+    //   getIt<CacheHelper>().saveData(
+    //     key: ApiKey.id,
+    //     value: decodedToken[ApiKey.tokenId],
+    //   );
+    //   emit(SignUpSuccess());
+    // } on ServerException catch (e) {
+    //   emit(SignUpFailure(errMessag: e.errModel.errorMessage));
+    // }
   }
 }
