@@ -20,7 +20,7 @@ class InterestsViewBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Wrap(
-              spacing: 8.w, 
+              spacing: 8.w,
               runSpacing: 12.h,
               children: const [
                 InterestCategoryButton(
