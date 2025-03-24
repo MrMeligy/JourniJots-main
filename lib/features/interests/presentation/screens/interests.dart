@@ -59,13 +59,11 @@ class _InterestsScreenState extends State<InterestsScreen> {
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.01),
-
                   const Text(
                     "In your adventure, tell us what are you looking for?",
                     style: TextStyle(fontSize: 16, color: Colors.black54),
                   ),
                   SizedBox(height: screenHeight * 0.02),
-
                   Expanded(
                     child: SingleChildScrollView(
                       child: Wrap(
@@ -117,10 +115,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
                       ),
                     ),
                   ),
-
                   SizedBox(height: screenHeight * 0.02),
-
-                  // "Next"
                   SizedBox(
                     width: double.infinity,
                     height: screenHeight * 0.06,
@@ -136,7 +131,6 @@ class _InterestsScreenState extends State<InterestsScreen> {
                       ),
                     ),
                   ),
-
                   SizedBox(height: screenHeight * 0.03),
                 ],
               ),
