@@ -31,7 +31,7 @@ class AppRouting {
       case Routes.signUpScreen:
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case Routes.interestsScreen:
-        return MaterialPageRoute(builder: (_) => InterestsScreen());
+        return MaterialPageRoute(builder: (_) => const InterestsScreen());
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.exploreScreen:

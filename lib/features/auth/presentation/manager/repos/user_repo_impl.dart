@@ -65,4 +65,38 @@ class UserRepoImpl extends UserRepo {
       return (left(e.errModel.errorMessage));
     }
   }
+
+  // @override
+  // Future<Either<String, ProfilePictureResponse>> uploadProfilePicture({
+  //   required XFile image,
+  // }) async {
+  //   try {
+  //     // Create FormData with the image
+  //     Uint8List imageBytes = await image.readAsBytes();
+
+  //     // إنشاء MultipartFile من Byte Array
+  //     final file = MultipartFile.fromBytes(
+  //       imageBytes,
+  //       filename: image.name,
+  //     );
+
+  //     final formData = FormData.fromMap({
+  //       'picture': file,
+  //     });
+
+  //     final response = await api.post(
+  //       EndPoint.uploadProfilePic,
+  //       data: formData,
+  //       isFromData: true,
+  //     );
+
+  //     // Parse and return the response
+  //     final profilePicResponse = ProfilePictureResponse.fromJson(response);
+  //     return right(profilePicResponse);
+  //   } on ServerException catch (e) {
+  //     return left(e.errModel.errorMessage);
+  //   } catch (e) {
+  //     return left(e.toString());
+  //   }
+  // }
 }

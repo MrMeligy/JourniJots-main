@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/routes/routes.dart';
+import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/text_styles.dart';
 import 'package:journijots/features/onboarding/presentation/screens/widgets/onboarding_button.dart';
 
@@ -49,6 +51,8 @@ class Onboarding1Body extends StatelessWidget {
               OnBoardingButton(
                 text: 'Next',
                 onTap: () {
+                  getIt<CacheHelper>()
+                      .saveData(key: "isOnBoardingVisited", value: true);
                   context.pushNamed(Routes.onBoarding2);
                 },
               ),

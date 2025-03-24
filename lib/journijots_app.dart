@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/core/routes/app_routing.dart';
+import 'package:journijots/core/services/service_locator.dart';
 
 // ignore: unused_import
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/auth/presentation/screens/login.dart';
+import 'package:journijots/features/onboarding/presentation/screens/onboarding1.dart';
 
 class JournijotsApp extends StatelessWidget {
   const JournijotsApp({super.key, required this.appRouting});
@@ -17,7 +20,11 @@ class JournijotsApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const LoginScreen(),
+        home: getIt<CacheHelper>().getData(key: "isOnBoardingVisited") ?? false
+            ? getIt<CacheHelper>().getData(key: "LoggedIn") ?? false
+                ? const HomeScreen()
+                : const LoginScreen()
+            : const Onboarding1(),
         onGenerateRoute: appRouting.generateRoute,
         theme: ThemeData(
           fontFamily: 'Acme',

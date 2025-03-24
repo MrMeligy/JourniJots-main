@@ -2,9 +2,8 @@ class EndPoint {
   static String baseUrl = "http://10.0.2.2:5206/api/";
   static String logIn = "Account/Login";
   static String register = "Account/Register";
-  static String getUserDataEndPoint(id) {
-    return "user/get-user/$id";
-  }
+  static String uploadProfilePic = "Account/UploadProfilePicture";
+  static String addInterests = "Account/AddIntersts";
 }
 
 class ApiKey {

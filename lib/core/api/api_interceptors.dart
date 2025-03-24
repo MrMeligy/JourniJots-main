@@ -6,9 +6,9 @@ import 'package:journijots/core/services/service_locator.dart';
 class ApiInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers[ApiKey.token] =
+    options.headers['Authorization'] =
         getIt<CacheHelper>().getData(key: ApiKey.token) != null
-            ? 'Bearer ${getIt<CacheHelper>().getData(key: ApiKey.token)}'
+            ? 'Bearer ${getIt<CacheHelper>().getDataString(key: ApiKey.token)}'
             : null;
     super.onRequest(options, handler);
   }
