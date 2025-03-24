@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:journijots/core/cache/cache_helper.dart';
+import 'package:journijots/core/helper/extensions.dart';
+import 'package:journijots/core/routes/routes.dart';
+import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/widgets/custom_button.dart';
 import 'package:journijots/features/auth/presentation/manager/user_cubit/user_cubit.dart';
@@ -69,10 +73,13 @@ class _LoginScreenState extends State<LoginScreen> {
               content: Text('Login Success'),
             ),
           );
+          getIt<CacheHelper>().saveData(key: "LoggedIn", value: true);
+          context.pushNamed(Routes.homeScreen);
         } else if (state is LogInFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.errMessag),
+              backgroundColor: Colors.red,
             ),
           );
         }

@@ -16,7 +16,7 @@ class UserCubit extends Cubit<UserState> {
   //Sign Up Form key
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   //Profile Pic
-  //XFile? profilePic;
+  // XFile? profilePic;
   //Sign up name
   TextEditingController signUpFirstName = TextEditingController();
   TextEditingController signUpLastName = TextEditingController();
@@ -101,4 +101,24 @@ class UserCubit extends Cubit<UserState> {
     //   emit(SignUpFailure(errMessag: e.errModel.errorMessage));
     // }
   }
+
+  // uploadProfilePic(XFile image) async {
+  //   // Set the profile pic locally first for immediate UI feedback
+  //   profilePic = image;
+  //   emit(ProfilePicLocallySet());
+
+  //   // Start upload process
+  //   emit(ProfilePicUploadLoading());
+
+  //   // Use the repository to upload the image
+  //   final response = await userRepo.uploadProfilePicture(image: image);
+
+  //   // Handle the result
+  //   response.fold(
+  //     (errMessage) => emit(ProfilePicUploadFailure(errMessage: errMessage)),
+  //     (profilePicResponse) {
+  //       emit(ProfilePicUploadSuccess(response: profilePicResponse));
+  //     },
+  //   );
+  // }
 }

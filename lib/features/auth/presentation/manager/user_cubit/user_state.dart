@@ -24,3 +24,17 @@ final class SignUpFailure extends UserState {
 
   SignUpFailure({required this.errMessag});
 }
+
+// class ProfilePicLocallySet extends UserState {}
+
+// class ProfilePicUploadLoading extends UserState {}
+
+// class ProfilePicUploadSuccess extends UserState {
+//   final ProfilePictureResponse response;
+//   ProfilePicUploadSuccess({required this.response});
+// }
+
+// class ProfilePicUploadFailure extends UserState {
+//   final String errMessage;
+//   ProfilePicUploadFailure({required this.errMessage});
+// }

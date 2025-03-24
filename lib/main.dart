@@ -13,6 +13,7 @@ void main() async {
   setupServiceLocator();
   await getIt<CacheHelper>().init();
   await ScreenUtil.ensureScreenSize();
+
   runApp(
     BlocProvider(
       create: (context) => UserCubit(getIt<UserRepoImpl>()),

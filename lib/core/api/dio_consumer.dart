@@ -81,9 +81,13 @@ class DioConsumer extends ApiConsumer {
     bool isFromData = false,
   }) async {
     try {
+      final formattedData = isFromData && data is Map<String, dynamic>
+          ? FormData.fromMap(data)
+          : data;
+
       final response = await dio.post(
         path,
-        data: isFromData ? FormData.fromMap(data) : data,
+        data: formattedData,
         queryParameters: queryParameters,
       );
       return response.data;
