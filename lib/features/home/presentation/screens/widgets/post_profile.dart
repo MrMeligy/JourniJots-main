@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/routes/routes.dart';
 import 'package:journijots/core/utils/text_styles.dart';
+import 'package:journijots/core/utils/widgets/image_base.dart';
+import 'package:journijots/features/home/data/post_model/post_model.dart';
 
 class PostProfile extends StatelessWidget {
   const PostProfile({
     super.key,
-    required this.userName,
-    required this.createdAt,
+    required this.postModel,
   });
-  final String userName;
-  final DateTime createdAt;
+  final PostModel postModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,11 +22,12 @@ class PostProfile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipOval(
-            child: Image.asset(
-              "assets/images/Ellipse 7.png",
-              fit: BoxFit.cover,
+            child: Base64Image(
+              base64String:
+                  postModel.profilePicture, // Paste your full base64 string
               width: 60.w,
               height: 60.h,
+              fit: BoxFit.cover,
             ),
           ),
           SizedBox(
@@ -36,7 +37,7 @@ class PostProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                userName,
+                postModel.userName!,
                 style: TextStyles.font22black,
               ),
               Text(

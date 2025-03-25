@@ -40,8 +40,7 @@ class _PostWidgetState extends State<PostWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               PostProfile(
-                userName: widget.post!.userName!,
-                createdAt: widget.post!.createdAt!,
+                postModel: widget.post!,
               ),
               SizedBox(
                 height: 16.h,

@@ -14,7 +14,7 @@ class AddPostButton extends StatelessWidget {
       duration: const Duration(milliseconds: 150),
       opacity: _isVisible ? 1.0 : 0.0,
       child: Align(
-        alignment: Alignment(1.w, 1.08.h),
+        alignment: Alignment(0.95.w, 0.89.h),
         child: FloatingActionButton(
           onPressed: () {},
           backgroundColor: kprimarycolor,
