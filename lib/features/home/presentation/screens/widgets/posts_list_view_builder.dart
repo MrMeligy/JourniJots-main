@@ -14,45 +14,40 @@ class PostsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<PostCubit>().getPosts();
     return BlocConsumer<PostCubit, PostState>(
       listener: (context, state) {
-        print(state);
+        if (state is GetPostsLoading) {}
       },
       builder: (context, state) {
-        return BlocBuilder<PostCubit, PostState>(
-          builder: (context, state) {
-            if (state is GetPostsSuccessfully) {
-              return ListView.builder(
-                  controller: _scrollController,
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.only(bottom: 100),
-                  itemCount: state.posts.length,
-                  itemBuilder: (context, index) {
-                    return PostWidget(
-                      post: state.posts[index],
-                    );
-                  });
-            }
-            if (state is GetPostsFailure) {
-              return Center(
-                child: Text(state.errMessag),
-              );
-            }
-            return Skeletonizer(
-              enabled: true,
-              child: ListView.builder(
-                  controller: _scrollController,
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.only(bottom: 100),
-                  itemCount: 5, // عدد العناصر الوهمية
-                  itemBuilder: (context, index) {
-                    return const PostWidget(
-                      post: null, // سيتحول تلقائيًا إلى skeleton
-                    );
-                  }),
-            );
-          },
+        if (state is GetPostsSuccessfully) {
+          return ListView.builder(
+              controller: _scrollController,
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.only(bottom: 100),
+              itemCount: state.posts.length,
+              itemBuilder: (context, index) {
+                return PostWidget(
+                  post: state.posts[index],
+                );
+              });
+        }
+        if (state is GetPostsFailure) {
+          return Center(
+            child: Text(state.errMessag),
+          );
+        }
+        return Skeletonizer(
+          enabled: true,
+          child: ListView.builder(
+              controller: _scrollController,
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.only(bottom: 100),
+              itemCount: 5, // عدد العناصر الوهمية
+              itemBuilder: (context, index) {
+                return const PostWidget(
+                  post: null, // سيتحول تلقائيًا إلى skeleton
+                );
+              }),
         );
       },
     );

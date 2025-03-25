@@ -8,15 +8,17 @@ part 'post_state.dart';
 class PostCubit extends Cubit<PostState> {
   PostCubit(this.postRepo) : super(PostInitial());
   final PostRepo postRepo;
+  bool _isLoaded = false;
   getPosts() async {
+    if (_isLoaded) return;
     emit(GetPostsLoading());
     final response = await postRepo.getPosts();
-    response.fold(
-        (errMessage) => emit(
-              GetPostsFailure(errMessag: errMessage),
-            ),
-        (posts) => emit(
-              GetPostsSuccessfully(posts: posts),
-            ));
+    response.fold((errMessage) => emit(GetPostsFailure(errMessag: errMessage)),
+        (posts) {
+      _isLoaded = true;
+      emit(
+        GetPostsSuccessfully(posts: posts),
+      );
+    });
   }
 }
