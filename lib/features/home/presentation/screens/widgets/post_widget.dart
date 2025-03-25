@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/text_styles.dart';
 import 'package:journijots/features/home/data/post_model/post_model.dart';
+import 'package:journijots/features/home/presentation/screens/widgets/image_swiper_widget.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/post_profile.dart';
 
 class PostWidget extends StatefulWidget {
@@ -82,6 +83,9 @@ class _PostWidgetState extends State<PostWidget> {
               SizedBox(
                 height: 10.h,
               ),
+              widget.post!.postImages!.isNotEmpty
+                  ? ImageSwiper(imageUrls: widget.post!.postImages)
+                  : const SizedBox(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
