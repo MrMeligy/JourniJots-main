@@ -4,6 +4,7 @@ class EndPoint {
   static String register = "Account/Register";
   static String uploadProfilePic = "Account/UploadProfilePicture";
   static String addInterests = "Account/AddIntersts";
+  static String getPosts = "Post/GetPosts";
 }
 
 class ApiKey {

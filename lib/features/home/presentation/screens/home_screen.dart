@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
+import 'package:journijots/features/home/presentation/screens/manager/post_cubit/post_cubit.dart';
+import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo_impl.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/add_post_button.dart';
 import 'package:journijots/core/utils/widgets/custom_appbar.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/home_view_body.dart';
@@ -58,8 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: kscaffoldcolor,
       floatingActionButton: AddPostButton(isVisible: _isVisible),
       appBar: const CustomAppBar(),
-      body: HomeViewBody(
-        scrollController: _scrollController,
+      body: BlocProvider(
+        create: (context) => PostCubit(getIt<PostRepoImpl>()),
+        child: HomeViewBody(
+          scrollController: _scrollController,
+        ),
       ),
     );
   }

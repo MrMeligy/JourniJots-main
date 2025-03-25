@@ -1,0 +1,24 @@
+part of 'post_cubit.dart';
+
+sealed class PostState extends Equatable {
+  const PostState();
+
+  @override
+  List<Object> get props => [];
+}
+
+final class PostInitial extends PostState {}
+
+final class GetPostsLoading extends PostState {}
+
+final class GetPostsSuccessfully extends PostState {
+  final List<PostModel> posts;
+
+  const GetPostsSuccessfully({required this.posts});
+}
+
+final class GetPostsFailure extends PostState {
+  final String errMessag;
+
+  const GetPostsFailure({required this.errMessag});
+}

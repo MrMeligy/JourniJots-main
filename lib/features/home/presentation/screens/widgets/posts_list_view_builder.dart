@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:journijots/features/home/presentation/screens/manager/post_cubit/post_cubit.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/post_widget.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class PostsListView extends StatelessWidget {
   const PostsListView({
@@ -11,16 +14,47 @@ class PostsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        controller: _scrollController,
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.only(bottom: 100),
-        itemBuilder: (context, index) {
-          return const PostWidget(
-              postContent:
-                  "Yesterday, I had the chance to explore El Zamalek, one of Cairo's most charming neighborhoods. "
-                  "Known for its laid-back vibe, lush greenery, and artistic spirit, this is one of the best places to visit in Cairo. "
-                  "The people are friendly, and the atmosphere is simply amazing.");
-        });
+    context.read<PostCubit>().getPosts();
+    return BlocConsumer<PostCubit, PostState>(
+      listener: (context, state) {
+        print(state);
+      },
+      builder: (context, state) {
+        return BlocBuilder<PostCubit, PostState>(
+          builder: (context, state) {
+            if (state is GetPostsSuccessfully) {
+              return ListView.builder(
+                  controller: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.only(bottom: 100),
+                  itemCount: state.posts.length,
+                  itemBuilder: (context, index) {
+                    return PostWidget(
+                      post: state.posts[index],
+                    );
+                  });
+            }
+            if (state is GetPostsFailure) {
+              return Center(
+                child: Text(state.errMessag),
+              );
+            }
+            return Skeletonizer(
+              enabled: true,
+              child: ListView.builder(
+                  controller: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.only(bottom: 100),
+                  itemCount: 5, // عدد العناصر الوهمية
+                  itemBuilder: (context, index) {
+                    return const PostWidget(
+                      post: null, // سيتحول تلقائيًا إلى skeleton
+                    );
+                  }),
+            );
+          },
+        );
+      },
+    );
   }
 }

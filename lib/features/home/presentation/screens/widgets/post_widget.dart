@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/text_styles.dart';
-import 'package:journijots/features/home/presentation/screens/widgets/image_swiper_widget.dart';
+import 'package:journijots/features/home/data/post_model/post_model.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/post_profile.dart';
 
 class PostWidget extends StatefulWidget {
-  const PostWidget({super.key, required this.postContent});
-  final String postContent;
+  final PostModel? post;
+
+  const PostWidget({super.key, this.post});
+
   @override
   State<PostWidget> createState() => _PostWidgetState();
 }
@@ -16,20 +18,16 @@ class PostWidget extends StatefulWidget {
 class _PostWidgetState extends State<PostWidget> {
   bool isExpanded = false;
   bool isLiked = false;
-  final List<String> imageUrls = [
-    "assets/images/z1.webp",
-    "assets/images/z2.jpg",
-    "assets/images/z3.jpg",
-    //"assets/images/z4.jpg",
-    //"assets/images/z5.jpg",
-    //"assets/images/z6.jpg",
-    //"assets/images/z7.jpg",
-  ];
+
   @override
   Widget build(BuildContext context) {
-    int maxlength = 180; //max words in posts to show
-    bool isLong =
-        widget.postContent.length > maxlength; //if it long will show see more
+    // إذا كان الـ post null، أظهر skeleton
+    if (widget.post == null) {
+      return _buildSkeletonPost();
+    }
+
+    int maxlength = 180;
+    bool isLong = widget.post!.post!.length > maxlength;
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5.h),
@@ -41,24 +39,23 @@ class _PostWidgetState extends State<PostWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const PostProfile(),
+              PostProfile(
+                userName: widget.post!.userName!,
+                createdAt: widget.post!.createdAt!,
+              ),
               SizedBox(
                 height: 16.h,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "A day In Zamalek",
-                    style: TextStyles.font18BlackBold,
-                  ),
                   RichText(
                     text: TextSpan(
                         text: isLong
                             ? (isExpanded
-                                ? widget.postContent
-                                : "${widget.postContent.substring(0, maxlength)}...")
-                            : widget.postContent,
+                                ? widget.post!.post
+                                : "${widget.post!.post!.substring(0, maxlength)}...")
+                            : widget.post!.post,
                         style: TextStyles.font18Black,
                         children: isLong
                             ? [
@@ -83,9 +80,6 @@ class _PostWidgetState extends State<PostWidget> {
               SizedBox(
                 height: 10.h,
               ),
-              ImageSwiper(
-                imageUrls: imageUrls,
-              ),
               SizedBox(
                 height: 10.h,
               ),
@@ -94,9 +88,9 @@ class _PostWidgetState extends State<PostWidget> {
                 children: [
                   Column(
                     children: [
-                      const Text(
-                        "23 Likes",
-                        style: TextStyle(fontSize: 16),
+                      Text(
+                        "${widget.post!.likeCount} Likes",
+                        style: const TextStyle(fontSize: 16),
                       ),
                       SizedBox(
                         height: 10.h,
@@ -123,9 +117,9 @@ class _PostWidgetState extends State<PostWidget> {
                   ),
                   Column(
                     children: [
-                      const Text(
-                        "12 Comments",
-                        style: TextStyle(fontSize: 16),
+                      Text(
+                        "${widget.post!.commentCount} Comments",
+                        style: const TextStyle(fontSize: 16),
                       ),
                       const SizedBox(
                         height: 10,
@@ -140,6 +134,135 @@ class _PostWidgetState extends State<PostWidget> {
                           Text(
                             "Comment",
                             style: TextStyles.font20BlueBold,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // skeleton widget
+  Widget _buildSkeletonPost() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5.h),
+      child: Card(
+        color: kbodycolor,
+        child: Padding(
+          padding: EdgeInsets.all(12.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Profile skeleton
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 25.w,
+                    backgroundColor: Colors.grey[300],
+                  ),
+                  SizedBox(width: 10.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 100.w,
+                        height: 15.h,
+                        color: Colors.grey[300],
+                      ),
+                      SizedBox(height: 5.h),
+                      Container(
+                        width: 80.w,
+                        height: 10.h,
+                        color: Colors.grey[300],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(height: 16.h),
+
+              // Post text skeleton
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 15.h,
+                    color: Colors.grey[300],
+                  ),
+                  SizedBox(height: 5.h),
+                  Container(
+                    width: double.infinity,
+                    height: 15.h,
+                    color: Colors.grey[300],
+                  ),
+                  SizedBox(height: 5.h),
+                  Container(
+                    width: 200.w,
+                    height: 15.h,
+                    color: Colors.grey[300],
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 20.h),
+
+              // Bottom row skeleton
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        width: 80.w,
+                        height: 15.h,
+                        color: Colors.grey[300],
+                      ),
+                      SizedBox(height: 10.h),
+                      Row(
+                        children: [
+                          Container(
+                            width: 30.w,
+                            height: 30.h,
+                            color: Colors.grey[300],
+                          ),
+                          SizedBox(width: 10.w),
+                          Container(
+                            width: 50.w,
+                            height: 15.h,
+                            color: Colors.grey[300],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        width: 80.w,
+                        height: 15.h,
+                        color: Colors.grey[300],
+                      ),
+                      SizedBox(height: 10.h),
+                      Row(
+                        children: [
+                          Container(
+                            width: 30.w,
+                            height: 30.h,
+                            color: Colors.grey[300],
+                          ),
+                          SizedBox(width: 10.w),
+                          Container(
+                            width: 50.w,
+                            height: 15.h,
+                            color: Colors.grey[300],
                           )
                         ],
                       )
