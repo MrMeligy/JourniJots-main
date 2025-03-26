@@ -51,29 +51,30 @@ class _PostWidgetState extends State<PostWidget> {
                 children: [
                   RichText(
                     text: TextSpan(
-                        text: isLong
-                            ? (isExpanded
-                                ? widget.post!.post
-                                : "${widget.post!.post!.substring(0, maxlength)}...")
-                            : widget.post!.post,
-                        style: TextStyles.font18Black,
-                        children: isLong
-                            ? [
-                                TextSpan(
-                                  text: isExpanded ? " See less" : " See more",
-                                  style: const TextStyle(
-                                    color: kprimarycolor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      setState(() {
-                                        isExpanded = !isExpanded;
-                                      });
-                                    },
+                      text: isLong
+                          ? (isExpanded
+                              ? widget.post!.post
+                              : "${widget.post!.post!.substring(0, maxlength)}...")
+                          : widget.post!.post,
+                      style: TextStyles.font18Black,
+                      children: isLong
+                          ? [
+                              TextSpan(
+                                text: isExpanded ? " See less" : " See more",
+                                style: const TextStyle(
+                                  color: kprimarycolor,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              ]
-                            : []),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    setState(() {
+                                      isExpanded = !isExpanded;
+                                    });
+                                  },
+                              ),
+                            ]
+                          : [],
+                    ),
                   ),
                 ],
               ),

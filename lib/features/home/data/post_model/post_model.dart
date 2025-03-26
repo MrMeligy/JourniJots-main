@@ -10,6 +10,7 @@ class PostModel extends Equatable {
   final String? post;
   final int? likeCount;
   final int? commentCount;
+  final bool? isLikedByCurrentUser;
   final List<PostImage>? postImages;
 
   const PostModel({
@@ -20,6 +21,7 @@ class PostModel extends Equatable {
     this.post,
     this.likeCount,
     this.commentCount,
+    this.isLikedByCurrentUser,
     this.postImages,
   });
 
@@ -33,6 +35,7 @@ class PostModel extends Equatable {
         post: json['post'] as String?,
         likeCount: json['likeCount'] as int?,
         commentCount: json['commentCount'] as int?,
+        isLikedByCurrentUser: json['isLikedByCurrentUser'] as bool?,
         postImages: (json['postImages'] as List<dynamic>?)
             ?.map((e) => PostImage.fromJson(e as Map<String, dynamic>))
             .toList(),
@@ -46,6 +49,7 @@ class PostModel extends Equatable {
         'post': post,
         'likeCount': likeCount,
         'commentCount': commentCount,
+        'isLikedByCurrentUser': isLikedByCurrentUser,
         'postImages': postImages?.map((e) => e.toJson()).toList(),
       };
 
@@ -59,6 +63,7 @@ class PostModel extends Equatable {
       post,
       likeCount,
       commentCount,
+      isLikedByCurrentUser,
       postImages,
     ];
   }
