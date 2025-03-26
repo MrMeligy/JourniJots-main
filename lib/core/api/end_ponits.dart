@@ -5,6 +5,7 @@ class EndPoint {
   static String uploadProfilePic = "Account/UploadProfilePicture";
   static String addInterests = "Account/AddIntersts";
   static String getPosts = "Post/GetPosts";
+  static String toggleLike = "Post/ToggleLike?postId=";
 }
 
 class ApiKey {
