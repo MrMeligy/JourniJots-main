@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/text_styles.dart';
 import 'package:journijots/features/home/data/post_model/post_model.dart';
+import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo_impl.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/image_swiper_widget.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/post_profile.dart';
 
@@ -18,7 +20,15 @@ class PostWidget extends StatefulWidget {
 
 class _PostWidgetState extends State<PostWidget> {
   bool isExpanded = false;
-  bool isLiked = false;
+  bool? isLiked;
+  int? likesCount;
+
+  @override
+  void initState() {
+    super.initState();
+    isLiked = widget.post?.isLikedByCurrentUser;
+    likesCount = widget.post?.likeCount;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +103,7 @@ class _PostWidgetState extends State<PostWidget> {
                   Column(
                     children: [
                       Text(
-                        "${widget.post!.likeCount} Likes",
+                        "$likesCount Likes",
                         style: const TextStyle(fontSize: 16),
                       ),
                       SizedBox(
@@ -102,17 +112,24 @@ class _PostWidgetState extends State<PostWidget> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            isLiked = !isLiked;
+                            getIt<PostRepoImpl>()
+                                .toggleLike(postId: widget.post!.postId ?? 0);
+                            isLiked!
+                                ? likesCount = likesCount! - 1
+                                : likesCount = likesCount! + 1;
+                            isLiked = !isLiked!;
                           });
                         },
                         child: Row(
                           children: [
                             Icon(
-                              isLiked ? Icons.favorite : Icons.favorite_outline,
+                              isLiked!
+                                  ? Icons.favorite
+                                  : Icons.favorite_outline,
                               color: kprimarycolor,
                               size: 30,
                             ),
-                            Text(isLiked ? "Liked" : "Like",
+                            Text(isLiked! ? "Liked" : "Like",
                                 style: TextStyles.font20BlueBold)
                           ],
                         ),

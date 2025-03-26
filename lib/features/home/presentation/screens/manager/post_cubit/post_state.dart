@@ -22,3 +22,15 @@ final class GetPostsFailure extends PostState {
 
   const GetPostsFailure({required this.errMessag});
 }
+
+final class ToggleLikeSuccessfully extends PostState {
+  final bool like;
+
+  const ToggleLikeSuccessfully({required this.like});
+}
+
+final class ToggleLikeFailure extends PostState {
+  final String errMessag;
+
+  const ToggleLikeFailure({required this.errMessag});
+}

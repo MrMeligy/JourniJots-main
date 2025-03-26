@@ -20,4 +20,14 @@ class PostRepoImpl extends PostRepo {
       return (left(e.errModel.errorMessage));
     }
   }
+
+  @override
+  Future<Either<String, bool>> toggleLike({required int postId}) async {
+    try {
+      bool response = await api.post(EndPoint.toggleLike + postId.toString());
+      return (right(response));
+    } on ServerException catch (e) {
+      return (left(e.errModel.errorMessage));
+    }
+  }
 }

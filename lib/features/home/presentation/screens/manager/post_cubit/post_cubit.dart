@@ -21,4 +21,14 @@ class PostCubit extends Cubit<PostState> {
       );
     });
   }
+
+  toggleLike(int postId) async {
+    final response = await postRepo.toggleLike(postId: postId);
+    response.fold(
+      (err) => emit(ToggleLikeFailure(errMessag: err)),
+      (like) => emit(
+        ToggleLikeSuccessfully(like: like),
+      ),
+    );
+  }
 }
