@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/utils/constants.dart';
-import 'package:journijots/features/profile/presentation/screens/widgets/home_view_body.dart';
+import 'package:journijots/features/home/presentation/screens/widgets/home_view_body.dart';
 import 'package:journijots/features/profile/presentation/screens/widgets/interests_view_body.dart';
 import 'package:journijots/features/profile/presentation/screens/widgets/profile_header.dart';
 import 'package:journijots/features/profile/presentation/screens/widgets/trips_view_body.dart';
@@ -91,9 +91,7 @@ class _ProfilePageState extends State<ProfilePage>
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      HomeViewBody(
-                        scrollController: _scrollController,
-                      ),
+                      const HomeViewBody(),
                       TripsViewBody(
                         scrollController: _scrollController,
                       ),

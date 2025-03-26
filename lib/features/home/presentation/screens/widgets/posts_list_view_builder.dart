@@ -7,11 +7,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 class PostsListView extends StatelessWidget {
   const PostsListView({
     super.key,
-    required ScrollController scrollController,
-  }) : _scrollController = scrollController;
-
-  final ScrollController _scrollController;
-
+  });
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PostCubit, PostState>(
@@ -21,7 +17,6 @@ class PostsListView extends StatelessWidget {
       builder: (context, state) {
         if (state is GetPostsSuccessfully) {
           return ListView.builder(
-              controller: _scrollController,
               physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 100),
               itemCount: state.posts.length,
@@ -39,7 +34,6 @@ class PostsListView extends StatelessWidget {
         return Skeletonizer(
           enabled: true,
           child: ListView.builder(
-              controller: _scrollController,
               physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 100),
               itemCount: 5, // عدد العناصر الوهمية
