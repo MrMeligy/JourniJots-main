@@ -3,7 +3,7 @@ import 'package:journijots/core/api/api_consumer.dart';
 import 'package:journijots/core/api/end_ponits.dart';
 import 'package:journijots/core/errors/exceptions.dart';
 import 'package:journijots/features/home/data/post_model/post_model.dart';
-import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo.dart';
+import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo/post_repo.dart';
 
 class PostRepoImpl extends PostRepo {
   final ApiConsumer api;

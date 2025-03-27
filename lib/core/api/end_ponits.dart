@@ -6,6 +6,8 @@ class EndPoint {
   static String addInterests = "Account/AddIntersts";
   static String getPosts = "Post/GetPosts";
   static String toggleLike = "Post/ToggleLike?postId=";
+  static String postComment = "Post/Comment?postId=";
+  static String getComment = "Post/GetPostComments?postId=";
 }
 
 class ApiKey {

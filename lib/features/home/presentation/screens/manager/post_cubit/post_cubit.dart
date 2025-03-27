@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:journijots/features/home/data/post_model/post_model.dart';
-import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo.dart';
+import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo/post_repo.dart';
 
 part 'post_state.dart';
 

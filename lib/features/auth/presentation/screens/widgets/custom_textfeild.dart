@@ -36,6 +36,7 @@ class CustomTextField extends StatelessWidget {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: InputDecoration(
               prefixIcon: Icon(icon, color: Colors.blue),
+              suffixIcon: Icon(suffixIcon, color: Colors.blue),
               hintText: label,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),

@@ -10,7 +10,7 @@ class Base64Image extends StatelessWidget {
 
   const Base64Image({
     super.key,
-    required this.base64String,
+    this.base64String,
     this.width,
     this.height,
     this.fit,
