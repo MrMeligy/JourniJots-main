@@ -31,7 +31,7 @@ class TextStyles {
     fontSize: 19.sp,
   );
   static TextStyle font16grey = TextStyle(
-    fontSize: 14.sp,
+    fontSize: 16.sp,
     color: Colors.grey,
   );
   static TextStyle font18BlackBold = TextStyle(

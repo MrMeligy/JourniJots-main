@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/funcs/date_time_func.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/routes/routes.dart';
 import 'package:journijots/core/utils/text_styles.dart';
@@ -33,7 +34,7 @@ class PostProfile extends StatelessWidget {
                 style: TextStyles.font22black,
               ),
               Text(
-                "2h ago",
+                formatTimeAgo(DateTime.parse(postModel.createdAt.toString())),
                 style: TextStyles.font16grey,
               )
             ],
