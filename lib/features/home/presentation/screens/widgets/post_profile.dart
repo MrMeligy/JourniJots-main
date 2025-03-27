@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/routes/routes.dart';
 import 'package:journijots/core/utils/text_styles.dart';
-import 'package:journijots/core/utils/widgets/image_base.dart';
 import 'package:journijots/features/home/data/post_model/post_model.dart';
+import 'package:journijots/features/home/presentation/screens/widgets/profile_picture.dart';
 
 class PostProfile extends StatelessWidget {
   const PostProfile({
@@ -21,15 +21,7 @@ class PostProfile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipOval(
-            child: Base64Image(
-              base64String:
-                  postModel.profilePicture, // Paste your full base64 string
-              width: 60.w,
-              height: 60.h,
-              fit: BoxFit.cover,
-            ),
-          ),
+          ProfilePicture(picture: postModel.profilePicture),
           SizedBox(
             width: 10.w,
           ),
@@ -37,7 +29,7 @@ class PostProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                postModel.userName!,
+                postModel.userName,
                 style: TextStyles.font22black,
               ),
               Text(

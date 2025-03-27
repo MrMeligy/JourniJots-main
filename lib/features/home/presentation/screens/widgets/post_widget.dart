@@ -1,11 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/text_styles.dart';
 import 'package:journijots/features/home/data/post_model/post_model.dart';
-import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo_impl.dart';
+import 'package:journijots/features/home/presentation/screens/manager/comment_cubit/comment_cubit.dart';
+import 'package:journijots/features/home/presentation/screens/manager/repos/comment_repo/comment_repo_impl.dart';
+import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo/post_repo_impl.dart';
+import 'package:journijots/features/home/presentation/screens/widgets/draggable_comment_sheet.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/image_swiper_widget.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/post_profile.dart';
 
@@ -38,7 +42,7 @@ class _PostWidgetState extends State<PostWidget> {
     }
 
     int maxlength = 180;
-    bool isLong = widget.post!.post!.length > maxlength;
+    bool isLong = widget.post!.post.length > maxlength;
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5.h),
@@ -64,7 +68,7 @@ class _PostWidgetState extends State<PostWidget> {
                       text: isLong
                           ? (isExpanded
                               ? widget.post!.post
-                              : "${widget.post!.post!.substring(0, maxlength)}...")
+                              : "${widget.post!.post.substring(0, maxlength)}...")
                           : widget.post!.post,
                       style: TextStyles.font18Black,
                       children: isLong
@@ -100,6 +104,7 @@ class _PostWidgetState extends State<PostWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  //like
                   Column(
                     children: [
                       Text(
@@ -113,7 +118,7 @@ class _PostWidgetState extends State<PostWidget> {
                         onTap: () {
                           setState(() {
                             getIt<PostRepoImpl>()
-                                .toggleLike(postId: widget.post!.postId ?? 0);
+                                .toggleLike(postId: widget.post!.postId);
                             isLiked!
                                 ? likesCount = likesCount! - 1
                                 : likesCount = likesCount! + 1;
@@ -136,6 +141,8 @@ class _PostWidgetState extends State<PostWidget> {
                       )
                     ],
                   ),
+
+                  //comment
                   Column(
                     children: [
                       Text(
@@ -145,18 +152,36 @@ class _PostWidgetState extends State<PostWidget> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.comment,
-                            size: 30,
-                            color: kprimarycolor,
-                          ),
-                          Text(
-                            "Comment",
-                            style: TextStyles.font20BlueBold,
-                          )
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            backgroundColor: Colors.white,
+                            useSafeArea: true,
+                            context: context,
+                            builder: (BuildContext bottomSheetContext) {
+                              return BlocProvider(
+                                create: (context) =>
+                                    CommentCubit(getIt<CommentRepoImpl>()),
+                                child: DraggableCommentSheet(
+                                  postId: widget.post!.postId,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.comment,
+                              size: 30,
+                              color: kprimarycolor,
+                            ),
+                            Text(
+                              "Comment",
+                              style: TextStyles.font20BlueBold,
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
