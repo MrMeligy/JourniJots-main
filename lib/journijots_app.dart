@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/bottom_nanv_bar.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/core/routes/app_routing.dart';
 import 'package:journijots/core/services/service_locator.dart';
@@ -22,7 +23,7 @@ class JournijotsApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: getIt<CacheHelper>().getData(key: "isOnBoardingVisited") ?? false
             ? getIt<CacheHelper>().getData(key: "LoggedIn") ?? false
-                ? const HomeScreen()
+                ? const BottomNavBarPage()
                 : const LoginScreen()
             : const Onboarding1(),
         onGenerateRoute: appRouting.generateRoute,

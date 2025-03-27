@@ -8,6 +8,7 @@ class PostsListView extends StatelessWidget {
   const PostsListView({
     super.key,
   });
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PostCubit, PostState>(
