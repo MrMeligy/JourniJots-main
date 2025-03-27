@@ -18,6 +18,7 @@ class DraggableCommentSheet extends StatelessWidget {
       builder: (context, scrollController) {
         return CommentBottomSheet(
           scrollController: scrollController,
+          postId: postId,
         );
       },
     );

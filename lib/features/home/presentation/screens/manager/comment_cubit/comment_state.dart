@@ -22,3 +22,17 @@ final class GetCommentsFailure extends CommentState {
 
   const GetCommentsFailure({required this.errMessag});
 }
+
+final class PostCommentsLoading extends CommentState {}
+
+final class PostCommentsSuccess extends CommentState {
+  final PostCommentModel comment;
+
+  const PostCommentsSuccess({required this.comment});
+}
+
+final class PostCommentsFailure extends CommentState {
+  final String errMessag;
+
+  const PostCommentsFailure({required this.errMessag});
+}

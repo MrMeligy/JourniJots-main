@@ -26,9 +26,12 @@ class CommentRepoImpl extends CommentRepo {
 
   @override
   Future<Either<String, PostCommentModel>> postComment(
-      {required int postId}) async {
+      {required int postId, required String content}) async {
     try {
-      var response = await api.post(EndPoint.postComment + postId.toString());
+      var response = await api.post(
+        EndPoint.postComment + postId.toString(),
+        data: '"$content"',
+      );
       final comment = PostCommentModel.fromJson(response);
       return (right(comment));
     } on ServerException catch (e) {

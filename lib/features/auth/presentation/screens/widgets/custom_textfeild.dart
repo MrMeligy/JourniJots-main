@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String label;
   final IconData icon;
-  final IconData? suffixIcon;
+  final IconButton? suffixIcon;
   final bool isPassword;
   final TextEditingController? controller;
   final String? errorText;
@@ -36,7 +36,7 @@ class CustomTextField extends StatelessWidget {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: InputDecoration(
               prefixIcon: Icon(icon, color: Colors.blue),
-              suffixIcon: Icon(suffixIcon, color: Colors.blue),
+              suffixIcon: suffixIcon,
               hintText: label,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),

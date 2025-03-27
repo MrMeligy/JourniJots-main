@@ -6,6 +6,7 @@ import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/auth/presentation/screens/widgets/custom_textfeild.dart';
 import 'package:journijots/features/home/presentation/screens/manager/comment_cubit/comment_cubit.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/profile_picture.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class CommentBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
@@ -13,24 +14,36 @@ class CommentBottomSheet extends StatelessWidget {
   const CommentBottomSheet({
     super.key,
     required this.scrollController,
+    required this.postId,
   });
-
+  final int postId;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CommentCubit, CommentState>(
+    return BlocConsumer<CommentCubit, CommentState>(
+      listener: (context, state) {
+        if (state is PostCommentsFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errMessag),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+        if (state is PostCommentsSuccess) {
+          context.read<CommentCubit>().getComments(postId);
+        }
+      },
       builder: (context, state) {
         return Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.6),
-            borderRadius: const BorderRadius.only(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
           ),
           child: (state is GetCommentsLoading)
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
+              ? const CommentsSkeletonizer()
               : Column(
                   children: [
                     Text(
@@ -109,10 +122,27 @@ class CommentBottomSheet extends StatelessWidget {
                         left: 16.w,
                         right: 16.w,
                       ),
-                      child: const CustomTextField(
+                      child: CustomTextField(
                         label: "Add Comment",
                         icon: Icons.comment,
-                        suffixIcon: Icons.send,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            if (context
+                                .read<CommentCubit>()
+                                .comment
+                                .text
+                                .isEmpty) {
+                              return;
+                            }
+                            context.read<CommentCubit>().postComment(postId);
+                            context.read<CommentCubit>().comment.clear();
+                          },
+                          icon: const Icon(
+                            Icons.send,
+                            color: Colors.blue,
+                          ),
+                        ),
+                        controller: context.read<CommentCubit>().comment,
                       ),
                     ),
                     SizedBox(
@@ -122,6 +152,60 @@ class CommentBottomSheet extends StatelessWidget {
                 ),
         );
       },
+    );
+  }
+}
+
+class CommentsSkeletonizer extends StatelessWidget {
+  const CommentsSkeletonizer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Skeletonizer(
+      ignoreContainers: true,
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ProfilePicture(),
+                SizedBox(
+                  width: 10.w,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'UserName',
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                        ),
+                      ),
+                      BubbleSpecialOne(
+                        text: 'Comment Comment Comment',
+                        isSender: false,
+                        color: kprimarycolor,
+                        textStyle: TextStyle(
+                          fontSize: 18.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

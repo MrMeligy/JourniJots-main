@@ -155,8 +155,7 @@ class _PostWidgetState extends State<PostWidget> {
                       GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
-                            backgroundColor:
-                                Colors.white.withValues(alpha: 0.6),
+                            backgroundColor: Colors.white,
                             useSafeArea: true,
                             context: context,
                             builder: (BuildContext bottomSheetContext) {
