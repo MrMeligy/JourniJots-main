@@ -4,7 +4,8 @@ import 'package:journijots/core/funcs/date_time_func.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/routes/routes.dart';
 import 'package:journijots/core/utils/text_styles.dart';
-import 'package:journijots/features/home/data/post_model/post_model.dart';
+import 'package:journijots/features/home/data/post_model/paginaton_post_model/post.dart';
+// import 'package:journijots/features/home/data/post_model/post_model.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/profile_picture.dart';
 
 class PostProfile extends StatelessWidget {
@@ -12,7 +13,7 @@ class PostProfile extends StatelessWidget {
     super.key,
     required this.postModel,
   });
-  final PostModel postModel;
+  final Post postModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

@@ -1,0 +1,2 @@
+E:/Graduation Project/so secret/Frontend/JourniJots-main/android/app/.cxx/RelWithDebInfo/20505l1b/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/Graduation Project/so secret/Frontend/JourniJots-main/android/app/.cxx/RelWithDebInfo/20505l1b/arm64-v8a/CMakeFiles/rebuild_cache.dir

@@ -1,8 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:journijots/core/api/api_consumer.dart';
 import 'package:journijots/core/api/end_ponits.dart';
+import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/core/errors/exceptions.dart';
-import 'package:journijots/features/home/data/post_model/post_model.dart';
+import 'package:journijots/core/services/service_locator.dart';
+import 'package:journijots/features/home/data/post_model/paginaton_post_model/post.dart';
+// import 'package:journijots/features/home/data/post_model/post_model.dart';
 import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo/post_repo.dart';
 
 class PostRepoImpl extends PostRepo {
@@ -10,11 +13,16 @@ class PostRepoImpl extends PostRepo {
 
   PostRepoImpl({required this.api});
   @override
-  Future<Either<String, List<PostModel>>> getPosts() async {
+  Future<Either<String, List<Post>>> getPosts() async {
     try {
-      var response = await api.get(EndPoint.getPosts);
-      final List<PostModel> posts =
-          (response as List).map((item) => PostModel.fromJson(item)).toList();
+      String? lastPostDate = getIt<CacheHelper>().getData(key: 'lastPostDate');
+      var response =
+          await api.get(EndPoint.getPostsEndPoint(lastPostDate: lastPostDate));
+      final List<Post> posts = (response['posts'] as List)
+          .map((item) => Post.fromJson(item))
+          .toList();
+      getIt<CacheHelper>()
+          .saveData(key: 'lastPostDate', value: response['lastPostDate']);
       return (right(posts));
     } on ServerException catch (e) {
       return (left(e.errModel.errorMessage));

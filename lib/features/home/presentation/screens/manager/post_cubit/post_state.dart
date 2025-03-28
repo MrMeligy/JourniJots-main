@@ -12,7 +12,7 @@ final class PostInitial extends PostState {}
 final class GetPostsLoading extends PostState {}
 
 final class GetPostsSuccessfully extends PostState {
-  final List<PostModel> posts;
+  final List<Post> posts;
 
   const GetPostsSuccessfully({required this.posts});
 }

@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: kscaffoldcolor,
       appBar: const CustomAppBar(),
       body: BlocProvider(
-        create: (context) => PostCubit(getIt<PostRepoImpl>())..getPosts(),
+        create: (context) => PostCubit(getIt<PostRepoImpl>())..getPosts(1),
         child: const HomeViewBody(),
       ),
     );
