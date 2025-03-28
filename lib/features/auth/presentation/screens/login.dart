@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           );
           getIt<CacheHelper>().saveData(key: "LoggedIn", value: true);
-          context.pushNamed(Routes.homeScreen);
+          context.pushNamed(Routes.mainScreen);
         } else if (state is LogInFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

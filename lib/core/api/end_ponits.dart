@@ -4,7 +4,13 @@ class EndPoint {
   static String register = "Account/Register";
   static String uploadProfilePic = "Account/UploadProfilePicture";
   static String addInterests = "Account/AddIntersts";
-  static String getPosts = "Post/GetPosts";
+  static String getPostsEndPoint({String? lastPostDate}) {
+    if (lastPostDate != null) {
+      return "Post/GetPosts?pageSize=30&lastPostDate=$lastPostDate";
+    }
+    return "Post/GetPosts?pageSize=30";
+  }
+
   static String toggleLike = "Post/ToggleLike?postId=";
   static String postComment = "Post/Comment?postId=";
   static String getComment = "Post/GetPostComments?postId=";
