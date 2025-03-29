@@ -11,6 +11,10 @@ class EndPoint {
     return "Post/GetPosts?pageSize=30";
   }
 
+  static String getProfileEndPoint({required String id}) {
+    return "User/GetUserProfile?userId=$id";
+  }
+
   static String toggleLike = "Post/ToggleLike?postId=";
   static String postComment = "Post/Comment?postId=";
   static String getComment = "Post/GetPostComments?postId=";

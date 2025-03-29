@@ -21,6 +21,10 @@ class TextStyles {
     fontSize: 16.sp,
     color: Colors.white,
   );
+  static TextStyle font18White = TextStyle(
+    fontSize: 18.sp,
+    color: Colors.white,
+  );
   static TextStyle font16blue = TextStyle(
     color: kprimarycolor,
     fontSize: 14.sp,

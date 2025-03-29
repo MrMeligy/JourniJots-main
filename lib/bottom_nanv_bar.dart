@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:journijots/core/api/end_ponits.dart';
+import 'package:journijots/core/cache/cache_helper.dart';
+import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
-import 'package:journijots/features/profile/presentation/screens/widgets/profile_page.dart';
+import 'package:journijots/features/profile/presentation/screens/profile_page.dart';
 
 class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({super.key});
@@ -20,7 +23,11 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   late final List<Widget> _pages = [
     const KeepAlivePage(child: HomeScreen()),
     const KeepAlivePage(child: ExploreScreen()),
-    const KeepAlivePage(child: ProfilePage()),
+    KeepAlivePage(
+      child: ProfilePage(
+        id: getIt<CacheHelper>().getData(key: ApiKey.id.toString()),
+      ),
+    ),
   ];
 
   void _onItemTapped(int index) {

@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/utils/constants.dart';
 
 class InterestCategoryButton extends StatelessWidget {
-  final String icon;
-  final String label;
+  final String interest;
 
   const InterestCategoryButton({
     super.key,
-    required this.icon,
-    required this.label,
+    required this.interest,
   });
+
+  Map<String, String>? getInterestData() {
+    for (var item in interests) {
+      if (item["values"].contains(interest)) {
+        return {"title": item["title"], "icon": item["icon"]};
+      }
+    }
+    return null; // في حال لم يتم العثور على تطابق
+  }
 
   @override
   Widget build(BuildContext context) {
+    var interestData = getInterestData();
+    String icon = interestData!["icon"]!;
+    String label = interestData["title"]!;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40.r),
