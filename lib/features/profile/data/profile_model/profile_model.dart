@@ -4,6 +4,7 @@ import 'post.dart';
 import 'trip.dart';
 
 class ProfileModel extends Equatable {
+  final int userId;
   final String? userName;
   final String? profilePicture;
   final List<Post>? posts;
@@ -11,6 +12,7 @@ class ProfileModel extends Equatable {
   final List<Trip>? trips;
 
   const ProfileModel({
+    required this.userId,
     this.userName,
     this.profilePicture,
     this.posts,
@@ -19,6 +21,7 @@ class ProfileModel extends Equatable {
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
+        userId: json['userId'] as int,
         userName: json['userName'] as String?,
         profilePicture: json['profilePicture'] as String?,
         posts: (json['posts'] as List<dynamic>?)
@@ -31,6 +34,7 @@ class ProfileModel extends Equatable {
       );
 
   Map<String, dynamic> toJson() => {
+        'userId': userId,
         'userName': userName,
         'profilePicture': profilePicture,
         'posts': posts?.map((e) => e.toJson()).toList(),
@@ -41,6 +45,7 @@ class ProfileModel extends Equatable {
   @override
   List<Object?> get props {
     return [
+      userId,
       userName,
       profilePicture,
       posts,
