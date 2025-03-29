@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/api/end_ponits.dart';
+import 'package:journijots/core/cache/cache_helper.dart';
+import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/profile_picture.dart';
 import 'package:journijots/features/profile/data/profile_model/profile_model.dart';
@@ -61,7 +64,12 @@ class ProfileHeader extends StatelessWidget {
             _buildProfilePicture(),
             SizedBox(width: 9.w),
             _buildUserInfo(),
-            _buildFollowButton(),
+            (profileModel.userId !=
+                    int.parse(
+                      getIt<CacheHelper>().getData(key: ApiKey.id),
+                    ))
+                ? _buildFollowButton()
+                : Container(),
           ],
         ),
       ),
