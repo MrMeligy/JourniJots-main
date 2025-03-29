@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/utils/constants.dart';
+import 'package:journijots/features/home/presentation/screens/widgets/profile_picture.dart';
+import 'package:journijots/features/profile/data/profile_model/profile_model.dart';
 
 class ProfileHeader extends StatelessWidget {
   final bool isFollowing;
   final VoidCallback onFollowPressed;
-
+  final ProfileModel profileModel;
   const ProfileHeader({
     super.key,
     required this.isFollowing,
     required this.onFollowPressed,
+    required this.profileModel,
   });
 
   @override
@@ -29,7 +32,7 @@ class ProfileHeader extends StatelessWidget {
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/image 26.png'),
+          image: AssetImage('assets/images/pyramidBackground.jpg'),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.only(
@@ -66,20 +69,11 @@ class ProfileHeader extends StatelessWidget {
   }
 
   Widget _buildProfilePicture() {
-    return Container(
+    return ProfilePicture(
+      picture: profileModel.profilePicture,
       width: 90.w,
       height: 90.h,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: Colors.white,
-          width: 4,
-        ),
-        image: const DecorationImage(
-          image: AssetImage('assets/images/Ellipse 7.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
+      isProfileView: true,
     );
   }
 
@@ -91,23 +85,24 @@ class ProfileHeader extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Karius',
+                profileModel.userName!,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.sp,
                   color: const Color.fromARGB(255, 6, 6, 6),
                 ),
               ),
-              SizedBox(width: 4.w),
-              Icon(
+              SizedBox(
+                width: 5.w,
+              ),
+              const Icon(
                 Icons.verified,
-                size: 20.sp,
-                color: Colors.blue[400],
+                color: Colors.blueAccent,
               ),
             ],
           ),
           Text(
-            'Gaming Enthusiast',
+            'Expert Traveler',
             style: TextStyle(
               color: const Color.fromARGB(255, 107, 107, 107),
               fontSize: 14.sp,
