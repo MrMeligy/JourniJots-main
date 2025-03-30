@@ -4,6 +4,7 @@ import 'package:journijots/bottom_nanv_bar.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/core/routes/app_routing.dart';
 import 'package:journijots/core/services/service_locator.dart';
+import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
 
 // ignore: unused_import
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
@@ -21,11 +22,12 @@ class JournijotsApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: getIt<CacheHelper>().getData(key: "isOnBoardingVisited") ?? false
-            ? getIt<CacheHelper>().getData(key: "LoggedIn") ?? false
-                ? const BottomNavBarPage()
-                : const LoginScreen()
-            : const Onboarding1(),
+        home: const ExploreScreen(),
+        // getIt<CacheHelper>().getData(key: "isOnBoardingVisited") ?? false
+        //     ? getIt<CacheHelper>().getData(key: "LoggedIn") ?? false
+        //         ? const BottomNavBarPage()
+        //         : const LoginScreen()
+        //     : const Onboarding1(),
         onGenerateRoute: appRouting.generateRoute,
         theme: ThemeData(
           fontFamily: 'Acme',

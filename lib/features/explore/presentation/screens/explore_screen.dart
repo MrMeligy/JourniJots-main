@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/nearby_place_card.dart';
+import 'package:journijots/features/explore/presentation/screens/widgets/popular_cities_swiper.dart';
 
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({super.key});
@@ -97,7 +98,6 @@ class ExploreScreen extends StatelessWidget {
                         "Hotels",
                         "Restaurants",
                         "Museums",
-                        "Hospitals"
                       ].map((category) {
                         return Padding(
                           padding: const EdgeInsets.only(right: 10),
@@ -138,11 +138,11 @@ class ExploreScreen extends StatelessWidget {
                         topRight: Radius.circular(30),
                       ),
                     ),
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Section Title and "See More"
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
@@ -152,42 +152,16 @@ class ExploreScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xff8CB6DC)),
                             ),
-                            Text(
-                              "See more..",
-                              style: TextStyle(
-                                  fontSize: 14, color: Color(0xff8CB6DC)),
-                            ),
                           ],
                         ),
-                        const SizedBox(height: 30),
+                        SizedBox(height: 30),
 
                         // Stacked Images
-                        Center(
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Positioned(
-                                top: 20,
-                                right: 40,
-                                child: Image.asset('assets/images/Frame 13.png',
-                                    width: 300, height: 250),
-                              ),
-                              Positioned(
-                                top: -20,
-                                left: 35,
-                                child: Image.asset('assets/images/Frame 12.png',
-                                    width: 300, height: 250),
-                              ),
-                              // Top image
-                              Image.asset('assets/images/Frame 11.png',
-                                  width: 300, height: 250),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 30),
+                        PopularCitiesSwiper(),
+                        SizedBox(height: 30),
 
                         // Nearby Places Section
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
@@ -204,10 +178,10 @@ class ExploreScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: 10),
 
                         // Horizontal Scrollable Cards
-                        const SingleChildScrollView(
+                        SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
@@ -229,7 +203,7 @@ class ExploreScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 55),
+                        SizedBox(height: 55),
                       ],
                     ),
                   ),
