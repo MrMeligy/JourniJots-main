@@ -17,21 +17,34 @@ class _PopularCitiesSwiperState extends State<PopularCitiesSwiper> {
   int _currentPage = 0;
 
   final List<CardItem> _items = [
-    CardItem("Cairo", "assets/images/cities/cairo.png"),
-    CardItem("Alexandria", "assets/images/cities/alex copy.png"),
-    CardItem("Dahab", "assets/images/cities/Dahab.jpg"),
-    CardItem("Taba", "assets/images/cities/Taba.jpg"),
-    CardItem("Luxor", "assets/images/cities/luxur.png"),
-    CardItem("Aswan", "assets/images/cities/Aswan.webp"),
-    CardItem("Sharm Elshiekh", "assets/images/cities/SharmElshiekh.jpg"),
-    CardItem("Hurghada", "assets/images/cities/Hurghada.jpg"),
-    CardItem("North East", "assets/images/cities/North East.jpg"),
-    CardItem("Alamein", "assets/images/cities/Alamien.jpg"),
-    CardItem("Port Said", "assets/images/cities/PortSaid.webp"),
-    CardItem("Suez", "assets/images/cities/Suez.jpg"),
-    CardItem("Marsa Alam", "assets/images/cities/MarsaAlam.jpg"),
-    CardItem("Matrouh", "assets/images/cities/Matrouh.jpg"),
-    CardItem("Fayoum", "assets/images/cities/Fayoum.jpg"),
+    CardItem("Cairo", "assets/images/cities/cairo.png", "The Capital of Egypt"),
+    CardItem("Alexandria", "assets/images/cities/alex copy.png",
+        "The Bride of the Mediterranean"),
+    CardItem("Dahab", "assets/images/cities/Dahab.jpg",
+        "A Diving and Relaxation Paradise"),
+    CardItem("Taba", "assets/images/cities/Taba.jpg", "A Gateway to Sinai"),
+    CardItem("Luxor", "assets/images/cities/luxur.png",
+        "The World's Greatest Open-Air Museum"),
+    CardItem(
+        "Aswan", "assets/images/cities/Aswan.webp", "A City of Nubian Culture"),
+    CardItem("Sharm Elshiekh", "assets/images/cities/SharmElshiekh.jpg",
+        "The City of Peace"),
+    CardItem("Hurghada", "assets/images/cities/Hurghada.jpg",
+        "A Red Sea Resort Destination"),
+    CardItem("North East", "assets/images/cities/North East.jpg",
+        "A Coastal Tourist Spot"),
+    CardItem("Alamein", "assets/images/cities/Alamien.jpg",
+        "The Newest City In Cairo"),
+    CardItem("Port Said", "assets/images/cities/PortSaid.webp",
+        "Entrance to the Suez Canal"),
+    CardItem(
+        "Suez", "assets/images/cities/Suez.jpg", "Strategic Maritime City"),
+    CardItem("Marsa Alam", "assets/images/cities/MarsaAlam.jpg",
+        "Diving and Marine Life Spot"),
+    CardItem("Matrouh", "assets/images/cities/Matrouh.jpg",
+        "Famous for its Crystal Beaches"),
+    CardItem("Fayoum", "assets/images/cities/Fayoum.jpg",
+        "An Oasis with Waterfalls and Heritage")
   ];
 
   @override
@@ -71,7 +84,8 @@ class _PopularCitiesSwiperState extends State<PopularCitiesSwiper> {
                 transform: Matrix4.identity()
                   ..setEntry(3, 2, 0.001)
                   ..scale(isCurrentPage ? 1.0 : 0.9),
-                child: buildCard(_items[index].title, _items[index].imagePath),
+                child: buildCard(_items[index].title, _items[index].imagePath,
+                    _items[index].subtitle),
               );
             },
           ),
@@ -101,6 +115,6 @@ class _PopularCitiesSwiperState extends State<PopularCitiesSwiper> {
 class CardItem {
   final String title;
   final String imagePath;
-
-  CardItem(this.title, this.imagePath);
+  final String subtitle;
+  CardItem(this.title, this.imagePath, this.subtitle);
 }

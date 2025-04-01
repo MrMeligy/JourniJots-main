@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:journijots/features/home/data/post_model/post_image.dart';
 
 class Post extends Equatable {
+  final String userId;
   final String userName;
   final String? profilePicture;
   final DateTime createdAt;
@@ -13,6 +14,7 @@ class Post extends Equatable {
   final List<PostImage>? postImages;
 
   const Post({
+    required this.userId,
     required this.userName,
     this.profilePicture,
     required this.createdAt,
@@ -25,6 +27,7 @@ class Post extends Equatable {
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
+        userId: json['userId'] as String,
         userName: json['userName'] as String,
         profilePicture: json['profilePicture'] as String?,
         createdAt: json['createdAt'] =
@@ -40,6 +43,7 @@ class Post extends Equatable {
       );
 
   Map<String, dynamic> toJson() => {
+        'userId': userId,
         'userName': userName,
         'profilePicture': profilePicture,
         'createdAt': createdAt.toIso8601String(),
@@ -54,6 +58,7 @@ class Post extends Equatable {
   @override
   List<Object?> get props {
     return [
+      userId,
       userName,
       profilePicture,
       createdAt,

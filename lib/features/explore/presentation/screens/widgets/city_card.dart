@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget buildCard(String title, String imagePath) {
+Widget buildCard(String title, String imagePath, String subtitle) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
     child: Container(
@@ -64,18 +64,13 @@ Widget buildCard(String title, String imagePath) {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Row(
-                      children: [
-                        Icon(Icons.location_pin, color: Colors.white),
-                        Text(
-                          "260 Km",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),

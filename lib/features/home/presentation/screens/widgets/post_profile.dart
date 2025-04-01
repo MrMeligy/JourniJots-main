@@ -18,7 +18,7 @@ class PostProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(Routes.profileScreen);
+        context.pushNamed(Routes.profileScreen, arguments: postModel.userId);
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -10,6 +10,7 @@ import 'package:journijots/features/onboarding/presentation/screens/onboarding1.
 import 'package:journijots/features/onboarding/presentation/screens/onboarding2.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding3.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:journijots/features/profile/presentation/screens/profile_page.dart';
 
 class AppRouting {
   Route generateRoute(RouteSettings settings) {
@@ -38,8 +39,12 @@ class AppRouting {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.exploreScreen:
         return MaterialPageRoute(builder: (_) => const ExploreScreen());
-      // case Routes.profileScreen:
-      //   return MaterialPageRoute(builder: (_) => const ProfilePage());
+      case Routes.profileScreen:
+        final args = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (_) => ProfilePage(
+                  id: args,
+                ));
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
