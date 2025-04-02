@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/funcs/date_time_func.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/routes/routes.dart';
+import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/text_styles.dart';
 import 'package:journijots/features/home/data/post_model/paginaton_post_model/post.dart';
 // import 'package:journijots/features/home/data/post_model/post_model.dart';
@@ -30,9 +31,21 @@ class PostProfile extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                postModel.userName,
-                style: TextStyles.font22black,
+              Row(
+                children: [
+                  Text(
+                    postModel.userName,
+                    style: TextStyles.font22black,
+                  ),
+                  SizedBox(
+                    width: 5.w,
+                  ),
+                  Icon(
+                    Icons.verified,
+                    color: Colors.blueAccent,
+                    size: 20.w,
+                  ),
+                ],
               ),
               Text(
                 formatTimeAgo(DateTime.parse(postModel.createdAt.toString())),

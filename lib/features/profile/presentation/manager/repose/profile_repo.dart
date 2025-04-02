@@ -3,4 +3,5 @@ import 'package:journijots/features/profile/data/profile_model/profile_model.dar
 
 abstract class ProfileRepo {
   Future<Either<String, ProfileModel>> getPosts({required String id});
+  Future<String> postFollow({required String userId});
 }

@@ -18,6 +18,9 @@ class EndPoint {
   static String toggleLike = "Post/ToggleLike?postId=";
   static String postComment = "Post/Comment?postId=";
   static String getComment = "Post/GetPostComments?postId=";
+  static String postFollow({required String userId}) {
+    return "User/Follow?followedId=$userId";
+  }
 }
 
 class ApiKey {

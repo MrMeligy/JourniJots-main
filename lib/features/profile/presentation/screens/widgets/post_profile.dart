@@ -26,9 +26,21 @@ class PostProfile extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              profileModel.userName!,
-              style: TextStyles.font22black,
+            Row(
+              children: [
+                Text(
+                  profileModel.userName!,
+                  style: TextStyles.font22black,
+                ),
+                SizedBox(
+                  width: 5.w,
+                ),
+                Icon(
+                  Icons.verified,
+                  color: Colors.blueAccent,
+                  size: 20.w,
+                ),
+              ],
             ),
             Text(
               formatTimeAgo(DateTime.parse(post.createdAt.toString())),

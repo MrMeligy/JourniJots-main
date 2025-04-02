@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
+import 'package:journijots/features/profile/presentation/manager/follow_cubit/follow_cubit.dart';
 import 'package:journijots/features/profile/presentation/manager/profile_posts_cubit/profile_posts_cubit.dart';
-import 'package:journijots/features/profile/presentation/manager/repose/profile_posts_repo_impl.dart';
+import 'package:journijots/features/profile/presentation/manager/repose/profile_repo_impl.dart';
 import 'package:journijots/features/profile/presentation/screens/widgets/interests_view_body.dart';
 import 'package:journijots/features/profile/presentation/screens/widgets/profile_header.dart';
 import 'package:journijots/features/profile/presentation/screens/widgets/profile_posts.dart';
@@ -24,7 +25,6 @@ class _ProfilePageState extends State<ProfilePage>
   final ScrollController _scrollController = ScrollController();
   bool _isVisible = true;
   double _lastOffset = 0;
-  bool _isFollowing = false;
 
   @override
   void initState() {
@@ -61,19 +61,26 @@ class _ProfilePageState extends State<ProfilePage>
     super.dispose();
   }
 
-  void followAction() {
-    setState(() {
-      _isFollowing = !_isFollowing;
-    });
-  }
+  // void followAction() {
+  //   setState(() {
+  //     _isFollowing = !_isFollowing;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileCubit(getIt<ProfileRepoImpl>())
-        ..getProfile(
-          id: widget.id,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ProfileCubit(getIt<ProfileRepoImpl>())
+            ..getProfile(
+              id: widget.id,
+            ),
         ),
+        BlocProvider(
+          create: (context) => FollowCubit(getIt<ProfileRepoImpl>()),
+        ),
+      ],
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -85,11 +92,10 @@ class _ProfilePageState extends State<ProfilePage>
                       ? Column(
                           children: [
                             ProfileHeader(
-                              isFollowing: _isFollowing,
-                              onFollowPressed: followAction,
+                              // onFollowPressed: followAction,
                               profileModel: state.profileModel,
                             ),
-                            SizedBox(height: 80.h),
+                            SizedBox(height: 20.h),
                             TabBar(
                               controller: _tabController,
                               labelColor: kprimarycolor,

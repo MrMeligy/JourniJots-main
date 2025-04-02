@@ -19,4 +19,15 @@ class ProfileRepoImpl extends ProfileRepo {
       return (left(e.errModel.errorMessage));
     }
   }
+
+  @override
+  Future<String> postFollow({required String userId}) async {
+    try {
+      var response = await api.post(EndPoint.postFollow(userId: userId));
+      final String message = response;
+      return message;
+    } on ServerException catch (e) {
+      return (e.errModel.errorMessage);
+    }
+  }
 }
