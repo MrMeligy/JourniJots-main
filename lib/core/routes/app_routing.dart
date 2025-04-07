@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/bottom_nanv_bar.dart';
 import 'package:journijots/core/routes/routes.dart';
+import 'package:journijots/features/explore/presentation/screens/city_screen.dart';
 import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/interests/presentation/screens/interests.dart';
@@ -39,12 +40,25 @@ class AppRouting {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.exploreScreen:
         return MaterialPageRoute(builder: (_) => const ExploreScreen());
+      case Routes.cityScreen:
+        final args = settings.arguments as Map<String, String>;
+        final cityImage = args['cityImage']!;
+        final city = args['city']!;
+        final desc = args['desc']!;
+        return MaterialPageRoute(
+          builder: (_) => CityScreen(
+            cityImage: cityImage,
+            city: city,
+            desc: desc,
+          ),
+        );
       case Routes.profileScreen:
         final args = settings.arguments as String;
         return MaterialPageRoute(
-            builder: (_) => ProfilePage(
-                  id: args,
-                ));
+          builder: (_) => ProfilePage(
+            id: args,
+          ),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

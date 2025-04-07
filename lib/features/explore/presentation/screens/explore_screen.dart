@@ -97,7 +97,7 @@ class ExploreScreen extends StatelessWidget {
                       children: [
                         "Hotels",
                         "Restaurants",
-                        "Museums",
+                        "Activities",
                       ].map((category) {
                         return Padding(
                           padding: const EdgeInsets.only(right: 10),

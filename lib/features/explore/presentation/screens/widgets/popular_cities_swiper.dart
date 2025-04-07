@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:journijots/features/explore/presentation/screens/widgets/city_card.dart';
+import 'package:journijots/core/helper/extensions.dart';
+import 'package:journijots/core/routes/routes.dart';
+import 'package:journijots/features/explore/presentation/screens/widgets/build_card.dart';
 
 class PopularCitiesSwiper extends StatefulWidget {
   const PopularCitiesSwiper({super.key});
@@ -27,12 +29,10 @@ class _PopularCitiesSwiperState extends State<PopularCitiesSwiper> {
         "The World's Greatest Open-Air Museum"),
     CardItem(
         "Aswan", "assets/images/cities/Aswan.webp", "A City of Nubian Culture"),
-    CardItem("Sharm Elshiekh", "assets/images/cities/SharmElshiekh.jpg",
+    CardItem("Sharm Elsheikh", "assets/images/cities/SharmElshiekh.jpg",
         "The City of Peace"),
     CardItem("Hurghada", "assets/images/cities/Hurghada.jpg",
         "A Red Sea Resort Destination"),
-    CardItem("North East", "assets/images/cities/North East.jpg",
-        "A Coastal Tourist Spot"),
     CardItem("Alamein", "assets/images/cities/Alamien.jpg",
         "The Newest City In Cairo"),
     CardItem("Port Said", "assets/images/cities/PortSaid.webp",
@@ -41,8 +41,8 @@ class _PopularCitiesSwiperState extends State<PopularCitiesSwiper> {
         "Suez", "assets/images/cities/Suez.jpg", "Strategic Maritime City"),
     CardItem("Marsa Alam", "assets/images/cities/MarsaAlam.jpg",
         "Diving and Marine Life Spot"),
-    CardItem("Matrouh", "assets/images/cities/Matrouh.jpg",
-        "Famous for its Crystal Beaches"),
+    // CardItem("Matrouh", "assets/images/cities/Matrouh.jpg",
+    //     "Famous for its Crystal Beaches"),
     CardItem("Fayoum", "assets/images/cities/Fayoum.jpg",
         "An Oasis with Waterfalls and Heritage")
   ];
@@ -85,7 +85,13 @@ class _PopularCitiesSwiperState extends State<PopularCitiesSwiper> {
                   ..setEntry(3, 2, 0.001)
                   ..scale(isCurrentPage ? 1.0 : 0.9),
                 child: buildCard(_items[index].title, _items[index].imagePath,
-                    _items[index].subtitle),
+                    _items[index].subtitle, () {
+                  context.pushNamed(Routes.cityScreen, arguments: {
+                    'cityImage': _items[index].imagePath,
+                    'city': _items[index].title,
+                    'desc': _items[index].subtitle,
+                  });
+                }),
               );
             },
           ),
