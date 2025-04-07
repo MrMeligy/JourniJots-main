@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/api/end_ponits.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/core/services/service_locator.dart';
@@ -100,6 +101,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
             Icon(
               icon,
               color: _selectedIndex == index ? Colors.blue : Colors.grey,
+              size: 30.h,
             ),
           ],
         ),

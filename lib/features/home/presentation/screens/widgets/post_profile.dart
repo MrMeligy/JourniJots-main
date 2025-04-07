@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/funcs/date_time_func.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/routes/routes.dart';
-import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/text_styles.dart';
 import 'package:journijots/features/home/data/post_model/paginaton_post_model/post.dart';
 // import 'package:journijots/features/home/data/post_model/post_model.dart';
