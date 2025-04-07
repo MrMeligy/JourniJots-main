@@ -1,19 +1,17 @@
-import 'dart:ffi';
-
 import 'package:equatable/equatable.dart';
 
-class ActivitiesModel extends Equatable {
+class ActivityModel extends Equatable {
   final int? id;
   final String? name;
   final String? image;
   final String? address;
   final String? city;
-  final Float? rating;
+  final dynamic rating;
   final int? ratingCount;
   final double? longitude;
   final double? latitude;
 
-  const ActivitiesModel({
+  const ActivityModel({
     this.id,
     this.name,
     this.image,
@@ -25,14 +23,14 @@ class ActivitiesModel extends Equatable {
     this.latitude,
   });
 
-  factory ActivitiesModel.fromJson(Map<String, dynamic> json) {
-    return ActivitiesModel(
+  factory ActivityModel.fromJson(Map<String, dynamic> json) {
+    return ActivityModel(
       id: json['id'] as int?,
       name: json['name'] as String?,
       image: json['image'] as String?,
       address: json['address'] as String?,
       city: json['city'] as String?,
-      rating: json['rating'] as Float?,
+      rating: json['rating'] as dynamic,
       ratingCount: json['ratingCount'] as int?,
       longitude: (json['longitude'] as num?)?.toDouble(),
       latitude: (json['latitude'] as num?)?.toDouble(),

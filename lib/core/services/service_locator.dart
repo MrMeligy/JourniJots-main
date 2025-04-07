@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:journijots/core/api/dio_consumer.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/features/auth/presentation/manager/repos/user_repo_impl.dart';
+import 'package:journijots/features/explore/presentation/manager/repos/city_repo_impl.dart';
 import 'package:journijots/features/home/presentation/screens/manager/repos/comment_repo/comment_repo_impl.dart';
 import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo/post_repo_impl.dart';
 import 'package:journijots/features/interests/presentation/manager/cubit/customize_user_cubit.dart';
@@ -31,5 +32,8 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<ProfileRepoImpl>(
     ProfileRepoImpl(api: getIt<DioConsumer>()),
+  );
+  getIt.registerSingleton<CityRepoImpl>(
+    CityRepoImpl(api: getIt<DioConsumer>()),
   );
 }

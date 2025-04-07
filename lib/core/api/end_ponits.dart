@@ -21,6 +21,10 @@ class EndPoint {
   static String postFollow({required String userId}) {
     return "User/Follow?followedId=$userId";
   }
+
+  static String getCityActivities({required String city}) {
+    return "Places/GetActivitesByCity?city=$city";
+  }
 }
 
 class ApiKey {
