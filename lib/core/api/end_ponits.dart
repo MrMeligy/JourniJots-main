@@ -1,9 +1,11 @@
 class EndPoint {
-  static String baseUrl = "http://10.0.2.2:5206/api/";
+  static String baseUrl =
+      "http://journijots.runasp.net/api/"; //http://10.0.2.2:5206/api/
   static String logIn = "Account/Login";
   static String register = "Account/Register";
   static String uploadProfilePic = "Account/UploadProfilePicture";
   static String addInterests = "Account/AddIntersts";
+  static String addPost = "Post/PostJot";
   static String getPostsEndPoint({String? lastPostDate}) {
     if (lastPostDate != null) {
       return "Post/GetPosts?pageSize=30&lastPostDate=$lastPostDate";
