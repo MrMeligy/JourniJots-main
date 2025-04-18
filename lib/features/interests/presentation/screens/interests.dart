@@ -133,7 +133,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
                             customizeUserCubit
                                 .addInterests(selectedInterestsValues.toList());
                           }
-                          context.pushNamed(Routes.homeScreen);
+                          context.pushNamed(Routes.mainScreen);
                         },
                         child: BlocConsumer<CustomizeUserCubit,
                             CustomizeUserState>(

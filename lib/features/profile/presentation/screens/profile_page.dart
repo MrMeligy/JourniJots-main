@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/api/end_ponits.dart';
+import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/profile/presentation/manager/follow_cubit/follow_cubit.dart';
@@ -15,120 +17,148 @@ import 'package:skeletonizer/skeletonizer.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key, required this.id});
   final String id;
+
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _ProfilePageState extends State<ProfilePage> {
   final ScrollController _scrollController = ScrollController();
   bool _isVisible = true;
+  bool _isFabOpen = false;
   double _lastOffset = 0;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
     _scrollController.addListener(_scrollListener);
   }
 
   void _scrollListener() {
-    if (_scrollController.position.pixels == 0) {
-      if (!_isVisible) {
-        setState(() {
-          _isVisible = true;
-        });
-      }
-    }
     if (_scrollController.position.pixels > _lastOffset && _isVisible) {
-      setState(() {
-        _isVisible = false;
-      });
+      setState(() => _isVisible = false);
     } else if (_scrollController.position.pixels < _lastOffset && !_isVisible) {
-      setState(() {
-        _isVisible = true;
-      });
+      setState(() => _isVisible = true);
     }
     _lastOffset = _scrollController.position.pixels;
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
     _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     super.dispose();
   }
-
-  // void followAction() {
-  //   setState(() {
-  //     _isFollowing = !_isFollowing;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ProfileCubit(getIt<ProfileRepoImpl>())
-            ..getProfile(
-              id: widget.id,
-            ),
+          create: (context) =>
+              ProfileCubit(getIt<ProfileRepoImpl>())..getProfile(id: widget.id),
         ),
         BlocProvider(
           create: (context) => FollowCubit(getIt<ProfileRepoImpl>()),
         ),
       ],
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Stack(
-            children: [
-              BlocBuilder<ProfileCubit, ProfileState>(
-                builder: (context, state) {
-                  return (state is ProfileSuccess)
-                      ? Column(
-                          children: [
-                            ProfileHeader(
-                              // onFollowPressed: followAction,
-                              profileModel: state.profileModel,
-                            ),
-                            SizedBox(height: 20.h),
-                            TabBar(
-                              controller: _tabController,
-                              labelColor: kprimarycolor,
-                              unselectedLabelColor: Colors.grey,
-                              indicatorColor: kprimarycolor,
-                              tabs: const [
-                                Tab(text: 'Posts'),
-                                Tab(text: 'Trips'),
-                                Tab(text: 'Interests'),
-                              ],
-                            ),
-                            Expanded(
-                              child: TabBarView(
-                                controller: _tabController,
-                                children: [
-                                  const ProfilePosts(),
-                                  TripsViewBody(
-                                    scrollController: _scrollController,
-                                  ),
-                                  InterestsViewBody(
-                                    scrollController: _scrollController,
-                                  ),
+      child: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          floatingActionButton: (widget.id ==
+                  getIt<CacheHelper>().getData(key: ApiKey.id))
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AnimatedSlide(
+                      duration: const Duration(milliseconds: 300),
+                      offset:
+                          _isFabOpen ? const Offset(0, 0) : const Offset(0, 1),
+                      child: AnimatedOpacity(
+                        duration: const Duration(milliseconds: 300),
+                        opacity: _isFabOpen ? 1 : 0,
+                        child: FloatingActionButton(
+                          backgroundColor: kprimarycolor,
+                          heroTag: 'trip',
+                          mini: true,
+                          onPressed: () {},
+                          child: const Icon(
+                            Icons.flight,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    AnimatedSlide(
+                      duration: const Duration(milliseconds: 300),
+                      offset:
+                          _isFabOpen ? const Offset(0, 0) : const Offset(0, 1),
+                      child: AnimatedOpacity(
+                        duration: const Duration(milliseconds: 300),
+                        opacity: _isFabOpen ? 1 : 0,
+                        child: FloatingActionButton(
+                          backgroundColor: kprimarycolor,
+                          heroTag: 'post',
+                          mini: true,
+                          onPressed: () {},
+                          // context.pushNamed(Routes.addPostScreen),
+                          child:
+                              const Icon(Icons.post_add, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    FloatingActionButton(
+                      backgroundColor: kprimarycolor,
+                      onPressed: () => setState(() => _isFabOpen = !_isFabOpen),
+                      child: Icon(
+                        _isFabOpen ? Icons.close : Icons.add,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                )
+              : null,
+          body: SafeArea(
+            child: Stack(
+              children: [
+                BlocBuilder<ProfileCubit, ProfileState>(
+                  builder: (context, state) {
+                    return (state is ProfileSuccess)
+                        ? Column(
+                            children: [
+                              ProfileHeader(profileModel: state.profileModel),
+                              SizedBox(height: 20.h),
+                              const TabBar(
+                                labelColor: kprimarycolor,
+                                unselectedLabelColor: Colors.grey,
+                                indicatorColor: kprimarycolor,
+                                tabs: [
+                                  Tab(text: 'Posts'),
+                                  Tab(text: 'Trips'),
+                                  Tab(text: 'Interests'),
                                 ],
                               ),
-                            ),
-                          ],
-                        )
-                      : const Skeletonizer(
-                          child: SkeletonizeProfileHeader(),
-                        );
-                },
-              ),
-            ],
+                              Expanded(
+                                child: TabBarView(
+                                  children: [
+                                    const ProfilePosts(),
+                                    TripsViewBody(
+                                        scrollController: _scrollController),
+                                    InterestsViewBody(
+                                        scrollController: _scrollController),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        : const Skeletonizer(child: SkeletonizeProfileHeader());
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -137,9 +167,7 @@ class _ProfilePageState extends State<ProfilePage>
 }
 
 class SkeletonizeProfileHeader extends StatelessWidget {
-  const SkeletonizeProfileHeader({
-    super.key,
-  });
+  const SkeletonizeProfileHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +176,6 @@ class SkeletonizeProfileHeader extends StatelessWidget {
         Stack(
           clipBehavior: Clip.none,
           children: [
-            // Cover Image
             Container(
               height: 150.h,
               width: double.infinity,
@@ -157,8 +184,6 @@ class SkeletonizeProfileHeader extends StatelessWidget {
                     BorderRadius.only(bottomRight: Radius.circular(600)),
               ),
             ),
-
-            // Profile Details
             Positioned(
               bottom: -75.h,
               left: 0,
@@ -168,7 +193,6 @@ class SkeletonizeProfileHeader extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    // Profile Picture
                     Container(
                       width: 90.w,
                       height: 90.h,
@@ -177,24 +201,19 @@ class SkeletonizeProfileHeader extends StatelessWidget {
                         border: Border.all(color: Colors.white, width: 4),
                       ),
                     ),
-
                     SizedBox(width: 9.w),
-
-                    // User Info
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              // User Name
                               Container(
                                 width: 100.w,
                                 height: 20.h,
-                                color: Colors.grey[300], // Placeholder
+                                color: Colors.grey[300],
                               ),
                               SizedBox(width: 4.w),
-                              // Verified Icon Placeholder
                               Container(
                                 width: 20.w,
                                 height: 20.h,
@@ -202,7 +221,6 @@ class SkeletonizeProfileHeader extends StatelessWidget {
                               ),
                             ],
                           ),
-                          // User Bio Placeholder
                           Container(
                             width: 150.w,
                             height: 14.h,
@@ -211,8 +229,6 @@ class SkeletonizeProfileHeader extends StatelessWidget {
                         ],
                       ),
                     ),
-
-                    // Follow Button
                     Container(
                       margin: EdgeInsets.only(bottom: 10.h),
                       width: 80.w,

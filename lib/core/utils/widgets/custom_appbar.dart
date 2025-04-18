@@ -4,8 +4,9 @@ import 'package:journijots/core/utils/constants.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
+    this.title,
   });
-
+  final String? title;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -13,9 +14,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
       ),
-      title: const Text(
-        "Home",
-        style: TextStyle(
+      title: Text(
+        title ?? "Home",
+        style: const TextStyle(
           fontSize: 40,
           color: kprimarycolor,
         ),

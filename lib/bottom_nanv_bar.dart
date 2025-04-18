@@ -41,49 +41,52 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: _pages, // Prevent swiping
-      ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 5,
-            )
-          ],
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: _pages, // Prevent swiping
         ),
-        child: SafeArea(
-          child: Stack(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildNavItem(0, Icons.home, 'Home'),
-                  _buildNavItem(1, Icons.explore, 'Explore'),
-                  _buildNavItem(2, Icons.person, 'Profile'),
-                ],
-              ),
-              AnimatedPositioned(
-                duration: const Duration(milliseconds: 250),
-                curve: Curves.easeInOut,
-                bottom: 0,
-                left: MediaQuery.of(context).size.width / 3 * _selectedIndex +
-                    (MediaQuery.of(context).size.width / 6 - 10),
-                child: Container(
-                  width: 20,
-                  height: 3,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(2),
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 5,
+              )
+            ],
+          ),
+          child: SafeArea(
+            child: Stack(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildNavItem(0, Icons.home, 'Home'),
+                    _buildNavItem(1, Icons.explore, 'Explore'),
+                    _buildNavItem(2, Icons.person, 'Profile'),
+                  ],
+                ),
+                AnimatedPositioned(
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.easeInOut,
+                  bottom: 0,
+                  left: MediaQuery.of(context).size.width / 3 * _selectedIndex +
+                      (MediaQuery.of(context).size.width / 6 - 10),
+                  child: Container(
+                    width: 20,
+                    height: 3,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

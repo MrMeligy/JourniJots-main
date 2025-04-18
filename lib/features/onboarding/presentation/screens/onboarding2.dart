@@ -21,12 +21,9 @@ class Onboarding2 extends StatelessWidget {
                 bottom: -60.h,
                 left: 0,
                 right: 0,
-                child: Hero(
-                  tag: 'bgonb',
-                  child: Image.asset(
-                    'assets/images/Rectangle 27_2.png',
-                    fit: BoxFit.cover,
-                  ),
+                child: Image.asset(
+                  'assets/images/Rectangle 27_2.png',
+                  fit: BoxFit.cover,
                 ),
               ),
 
