@@ -1,12 +1,18 @@
-import 'package:journijots/core/api/end_ponits.dart';
-
 class ErrorModel {
   final String errorMessage;
+  final int? statusCode;
+  // other fields as needed
 
-  ErrorModel({required this.errorMessage});
-  factory ErrorModel.fromJson(Map<String, dynamic> jsonData) {
+  ErrorModel({
+    required this.errorMessage,
+    this.statusCode,
+  });
+
+  factory ErrorModel.fromJson(Map<String, dynamic> json) {
     return ErrorModel(
-      errorMessage: jsonData[ApiKey.message],
+      errorMessage: json['message'] ?? '',
+      statusCode: json['statusCode'],
+      // other fields
     );
   }
 }

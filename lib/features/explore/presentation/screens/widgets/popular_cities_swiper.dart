@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:journijots/core/helper/extensions.dart';
-import 'package:journijots/core/routes/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:journijots/core/services/service_locator.dart';
+import 'package:journijots/features/explore/presentation/manager/cubits/city_cubit/city_cubit.dart';
+import 'package:journijots/features/explore/presentation/manager/repos/city_repo_impl.dart';
+import 'package:journijots/features/explore/presentation/screens/city_screen.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/build_card.dart';
 
 class PopularCitiesSwiper extends StatefulWidget {
@@ -86,11 +89,22 @@ class _PopularCitiesSwiperState extends State<PopularCitiesSwiper> {
                   ..scale(isCurrentPage ? 1.0 : 0.9),
                 child: buildCard(_items[index].title, _items[index].imagePath,
                     _items[index].subtitle, () {
-                  context.pushNamed(Routes.cityScreen, arguments: {
-                    'cityImage': _items[index].imagePath,
-                    'city': _items[index].title,
-                    'desc': _items[index].subtitle,
-                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                        create: (_) => CityCubit(getIt<CityRepoImpl>())
+                          ..getActivities(
+                            city: _items[index].title,
+                          ),
+                        child: CityScreen(
+                          city: _items[index].title,
+                          cityImage: _items[index].imagePath,
+                          desc: _items[index].subtitle,
+                        ),
+                      ),
+                    ),
+                  );
                 }),
               );
             },

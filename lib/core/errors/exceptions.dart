@@ -34,9 +34,33 @@ void handleDioExceptions(DioException e) {
         case 403: //forbidden
           throw ServerException(
               errModel: ErrorModel.fromJson(e.response!.data));
-        case 404: //not found
-          throw ServerException(
-              errModel: ErrorModel.fromJson(e.response!.data));
+        case 404: // not found
+          if (e.response?.headers['content-type']?.contains('text/plain') ==
+              true) {
+            // Handle plain text error message
+            final errorMessage = e.response!.data.toString();
+            throw ServerException(
+              errModel: ErrorModel(
+                errorMessage: errorMessage,
+                statusCode: e.response!.statusCode,
+              ),
+            );
+          } else {
+            // Handle JSON error response
+            try {
+              throw ServerException(
+                errModel: ErrorModel.fromJson(e.response!.data),
+              );
+            } catch (parseError) {
+              // Fallback if parsing fails
+              throw ServerException(
+                errModel: ErrorModel(
+                  errorMessage: e.response?.data?.toString() ?? "Unknown error",
+                  statusCode: e.response!.statusCode,
+                ),
+              );
+            }
+          }
         case 409: //cofficient
           throw ServerException(
               errModel: ErrorModel.fromJson(e.response!.data));
