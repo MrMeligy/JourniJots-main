@@ -35,6 +35,13 @@ class EndPoint {
   static String getCityHotels({required String city}) {
     return "Places/GetHotelsByCity?city=$city";
   }
+
+  static String search({required String text, String? city}) {
+    if (city != null) {
+      return "User/searchByCity?name=$text&city=$city";
+    }
+    return "User/search?name=$text";
+  }
 }
 
 class ApiKey {

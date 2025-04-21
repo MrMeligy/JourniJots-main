@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/nearby_place_card.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/popular_cities_swiper.dart';
+import 'package:journijots/features/explore/presentation/screens/widgets/search_bar.dart';
 
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({super.key});
@@ -60,28 +61,12 @@ class ExploreScreen extends StatelessWidget {
                   const SizedBox(height: 25),
 
                   // Search Bar
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       children: [
                         Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: "  What are you looking for?",
-                              hintStyle:
-                                  const TextStyle(color: Color(0xff8CB6DC)),
-                              suffixIcon:
-                                  const Icon(Icons.search, color: Colors.grey),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide.none,
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 12),
-                            ),
-                          ),
+                          child: CustomSearchBar(),
                         ),
                       ],
                     ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/city_cubit/city_cubit.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/category_chip.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/city_activites.dart';
@@ -10,6 +9,7 @@ import 'package:journijots/features/explore/presentation/screens/widgets/city_ho
 import 'package:journijots/features/explore/presentation/screens/widgets/city_restaurants.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/city_skeltonizer.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/explore_appbar.dart';
+import 'package:journijots/features/explore/presentation/screens/widgets/search_bar.dart';
 
 class CityScreen extends StatefulWidget {
   const CityScreen(
@@ -67,7 +67,10 @@ class _CityScreenState extends State<CityScreen> {
                 const ExploreAppBar(),
                 SizedBox(height: 25.h),
                 // Search Bar
-                const SearchBar(),
+                CustomSearchBar(
+                  city: widget.city,
+                  hintText: "Search in ${widget.city}",
+                ),
                 SizedBox(height: 15.h),
 
                 Padding(
@@ -151,40 +154,6 @@ class _CityScreenState extends State<CityScreen> {
                   ),
                 ),
               ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SearchBar extends StatelessWidget {
-  const SearchBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: "  What are you looking for?",
-                hintStyle: const TextStyle(color: kprimarycolor),
-                suffixIcon: const Icon(Icons.search, color: kprimarycolor),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              ),
             ),
           ),
         ],

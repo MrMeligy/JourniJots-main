@@ -5,7 +5,7 @@ import 'package:journijots/core/errors/exceptions.dart';
 import 'package:journijots/features/explore/data/activities_model/activity_model.dart';
 import 'package:journijots/features/explore/data/hotel_model/hotel_model.dart';
 import 'package:journijots/features/explore/data/restaurant_model/restaurant_model.dart';
-import 'package:journijots/features/explore/presentation/manager/repos/city_repo.dart';
+import 'package:journijots/features/explore/presentation/manager/repos/city/city_repo.dart';
 
 class CityRepoImpl extends CityRepo {
   final ApiConsumer api;

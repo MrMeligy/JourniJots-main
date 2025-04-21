@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/city_cubit/city_cubit.dart';
-import 'package:journijots/features/explore/presentation/manager/repos/city_repo_impl.dart';
+import 'package:journijots/features/explore/presentation/manager/repos/city/city_repo_impl.dart';
 import 'package:journijots/features/explore/presentation/screens/city_screen.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/build_card.dart';
 
