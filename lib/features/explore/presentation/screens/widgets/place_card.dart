@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:journijots/core/utils/text_styles.dart';
-import 'package:journijots/core/utils/widgets/image_base.dart';
+import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/data/place_model/place_model.dart';
+import 'package:journijots/features/explore/presentation/screens/widgets/image_handler.dart';
 
 class PlaceCard extends StatelessWidget {
   const PlaceCard({
@@ -13,127 +12,108 @@ class PlaceCard extends StatelessWidget {
   final PlaceModel placeModel;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.horizontal(left: Radius.circular(16)),
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black38,
+            blurRadius: 6,
+            offset: Offset(15, 12), // Shadow position
           ),
-          width: MediaQuery.of(context).size.width * 0.3,
-          height: MediaQuery.of(context).size.height * 0.15,
-          child: ClipRRect(
-            borderRadius:
-                const BorderRadius.horizontal(left: Radius.circular(16)),
-            child: (placeModel.image!.contains("data:image"))
-                ? Base64Image(
-                    base64String: placeModel.image,
-                  )
-                : CachedNetworkImage(
-                    imageUrl: placeModel.image!,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
-          ),
+        ],
+        color: kbodycolor,
+        border: Border.all(
+          color: Colors.black54,
+          width: 3,
         ),
-        Expanded(
-          child: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color(0xff224A67),
-                Color(0xff4493CD),
-              ]),
-              borderRadius: BorderRadius.horizontal(right: Radius.circular(16)),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(16),
+        ),
+      ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.3,
+            width: double.infinity,
+            child: ImageHandler(
+              imageUrl: placeModel.image,
             ),
-            height: MediaQuery.of(context).size.height * 0.15,
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              placeModel.name!,
+              style: TextStyle(
+                fontSize: 22.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: 10.w,
+                Icon(
+                  Icons.location_pin,
+                  size: 26.w,
                 ),
-                Expanded(
-                  // Added Expanded to prevent overflow
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          placeModel.name!,
-                          style: TextStyles.font18White,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.location_pin,
-                              color: Colors.white,
-                              size: 22.w,
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Expanded(
-                              // Added Expanded to prevent text overflow
-                              child: Text(
-                                placeModel.city!,
-                                style: TextStyles.font18White,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.white,
-                                  size: 22.w,
-                                ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Text(
-                                  placeModel.rating.toString(),
-                                  style: TextStyles.font18White,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.people_alt,
-                                  size: 22.h,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 3.w,
-                                ),
-                                Text(
-                                  "${placeModel.ratingCount}",
-                                  style: TextStyles.font18White,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                SizedBox(
+                  width: 5.w,
+                ),
+                Flexible(
+                  child: Text(
+                    placeModel.address ?? placeModel.city!,
+                    style: TextStyle(
+                      fontSize: 19.sp,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      size: 26.w,
+                    ),
+                    Text(
+                      placeModel.rating.toString(),
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  spacing: 3.w,
+                  children: [
+                    Icon(
+                      Icons.people,
+                      size: 26.w,
+                    ),
+                    Text(
+                      placeModel.ratingCount.toString(),
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
