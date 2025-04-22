@@ -1,17 +1,19 @@
 import 'package:equatable/equatable.dart';
 
-class ActivityModel extends Equatable {
+class PlaceModel extends Equatable {
+  final String? category;
   final int? id;
   final String? name;
   final String? image;
   final String? address;
   final String? city;
-  final dynamic rating;
+  final double? rating;
   final int? ratingCount;
   final double? longitude;
   final double? latitude;
 
-  const ActivityModel({
+  const PlaceModel({
+    this.category,
     this.id,
     this.name,
     this.image,
@@ -23,14 +25,15 @@ class ActivityModel extends Equatable {
     this.latitude,
   });
 
-  factory ActivityModel.fromJson(Map<String, dynamic> json) {
-    return ActivityModel(
+  factory PlaceModel.fromJson(Map<String, dynamic> json) {
+    return PlaceModel(
+      category: json['category'] as String?,
       id: json['id'] as int?,
       name: json['name'] as String?,
       image: json['image'] as String?,
       address: json['address'] as String?,
       city: json['city'] as String?,
-      rating: json['rating'] as dynamic,
+      rating: (json['rating'] as num?)?.toDouble(),
       ratingCount: json['ratingCount'] as int?,
       longitude: (json['longitude'] as num?)?.toDouble(),
       latitude: (json['latitude'] as num?)?.toDouble(),
@@ -38,6 +41,7 @@ class ActivityModel extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
+        'category': category,
         'id': id,
         'name': name,
         'image': image,
@@ -52,6 +56,7 @@ class ActivityModel extends Equatable {
   @override
   List<Object?> get props {
     return [
+      category,
       id,
       name,
       image,

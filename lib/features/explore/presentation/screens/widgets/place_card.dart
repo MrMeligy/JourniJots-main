@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:journijots/core/utils/text_styles.dart';
-import 'package:journijots/features/explore/data/activities_model/activity_model.dart';
+import 'package:journijots/core/utils/widgets/image_base.dart';
+import 'package:journijots/features/explore/data/place_model/place_model.dart';
 
-class ActivityCard extends StatelessWidget {
-  const ActivityCard({
+class PlaceCard extends StatelessWidget {
+  const PlaceCard({
     super.key,
-    required this.activityModel,
+    required this.placeModel,
   });
-  final ActivityModel activityModel;
+  final PlaceModel placeModel;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -23,14 +24,19 @@ class ActivityCard extends StatelessWidget {
           child: ClipRRect(
             borderRadius:
                 const BorderRadius.horizontal(left: Radius.circular(16)),
-            child: CachedNetworkImage(
-              imageUrl: activityModel.image!,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => const Center(
-                child: CircularProgressIndicator(),
-              ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
+            child: (placeModel.image!.contains("data:image"))
+                ? Base64Image(
+                    base64String: placeModel.image,
+                  )
+                : CachedNetworkImage(
+                    imageUrl: placeModel.image!,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
           ),
         ),
         Expanded(
@@ -57,7 +63,7 @@ class ActivityCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          activityModel.name!,
+                          placeModel.name!,
                           style: TextStyles.font18White,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
@@ -75,7 +81,7 @@ class ActivityCard extends StatelessWidget {
                             Expanded(
                               // Added Expanded to prevent text overflow
                               child: Text(
-                                activityModel.city!,
+                                placeModel.city!,
                                 style: TextStyles.font18White,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -96,7 +102,7 @@ class ActivityCard extends StatelessWidget {
                                   width: 5.w,
                                 ),
                                 Text(
-                                  activityModel.rating.toString(),
+                                  placeModel.rating.toString(),
                                   style: TextStyles.font18White,
                                 ),
                               ],
@@ -112,7 +118,7 @@ class ActivityCard extends StatelessWidget {
                                   width: 3.w,
                                 ),
                                 Text(
-                                  "${activityModel.ratingCount}",
+                                  "${placeModel.ratingCount}",
                                   style: TextStyles.font18White,
                                 ),
                               ],

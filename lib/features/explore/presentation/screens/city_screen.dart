@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/city_cubit/city_cubit.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/category_chip.dart';
-import 'package:journijots/features/explore/presentation/screens/widgets/city_activites.dart';
+import 'package:journijots/features/explore/presentation/screens/widgets/city_places.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/city_describtion.dart';
-import 'package:journijots/features/explore/presentation/screens/widgets/city_hotels.dart';
-import 'package:journijots/features/explore/presentation/screens/widgets/city_restaurants.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/city_skeltonizer.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/explore_appbar.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/search_bar.dart';
@@ -130,26 +128,15 @@ class _CityScreenState extends State<CityScreen> {
                               city: widget.city,
                               subtitle: widget.desc,
                             ),
-                            (state is CityActivitiesSuccess)
-                                ? CityActivties(
+                            (state is CitySuccess)
+                                ? CityPlaces(
                                     city: widget.city,
                                     desc: widget.desc,
-                                    activities: state.activities,
+                                    places: state.places,
                                   )
-                                : (state is CityRestaurantsSuccess)
-                                    ? CityRestaurants(
-                                        city: widget.city,
-                                        desc: widget.desc,
-                                        restaurants: state.restaurants)
-                                    : (state is CityHotelsSuccess)
-                                        ? CityHotels(
-                                            city: widget.city,
-                                            desc: widget.desc,
-                                            hotels: state.hotels,
-                                          )
-                                        : (state is CityFailure)
-                                            ? Center(child: Text(state.err))
-                                            : const CitySkeltonizer(),
+                                : (state is CityFailure)
+                                    ? Center(child: Text(state.err))
+                                    : const CitySkeltonizer(),
                           ],
                         );
                       },

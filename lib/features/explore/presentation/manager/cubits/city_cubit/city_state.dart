@@ -11,8 +11,14 @@ final class CityInitial extends CityState {}
 
 final class CityLoading extends CityState {}
 
+final class CitySuccess extends CityState {
+  final List<PlaceModel> places;
+
+  const CitySuccess({required this.places});
+}
+
 final class CityActivitiesSuccess extends CityState {
-  final List<ActivityModel> activities;
+  final List<PlaceModel> activities;
 
   const CityActivitiesSuccess({required this.activities});
 }
@@ -24,13 +30,13 @@ final class CityFailure extends CityState {
 }
 
 final class CityRestaurantsSuccess extends CityState {
-  final List<RestaurantModel> restaurants;
+  final List<PlaceModel> restaurants;
 
   const CityRestaurantsSuccess({required this.restaurants});
 }
 
 final class CityHotelsSuccess extends CityState {
-  final List<HotelModel> hotels;
+  final List<PlaceModel> hotels;
 
   const CityHotelsSuccess({required this.hotels});
 }

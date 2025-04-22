@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:journijots/features/explore/data/hotel_model/hotel_model.dart';
-import 'package:journijots/features/explore/presentation/screens/widgets/hotel_card.dart';
+import 'package:journijots/features/explore/data/place_model/place_model.dart';
+import 'package:journijots/features/explore/presentation/screens/widgets/place_card.dart';
 
-class CityHotels extends StatelessWidget {
-  const CityHotels({
+class CityPlaces extends StatelessWidget {
+  const CityPlaces({
     super.key,
     required this.city,
     required this.desc,
-    required this.hotels,
+    required this.places,
   });
 
   final String city;
   final String desc;
-  final List<HotelModel> hotels;
+  final List<PlaceModel> places;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,11 @@ class CityHotels extends StatelessWidget {
               true, // Allows the ListView to take only the space it needs
           physics:
               const NeverScrollableScrollPhysics(), // Disable internal scrolling of ListView
-          itemCount: hotels.length,
+          itemCount: places.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: HotelCard(hotelModel: hotels[index]),
+              child: PlaceCard(placeModel: places[index]),
             );
           },
         ),
