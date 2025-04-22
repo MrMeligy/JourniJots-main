@@ -71,7 +71,10 @@ class _PostWidgetState extends State<PostWidget> {
                               ? widget.post!.post
                               : "${widget.post!.post.substring(0, maxlength)}...")
                           : widget.post!.post,
-                      style: TextStyles.font18Black,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18.sp,
+                      ),
                       children: isLong
                           ? [
                               TextSpan(

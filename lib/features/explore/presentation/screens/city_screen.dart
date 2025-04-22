@@ -67,9 +67,12 @@ class _CityScreenState extends State<CityScreen> {
                 const ExploreAppBar(),
                 SizedBox(height: 25.h),
                 // Search Bar
-                CustomSearchBar(
-                  city: widget.city,
-                  hintText: "Search in ${widget.city}",
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  child: CustomSearchBar(
+                    city: widget.city,
+                    hintText: "Search in ${widget.city}",
+                  ),
                 ),
                 SizedBox(height: 15.h),
 
