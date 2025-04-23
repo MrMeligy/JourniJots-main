@@ -1,6 +1,6 @@
 class EndPoint {
   static String baseUrl =
-      "http://10.0.2.2:5206/api/"; //http://10.0.2.2:5206/api/ // http://journijotsv1.runasp.net/api/
+      "http://journijotsv2.runasp.net/"; //http://10.0.2.2:5206/api/ // http://journijotsv1.runasp.net/api/
   static String logIn = "Account/Login";
   static String register = "Account/Register";
   static String uploadProfilePic = "Account/UploadProfilePicture";

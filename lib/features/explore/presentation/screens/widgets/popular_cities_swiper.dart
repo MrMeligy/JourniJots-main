@@ -22,7 +22,8 @@ class _PopularCitiesSwiperState extends State<PopularCitiesSwiper> {
   int _currentPage = 0;
 
   final List<CardItem> _items = [
-    CardItem("Cairo", "assets/images/cities/cairo.png", "The Capital of Egypt"),
+    CardItem("Cairo", "assets/images/cities/cairo.jpg", "The Capital of Egypt"),
+    CardItem("Giza", "assets/images/cities/cairo.png", "The Pyramids City"),
     CardItem("Alexandria", "assets/images/cities/alex copy.png",
         "The Bride of the Mediterranean"),
     CardItem("Dahab", "assets/images/cities/Dahab.jpg",
