@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:journijots/core/api/api_consumer.dart';
 import 'package:journijots/core/api/end_ponits.dart';
 import 'package:journijots/core/errors/exceptions.dart';
+import 'package:journijots/features/explore/data/place_model/paggination_place.dart';
 import 'package:journijots/features/explore/data/place_model/place_model.dart';
 import 'package:journijots/features/explore/presentation/manager/repos/city/city_repo.dart';
 
@@ -10,45 +11,60 @@ class CityRepoImpl extends CityRepo {
 
   CityRepoImpl({required this.api});
   @override
-  Future<Either<String, List<PlaceModel>>> getCityActivity(
-      {required String city}) async {
+  Future<Either<String, Tuple2<List<PlaceModel>, PagginationPlace>>>
+      getCityActivity({required String city, required String num}) async {
     try {
       var response = await api.get(
-        EndPoint.getCityActivities(city: city),
+        EndPoint.getCityActivities(city: city, pageNum: num),
       );
-      final List<PlaceModel> activites =
-          (response as List).map((item) => PlaceModel.fromJson(item)).toList();
-      return (right(activites));
+      final pagginationResponse = PagginationPlace.fromJson(response);
+      final List<PlaceModel> activities = (response['data'] as List)
+          .map((item) => PlaceModel.fromJson(item))
+          .toList();
+
+      return right(
+        Tuple2(activities, pagginationResponse),
+      );
     } on ServerException catch (e) {
       return (left(e.errModel.errorMessage));
     }
   }
 
   @override
-  Future<Either<String, List<PlaceModel>>> getCityRestaurants(
-      {required String city}) async {
+  Future<Either<String, Tuple2<List<PlaceModel>, PagginationPlace>>>
+      getCityRestaurants({required String city, required String num}) async {
     try {
       var response = await api.get(
-        EndPoint.getCityRestaurants(city: city),
+        EndPoint.getCityRestaurants(city: city, pageNum: num),
       );
-      final List<PlaceModel> restaurants =
-          (response as List).map((item) => PlaceModel.fromJson(item)).toList();
-      return (right(restaurants));
+      final pagginationResponse = PagginationPlace.fromJson(response);
+      final List<PlaceModel> restaurants = (response['data'] as List)
+          .map((item) => PlaceModel.fromJson(item))
+          .toList();
+
+      return right(
+        Tuple2(restaurants, pagginationResponse),
+      );
     } on ServerException catch (e) {
       return (left(e.errModel.errorMessage));
     }
   }
 
   @override
-  Future<Either<String, List<PlaceModel>>> getCityHotels(
-      {required String city}) async {
+  Future<Either<String, Tuple2<List<PlaceModel>, PagginationPlace>>>
+      getCityHotels({required String city, required String num}) async {
     try {
       var response = await api.get(
-        EndPoint.getCityHotels(city: city),
+        EndPoint.getCityHotels(city: city, pageNum: num),
       );
-      final List<PlaceModel> hotels =
-          (response as List).map((item) => PlaceModel.fromJson(item)).toList();
-      return (right(hotels));
+      final pagginationResponse = PagginationPlace.fromJson(response);
+      final List<PlaceModel> hotels = (response['data'] as List)
+          .map((item) => PlaceModel.fromJson(item))
+          .toList();
+
+      return right(
+        Tuple2(hotels, pagginationResponse),
+      );
     } on ServerException catch (e) {
       return (left(e.errModel.errorMessage));
     }

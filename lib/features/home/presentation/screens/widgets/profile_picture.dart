@@ -24,7 +24,7 @@ class ProfilePicture extends StatelessWidget {
             width: isProfileView ?? false ? 4 : 0,
             color: Colors.white,
           ),
-          borderRadius: BorderRadius.circular(50)),
+          borderRadius: BorderRadius.circular(80)),
       child: ClipOval(
         child: Base64Image(
           base64String: picture, // Paste your full base64 string

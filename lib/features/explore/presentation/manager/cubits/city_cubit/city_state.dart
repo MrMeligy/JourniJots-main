@@ -13,8 +13,12 @@ final class CityLoading extends CityState {}
 
 final class CitySuccess extends CityState {
   final List<PlaceModel> places;
+  final PagginationPlace pagDetails;
 
-  const CitySuccess({required this.places});
+  const CitySuccess({
+    required this.places,
+    required this.pagDetails,
+  });
 }
 
 final class CityActivitiesSuccess extends CityState {

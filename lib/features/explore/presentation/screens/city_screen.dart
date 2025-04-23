@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/city_cubit/city_cubit.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/category_chip.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/city_places.dart';
@@ -31,11 +32,11 @@ class _CityScreenState extends State<CityScreen> {
     });
 
     if (category == "Activities") {
-      context.read<CityCubit>().getActivities(city: widget.city);
+      context.read<CityCubit>().getActivities(city: widget.city, pageNum: '1');
     } else if (category == "Restaurants") {
-      context.read<CityCubit>().getRestaurants(city: widget.city);
+      context.read<CityCubit>().getRestaurants(city: widget.city, pageNum: '1');
     } else if (category == "Hotels") {
-      context.read<CityCubit>().getHotels(city: widget.city);
+      context.read<CityCubit>().getHotels(city: widget.city, pageNum: '1');
     }
   }
 
@@ -129,10 +130,69 @@ class _CityScreenState extends State<CityScreen> {
                               subtitle: widget.desc,
                             ),
                             (state is CitySuccess)
-                                ? CityPlaces(
-                                    city: widget.city,
-                                    desc: widget.desc,
-                                    places: state.places,
+                                ? Column(
+                                    children: [
+                                      CityPlaces(
+                                        city: widget.city,
+                                        desc: widget.desc,
+                                        places: state.places,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(bottom: 30.h),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 30,
+                                              backgroundColor: (state.pagDetails
+                                                          .pageNumber ==
+                                                      1)
+                                                  ? kscaffoldcolor
+                                                  : kprimarycolor,
+                                              child: IconButton(
+                                                onPressed: () {
+                                                  if (state.pagDetails
+                                                          .pageNumber ==
+                                                      1) {
+                                                    return;
+                                                  }
+                                                  _prevPage(context, state);
+                                                },
+                                                icon: Icon(
+                                                    Icons.arrow_back_ios_new,
+                                                    size: 30.h,
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                            CircleAvatar(
+                                              radius: 30,
+                                              backgroundColor:
+                                                  (state.pagDetails.hasNext!)
+                                                      ? kprimarycolor
+                                                      : kscaffoldcolor,
+                                              child: IconButton(
+                                                onPressed: () {
+                                                  if (!state
+                                                      .pagDetails.hasNext!) {
+                                                    return;
+                                                  }
+                                                  _nextPage(context, state);
+                                                },
+                                                icon: Icon(
+                                                  Icons.arrow_forward_ios,
+                                                  size: 30.h,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 30.h,
+                                      )
+                                    ],
                                   )
                                 : (state is CityFailure)
                                     ? Center(child: Text(state.err))
@@ -149,5 +209,37 @@ class _CityScreenState extends State<CityScreen> {
         ],
       ),
     );
+  }
+
+  void _nextPage(BuildContext context, CitySuccess state) {
+    if (selectedCategory == "Activities") {
+      context.read<CityCubit>().getActivities(
+          city: widget.city,
+          pageNum: (state.pagDetails.pageNumber! + 1).toString());
+    } else if (selectedCategory == "Restaurants") {
+      context.read<CityCubit>().getRestaurants(
+          city: widget.city,
+          pageNum: (state.pagDetails.pageNumber! + 1).toString());
+    } else if (selectedCategory == "Hotels") {
+      context.read<CityCubit>().getHotels(
+          city: widget.city,
+          pageNum: (state.pagDetails.pageNumber! + 1).toString());
+    }
+  }
+
+  void _prevPage(BuildContext context, CitySuccess state) {
+    if (selectedCategory == "Activities") {
+      context.read<CityCubit>().getActivities(
+          city: widget.city,
+          pageNum: (state.pagDetails.pageNumber! - 1).toString());
+    } else if (selectedCategory == "Restaurants") {
+      context.read<CityCubit>().getRestaurants(
+          city: widget.city,
+          pageNum: (state.pagDetails.pageNumber! - 1).toString());
+    } else if (selectedCategory == "Hotels") {
+      context.read<CityCubit>().getHotels(
+          city: widget.city,
+          pageNum: (state.pagDetails.pageNumber! - 1).toString());
+    }
   }
 }

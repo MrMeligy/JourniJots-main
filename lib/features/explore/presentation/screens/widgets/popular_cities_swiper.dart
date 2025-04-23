@@ -96,6 +96,7 @@ class _PopularCitiesSwiperState extends State<PopularCitiesSwiper> {
                         create: (_) => CityCubit(getIt<CityRepoImpl>())
                           ..getActivities(
                             city: _items[index].title,
+                            pageNum: '1',
                           ),
                         child: CityScreen(
                           city: _items[index].title,

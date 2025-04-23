@@ -1,6 +1,6 @@
 class EndPoint {
   static String baseUrl =
-      "http://journijotsv1.runasp.net/api/"; //http://10.0.2.2:5206/api/ // http://journijots.runasp.net/api/
+      "http://10.0.2.2:5206/api/"; //http://10.0.2.2:5206/api/ // http://journijotsv1.runasp.net/api/
   static String logIn = "Account/Login";
   static String register = "Account/Register";
   static String uploadProfilePic = "Account/UploadProfilePicture";
@@ -24,16 +24,18 @@ class EndPoint {
     return "User/Follow?followedId=$userId";
   }
 
-  static String getCityActivities({required String city}) {
-    return "Places/GetActivitesByCity?city=$city";
+  static String getCityActivities(
+      {required String city, required String pageNum}) {
+    return "Places/GetActivitiesByCity?city=$city&pageNumber=$pageNum&pageSize=10";
   }
 
-  static String getCityRestaurants({required String city}) {
-    return "Places/GetRestaurantsByCity?city=$city";
+  static String getCityRestaurants(
+      {required String city, required String pageNum}) {
+    return "Places/GetRestaurantsByCity?city=$city&pageNumber=$pageNum&pageSize=10";
   }
 
-  static String getCityHotels({required String city}) {
-    return "Places/GetHotelsByCity?city=$city";
+  static String getCityHotels({required String city, required String pageNum}) {
+    return "Places/GetHotelsByCity?city=$city&pageNumber=$pageNum&pageSize=10";
   }
 
   static String search({required String text, String? city}) {
