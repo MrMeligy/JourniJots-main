@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/utils/constants.dart';
+import 'package:journijots/features/add_post/presentation/screens/widgets/create_post_page.dart';
 
 class AddPostButton extends StatelessWidget {
   const AddPostButton({
@@ -20,7 +21,13 @@ class AddPostButton extends StatelessWidget {
       child: Align(
         alignment: Alignment(1.w, 1.08.h),
         child: FloatingActionButton(
-          onPressed: onPressed,
+          onPressed: () {
+            // Navigate to CreatePostPage when button is pressed
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CreatePostPage()),
+            );
+          },
           backgroundColor: kprimarycolor,
           child: const Icon(
             Icons.create,
