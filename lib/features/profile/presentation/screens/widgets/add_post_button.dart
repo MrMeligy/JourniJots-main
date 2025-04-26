@@ -22,7 +22,6 @@ class AddPostButton extends StatelessWidget {
         alignment: Alignment(1.w, 1.08.h),
         child: FloatingActionButton(
           onPressed: () {
-            // Navigate to CreatePostPage when button is pressed
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const CreatePostPage()),
