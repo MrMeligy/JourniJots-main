@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/bottom_nanv_bar.dart';
 import 'package:journijots/core/routes/routes.dart';
-import 'package:journijots/features/actions/data/presentation/screens/add_post_screen.dart';
+import 'package:journijots/features/actions/data/presentation/screens/create_post_page.dart';
 import 'package:journijots/features/explore/presentation/screens/city_screen.dart';
 import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
@@ -38,7 +38,7 @@ class AppRouting {
       case Routes.mainScreen:
         return MaterialPageRoute(builder: (_) => const BottomNavBarPage());
       case Routes.addPostScreen:
-        return MaterialPageRoute(builder: (_) => const AddPostScreen());
+        return MaterialPageRoute(builder: (_) => const CreatePostPage());
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.exploreScreen:

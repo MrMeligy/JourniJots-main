@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/api/end_ponits.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
+import 'package:journijots/core/helper/extensions.dart';
+import 'package:journijots/core/routes/routes.dart';
 import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/profile/presentation/manager/follow_cubit/follow_cubit.dart';
@@ -102,8 +104,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           backgroundColor: kprimarycolor,
                           heroTag: 'post',
                           mini: true,
-                          onPressed: () {},
-                          // context.pushNamed(Routes.addPostScreen),
+                          onPressed: () {
+                            context.pushNamed(Routes.addPostScreen);
+                          },
                           child:
                               const Icon(Icons.post_add, color: Colors.white),
                         ),
