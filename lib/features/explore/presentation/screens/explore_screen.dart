@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/nearby_place_card.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/popular_cities_swiper.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/search_bar.dart';
@@ -32,7 +34,7 @@ class ExploreScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 45),
+                  SizedBox(height: 45.h),
 
                   // Header Section
                   Padding(
@@ -42,23 +44,25 @@ class ExploreScreen extends StatelessWidget {
                       children: [
                         Image.asset(
                           'assets/images/jj.png', // Logo
-                          height: 30,
                         ),
                         Text(
                           'Explore',
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 40.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.blue.shade900,
                           ),
                         ),
-                        const Icon(Icons.notifications,
-                            color: Colors.white, size: 28),
+                        Icon(
+                          Icons.notifications_on_outlined,
+                          size: 35.h,
+                          color: kprimarycolor,
+                        ),
                       ],
                     ),
                   ),
 
-                  const SizedBox(height: 25),
+                  SizedBox(height: 40.h),
 
                   // Search Bar
                   const Padding(
@@ -72,45 +76,7 @@ class ExploreScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 15),
-
-                  // Category Filters (Scrollable Chips)
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      children: [
-                        "Hotels",
-                        "Restaurants",
-                        "Activities",
-                      ].map((category) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: GestureDetector(
-                            onTap: () {
-                              // Navigator.pushNamed(context, '/${category.toLowerCase()}');
-                            },
-                            child: Chip(
-                              label: Text(
-                                category,
-                                style:
-                                    const TextStyle(color: Color(0xff8CB6DC)),
-                              ),
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                side:
-                                    const BorderSide(color: Color(0xff8CB6DC)),
-                              ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-
-                  const SizedBox(height: 15),
-
+                  SizedBox(height: 25.h),
                   // Popular Cities Section with Different Background
                   Container(
                     width: double.infinity,
@@ -123,11 +89,11 @@ class ExploreScreen extends StatelessWidget {
                         topRight: Radius.circular(30),
                       ),
                     ),
-                    child: const Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Section Title and "See More"
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
@@ -139,14 +105,14 @@ class ExploreScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 30),
+                        SizedBox(height: 30.h),
 
                         // Stacked Images
-                        PopularCitiesSwiper(),
-                        SizedBox(height: 30),
+                        const PopularCitiesSwiper(),
+                        SizedBox(height: 30.h),
 
                         // Nearby Places Section
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
@@ -163,10 +129,10 @@ class ExploreScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 10.h),
 
                         // Horizontal Scrollable Cards
-                        SingleChildScrollView(
+                        const SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
@@ -188,7 +154,7 @@ class ExploreScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: 55),
+                        SizedBox(height: 55.h),
                       ],
                     ),
                   ),
