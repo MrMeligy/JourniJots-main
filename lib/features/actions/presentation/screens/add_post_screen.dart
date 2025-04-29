@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/core/utils/constants.dart';
-import 'package:journijots/features/actions/data/presentation/screens/widgets/add_post_text_feild.dart';
-import 'package:journijots/features/actions/data/presentation/screens/widgets/post_button.dart';
+import 'package:journijots/features/actions/presentation/screens/widgets/add_post_text_feild.dart';
+import 'package:journijots/features/actions/presentation/screens/widgets/post_button.dart';
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({super.key});
