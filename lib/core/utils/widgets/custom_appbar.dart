@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/utils/constants.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -16,8 +17,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(
         title ?? "Home",
-        style: const TextStyle(
-          fontSize: 40,
+        style: TextStyle(
+          fontSize: 40.sp,
           color: kprimarycolor,
         ),
       ),
@@ -28,13 +29,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           "assets/images/logo.png",
         ),
       ),
-      actions: const [
+      actions: [
         Padding(
-          padding: EdgeInsets.only(right: 8),
+          padding: const EdgeInsets.only(right: 8),
           child: Icon(
             Icons.notifications_on_outlined,
-            size: 35,
-            color: Color(0xff1C366E),
+            size: 35.h,
+            color: const Color(0xff1C366E),
           ),
         )
       ],

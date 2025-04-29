@@ -77,9 +77,9 @@ Widget buildCard(
                       ),
                       Text(
                         subtitle,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

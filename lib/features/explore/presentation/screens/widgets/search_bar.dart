@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/routes/routes.dart';
+import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/debouncer.dart';
 import 'package:journijots/core/utils/widgets/image_base.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/search_cubit/search_cubit.dart';
@@ -98,7 +99,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                       child: Padding(
                         padding: EdgeInsets.all(16.0),
                         child: CircularProgressIndicator(
-                          color: Color(0xff8CB6DC),
+                          color: kprimarycolor,
                         ),
                       ),
                     );
@@ -224,8 +225,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           filled: true,
           fillColor: Colors.white,
           hintText: widget.hintText ?? "  What are you looking for?",
-          hintStyle: const TextStyle(color: Color(0xff8CB6DC)),
-          suffixIcon: const Icon(Icons.search, color: Colors.grey),
+          hintStyle: const TextStyle(color: kprimarycolor),
+          suffixIcon: const Icon(Icons.search, color: kprimarycolor),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: BorderSide.none,
