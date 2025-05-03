@@ -21,6 +21,15 @@ class PostRepoImpl extends PostRepo {
       final List<Post> posts = (response['posts'] as List)
           .map((item) => Post.fromJson(item))
           .toList();
+      if (posts.isEmpty) {
+        var response = await api.get(EndPoint.getPostsEndPoint());
+        final List<Post> posts = (response['posts'] as List)
+            .map((item) => Post.fromJson(item))
+            .toList();
+        getIt<CacheHelper>()
+            .saveData(key: 'lastPostDate', value: response['lastPostDate']);
+        return (right(posts));
+      }
       getIt<CacheHelper>()
           .saveData(key: 'lastPostDate', value: response['lastPostDate']);
       return (right(posts));

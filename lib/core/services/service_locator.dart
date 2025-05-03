@@ -4,6 +4,7 @@ import 'package:journijots/core/api/dio_consumer.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/features/auth/presentation/manager/repos/user_repo_impl.dart';
 import 'package:journijots/features/explore/presentation/manager/repos/city/city_repo_impl.dart';
+import 'package:journijots/features/explore/presentation/manager/repos/nearby_places/nearby_places_repo_imp.dart';
 import 'package:journijots/features/explore/presentation/manager/repos/search_repo/search_repo_impl.dart';
 import 'package:journijots/features/home/presentation/screens/manager/repos/comment_repo/comment_repo_impl.dart';
 import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo/post_repo_impl.dart';
@@ -41,5 +42,8 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<SearchRepoImpl>(
     SearchRepoImpl(api: getIt<DioConsumer>()),
+  );
+  getIt.registerSingleton<NearbyPlacesRepoImp>(
+    NearbyPlacesRepoImp(api: getIt<DioConsumer>()),
   );
 }

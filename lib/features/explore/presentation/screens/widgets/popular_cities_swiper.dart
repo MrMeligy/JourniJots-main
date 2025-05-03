@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:journijots/core/services/service_locator.dart';
+import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/city_cubit/city_cubit.dart';
 import 'package:journijots/features/explore/presentation/manager/repos/city/city_repo_impl.dart';
 import 'package:journijots/features/explore/presentation/screens/city_screen.dart';
@@ -21,36 +22,7 @@ class _PopularCitiesSwiperState extends State<PopularCitiesSwiper> {
 
   int _currentPage = 0;
 
-  final List<CardItem> _items = [
-    CardItem("Cairo", "assets/images/cities/cairo.jpg", "The Capital of Egypt"),
-    CardItem("Giza", "assets/images/cities/cairo.png", "The Pyramids City"),
-    CardItem("Alexandria", "assets/images/cities/alex copy.png",
-        "The Bride of the Mediterranean"),
-    CardItem("Dahab", "assets/images/cities/Dahab.jpg",
-        "A Diving and Relaxation Paradise"),
-    CardItem("Taba", "assets/images/cities/Taba.jpg", "A Gateway to Sinai"),
-    CardItem("Luxor", "assets/images/cities/luxur.png",
-        "The World's Greatest Open-Air Museum"),
-    CardItem(
-        "Aswan", "assets/images/cities/Aswan.webp", "A City of Nubian Culture"),
-    CardItem("Sharm Elsheikh", "assets/images/cities/SharmElshiekh.jpg",
-        "The City of Peace"),
-    CardItem("Hurghada", "assets/images/cities/Hurghada.jpg",
-        "A Red Sea Resort Destination"),
-    CardItem("Alamein", "assets/images/cities/Alamien.jpg",
-        "The Newest City In Cairo"),
-    CardItem("Port Said", "assets/images/cities/PortSaid.webp",
-        "Entrance to the Suez Canal"),
-    CardItem(
-        "Suez", "assets/images/cities/Suez.jpg", "Strategic Maritime City"),
-    CardItem("Marsa Alam", "assets/images/cities/MarsaAlam.jpg",
-        "Diving and Marine Life Spot"),
-    // CardItem("Matrouh", "assets/images/cities/Matrouh.jpg",
-    //     "Famous for its Crystal Beaches"),
-    CardItem("Fayoum", "assets/images/cities/Fayoum.jpg",
-        "An Oasis with Waterfalls and Heritage")
-  ];
-
+  final List<CardItem> _items = kcitycards;
   @override
   void initState() {
     super.initState();
