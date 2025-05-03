@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class NearbyPlaceModel extends Equatable {
+class NearByPlaceModel extends Equatable {
   final String? type;
   final int? id;
   final String? name;
@@ -9,7 +9,7 @@ class NearbyPlaceModel extends Equatable {
   final int? ratingCount;
   final String? address;
 
-  const NearbyPlaceModel({
+  const NearByPlaceModel({
     this.type,
     this.id,
     this.name,
@@ -19,8 +19,8 @@ class NearbyPlaceModel extends Equatable {
     this.address,
   });
 
-  factory NearbyPlaceModel.fromJson(Map<String, dynamic> json) {
-    return NearbyPlaceModel(
+  factory NearByPlaceModel.fromJson(Map<String, dynamic> json) {
+    return NearByPlaceModel(
       type: json['type'] as String?,
       id: json['id'] as int?,
       name: json['name'] as String?,

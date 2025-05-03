@@ -38,6 +38,10 @@ class EndPoint {
     return "Places/GetHotelsByCity?city=$city&pageNumber=$pageNum&pageSize=10";
   }
 
+  static String getNearByPlaces({required String city}) {
+    return "user/GetPopularPlacesInCity?city=$city";
+  }
+
   static String search({required String text, String? city}) {
     if (city != null) {
       return "User/searchByCity?name=$text&city=$city";
