@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:get_it/get_it.dart';
 import 'package:journijots/core/api/dio_consumer.dart';
 import 'package:journijots/core/cache/cache_helper.dart';

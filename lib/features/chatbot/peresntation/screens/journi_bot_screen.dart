@@ -34,9 +34,12 @@ class _JourniBotScreenState extends State<JourniBotScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[350],
+      backgroundColor: const Color(0xffFFFFFF),
       appBar: const CustomAppBar(
         title: "JourniBot",
+        color: Color(0xff529CE0),
+        titleColor: Color(0xffFFFFFF),
+        iconColor: Color(0xffFFFFFF),
       ),
       body: _buildUI(),
     );
@@ -47,6 +50,24 @@ class _JourniBotScreenState extends State<JourniBotScreen> {
       currentUser: currentUser,
       onSend: _sendMessage,
       messages: messages,
+      messageOptions: const MessageOptions(
+        containerColor: Color(0xffD9D9D9),
+      ),
+      inputOptions: const InputOptions(
+        inputDecoration: InputDecoration(
+          hintText: "Ask about Egypt tourism...",
+          hintStyle: TextStyle(
+            color: Color(0xff535353),
+          ),
+          fillColor: Color(0xffC6BDBD),
+          filled: true,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -89,7 +110,6 @@ class _JourniBotScreenState extends State<JourniBotScreen> {
         if (messages.isNotEmpty && messages[0].user == chatBot) {
           messages.removeAt(0);
         }
-        // إضافة رسالة خطأ
         ChatMessage errorMessage = ChatMessage(
           user: chatBot,
           createdAt: DateTime.now(),
@@ -97,6 +117,7 @@ class _JourniBotScreenState extends State<JourniBotScreen> {
         );
         messages = [errorMessage, ...messages];
       });
+      // ignore: avoid_print
       print(e);
     }
   }
