@@ -30,15 +30,17 @@ environment:
 dependencies:
   bloc: ^9.0.0
   cached_network_image: ^3.4.1
-  chat_bubbles: ^1.7.0
+  chat_bubbles: 1.6.0
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
+  dash_chat_2: ^0.0.21
   dio: ^5.8.0+1
   equatable: ^2.0.7
   flutter:
     sdk: flutter
-  flutter_bloc: ^9.1.0
+  flutter_bloc: ^9.1.1
   flutter_debouncer: ^2.0.0
+  flutter_gemini: ^3.0.0
   flutter_native_splash: ^2.4.5
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.17
