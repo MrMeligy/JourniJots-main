@@ -170,7 +170,9 @@ class ExploreScreen extends StatelessWidget {
                                               .first; // القاهرة هي الأولى في القائمة
 
                                           return CityScreen(
-                                            city: cityName,
+                                            city: cityName.replaceFirst(
+                                                cityName[0],
+                                                cityName[0].toUpperCase()),
                                             cityImage: cityData.imagePath,
                                             desc: cityData.subtitle,
                                           );
