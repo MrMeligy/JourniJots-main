@@ -6,11 +6,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     this.title,
+    this.color,
+    this.titleColor = kprimarycolor,
+    this.iconColor,
   });
   final String? title;
+  final Color? color, titleColor, iconColor;
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: color,
       toolbarHeight: preferredSize.height,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
@@ -19,7 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         title ?? "Home",
         style: TextStyle(
           fontSize: 40.sp,
-          color: kprimarycolor,
+          color: titleColor,
         ),
       ),
       centerTitle: true,
@@ -35,7 +40,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Icon(
             Icons.notifications_on_outlined,
             size: 35.h,
-            color: const Color(0xff1C366E),
+            color: iconColor,
           ),
         )
       ],
