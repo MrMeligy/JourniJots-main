@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:get_it/get_it.dart';
 import 'package:journijots/core/api/dio_consumer.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
@@ -14,8 +15,10 @@ import 'package:journijots/features/profile/presentation/manager/repose/profile_
 final getIt = GetIt.instance;
 
 void setupServiceLocator() {
+  getIt.registerSingleton<Dio>(Dio());
   getIt.registerSingleton<CacheHelper>(CacheHelper());
   getIt.registerSingleton<DioConsumer>(DioConsumer(dio: Dio()));
+
   getIt.registerSingleton<UserRepoImpl>(
     UserRepoImpl(api: getIt<DioConsumer>()),
   );
