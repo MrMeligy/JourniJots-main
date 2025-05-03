@@ -65,6 +65,7 @@ Widget nearPlaceCard(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Text(
@@ -73,7 +74,6 @@ Widget nearPlaceCard(
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
-                          fontWeight: FontWeight.bold,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),

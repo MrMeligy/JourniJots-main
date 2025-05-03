@@ -9,7 +9,6 @@ import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/features/chatbot/peresntation/screens/journi_bot_screen.dart';
 import 'package:journijots/features/explore/presentation/screens/city_screen.dart';
 import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
-
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/auth/presentation/screens/login.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding1.dart';

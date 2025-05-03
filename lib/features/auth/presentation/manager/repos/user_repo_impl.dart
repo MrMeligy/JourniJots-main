@@ -25,6 +25,7 @@ class UserRepoImpl extends UserRepo {
       final user = AuthModel.fromJson(response);
       final decodedToken = JwtDecoder.decode(user.token!);
       getIt<CacheHelper>().saveData(key: ApiKey.token, value: user.token);
+      getIt<CacheHelper>().saveData(key: ApiKey.city, value: user.city);
       getIt<CacheHelper>()
           .saveData(key: ApiKey.id, value: decodedToken[ApiKey.tokenId]);
       return (right(user));
