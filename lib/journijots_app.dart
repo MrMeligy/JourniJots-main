@@ -25,12 +25,11 @@ class JournijotsApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const JourniBotScreen(),
-        // getIt<CacheHelper>().getData(key: "isOnBoardingVisited") ?? false
-        //     ? getIt<CacheHelper>().getData(key: "LoggedIn") ?? false
-        //         ? const BottomNavBarPage()
-        //         : const LoginScreen()
-        //     : const Onboarding1(),
+        home: getIt<CacheHelper>().getData(key: "isOnBoardingVisited") ?? false
+            ? getIt<CacheHelper>().getData(key: "LoggedIn") ?? false
+                ? const BottomNavBarPage()
+                : const LoginScreen()
+            : const Onboarding1(),
         onGenerateRoute: appRouting.generateRoute,
         theme: ThemeData(
           fontFamily: 'Acme',

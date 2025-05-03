@@ -40,6 +40,7 @@ class UserRepoImpl extends UserRepo {
     required String signUpUserName,
     required String signUpEmail,
     required String signUpPassword,
+    required String city,
   }) async {
     try {
       final response = await api.post(EndPoint.register, data: {
@@ -48,6 +49,7 @@ class UserRepoImpl extends UserRepo {
         ApiKey.userName: signUpUserName,
         ApiKey.email: signUpEmail,
         ApiKey.password: signUpPassword,
+        ApiKey.city: city,
       });
 
       final user = AuthModel.fromJson(response);
@@ -59,6 +61,10 @@ class UserRepoImpl extends UserRepo {
       getIt<CacheHelper>().saveData(
         key: ApiKey.id,
         value: decodedToken[ApiKey.tokenId],
+      );
+      getIt<CacheHelper>().saveData(
+        key: ApiKey.city,
+        value: city,
       );
       return (right(user));
     } on ServerException catch (e) {

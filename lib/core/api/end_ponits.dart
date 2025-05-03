@@ -59,6 +59,7 @@ class ApiKey {
   static String userName = "userName";
   static String firstName = "firstName";
   static String lastName = "lastName";
+  static String city = "city";
   static String profilePicture = "profilePicture";
   static String intersts = "intersts";
   static String follow = "follow";

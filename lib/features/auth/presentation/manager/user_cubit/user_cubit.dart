@@ -27,6 +27,7 @@ class UserCubit extends Cubit<UserState> {
   TextEditingController signUpPassword = TextEditingController();
   //Sign up confirm password
   TextEditingController confirmPassword = TextEditingController();
+  TextEditingController city = TextEditingController();
   AuthModel? user;
 
   final UserRepo userRepo;
@@ -63,11 +64,13 @@ class UserCubit extends Cubit<UserState> {
     emit(SignUpLoading());
 
     final response = await userRepo.signUp(
-        signUpFirstName: signUpFirstName.text,
-        signUpLastName: signUpLastName.text,
-        signUpUserName: signUpUserName.text,
-        signUpEmail: signUpEmail.text,
-        signUpPassword: signUpPassword.text);
+      signUpFirstName: signUpFirstName.text,
+      signUpLastName: signUpLastName.text,
+      signUpUserName: signUpUserName.text,
+      signUpEmail: signUpEmail.text,
+      signUpPassword: signUpPassword.text,
+      city: city.text,
+    );
     response.fold(
       (errMessage) => emit(
         SignUpFailure(errMessag: errMessage),

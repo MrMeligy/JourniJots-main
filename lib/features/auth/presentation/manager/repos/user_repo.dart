@@ -12,5 +12,6 @@ abstract class UserRepo {
     required String signUpUserName,
     required String signUpEmail,
     required String signUpPassword,
+    required String city,
   });
 }

@@ -272,6 +272,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             showError: _fieldErrors['confirmPassword'] ?? false,
                             errorText: _errorMessages['confirmPassword'],
                           ),
+                          const Text(
+                            "Your City Or Your Destination",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: screenHeight * 0.001),
+                          CustomTextField(
+                            label: "City",
+                            icon: Icons.location_city,
+                            controller: context.read<UserCubit>().city,
+                          ),
                           SizedBox(height: screenHeight * 0.02),
                           Center(
                             child: GestureDetector(
