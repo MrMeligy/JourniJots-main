@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'dart:io';
 
+import 'package:journijots/core/utils/widgets/custom_appbar.dart';
+
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({super.key});
 
@@ -69,21 +71,14 @@ class _CreatePostPageState extends State<CreatePostPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kbodycolor,
-      appBar: AppBar(
-        backgroundColor: kprimarycolor,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: kbodycolor),
-          onPressed: () => Navigator.pop(context),
+      appBar: const CustomAppBar(
+        color: Color(0xff529CE0),
+        title: "Create Post",
+        titleColor: Colors.white,
+        leading: BackButton(
+          color: Colors.white,
         ),
-        title: const Text(
-          'Create Post',
-          style: TextStyle(
-            color: kbodycolor,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
+        icon: false,
       ),
       body: SafeArea(
         child: Column(
@@ -112,7 +107,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       TextField(
                         controller: _postController,
                         decoration: const InputDecoration(
-                          hintText: 'Share your thoughts...',
+                          hintText: 'Share your Journy...',
                           border: InputBorder.none,
                         ),
                         maxLines: 5,

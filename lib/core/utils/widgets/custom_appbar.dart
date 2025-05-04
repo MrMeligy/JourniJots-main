@@ -9,9 +9,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.color,
     this.titleColor = kprimarycolor,
     this.iconColor,
+    this.leading,
+    this.icon = true,
   });
+  final IconButton? leading;
   final String? title;
   final Color? color, titleColor, iconColor;
+  final bool? icon;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -30,19 +34,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       leading: Padding(
         padding: const EdgeInsets.only(left: 10),
-        child: Image.asset(
-          "assets/images/logo.png",
-        ),
+        child: leading ??
+            Image.asset(
+              "assets/images/logo.png",
+            ),
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: Icon(
-            Icons.notifications_on_outlined,
-            size: 35.h,
-            color: iconColor,
-          ),
-        )
+        (icon ?? false)
+            ? Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Icon(
+                  Icons.notifications_on_outlined,
+                  size: 35.h,
+                  color: iconColor,
+                ),
+              )
+            : const Padding(padding: EdgeInsets.only(right: 8))
       ],
     );
   }

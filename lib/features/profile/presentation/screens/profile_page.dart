@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:journijots/core/api/end_ponits.dart';
-import 'package:journijots/core/cache/cache_helper.dart';
-import 'package:journijots/core/helper/extensions.dart';
-import 'package:journijots/core/routes/routes.dart';
 import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/profile/presentation/manager/follow_cubit/follow_cubit.dart';
@@ -27,7 +23,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final ScrollController _scrollController = ScrollController();
   bool _isVisible = true;
-  bool _isFabOpen = false;
   double _lastOffset = 0;
 
   @override
@@ -68,62 +63,6 @@ class _ProfilePageState extends State<ProfilePage> {
         length: 3,
         child: Scaffold(
           backgroundColor: Colors.white,
-          floatingActionButton: (widget.id ==
-                  getIt<CacheHelper>().getData(key: ApiKey.id))
-              ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AnimatedSlide(
-                      duration: const Duration(milliseconds: 300),
-                      offset:
-                          _isFabOpen ? const Offset(0, 0) : const Offset(0, 1),
-                      child: AnimatedOpacity(
-                        duration: const Duration(milliseconds: 300),
-                        opacity: _isFabOpen ? 1 : 0,
-                        child: FloatingActionButton(
-                          backgroundColor: kprimarycolor,
-                          heroTag: 'trip',
-                          mini: true,
-                          onPressed: () {},
-                          child: const Icon(
-                            Icons.flight,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    AnimatedSlide(
-                      duration: const Duration(milliseconds: 300),
-                      offset:
-                          _isFabOpen ? const Offset(0, 0) : const Offset(0, 1),
-                      child: AnimatedOpacity(
-                        duration: const Duration(milliseconds: 300),
-                        opacity: _isFabOpen ? 1 : 0,
-                        child: FloatingActionButton(
-                          backgroundColor: kprimarycolor,
-                          heroTag: 'post',
-                          mini: true,
-                          onPressed: () {
-                            context.pushNamed(Routes.addPostScreen);
-                          },
-                          child:
-                              const Icon(Icons.post_add, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    FloatingActionButton(
-                      backgroundColor: kprimarycolor,
-                      onPressed: () => setState(() => _isFabOpen = !_isFabOpen),
-                      child: Icon(
-                        _isFabOpen ? Icons.close : Icons.add,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                )
-              : null,
           body: SafeArea(
             child: Stack(
               children: [
