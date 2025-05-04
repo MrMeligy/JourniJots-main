@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/city_cubit/city_cubit.dart';
@@ -76,10 +77,31 @@ class _CityScreenState extends State<CityScreen> {
                   // SizedBox(height: 25.h),
                   // Search Bar
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14),
-                    child: CustomSearchBar(
-                      city: widget.city,
-                      hintText: "Search in ${widget.city}",
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: const Color(0xff149FEA),
+                          child: IconButton(
+                            onPressed: () {
+                              context.pop();
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back,
+                            ),
+                            color: Colors.white,
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: CustomSearchBar(
+                              city: widget.city,
+                              hintText: "Search in ${widget.city}",
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 30.h),
