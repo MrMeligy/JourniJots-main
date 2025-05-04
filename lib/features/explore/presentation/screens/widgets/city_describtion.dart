@@ -17,19 +17,19 @@ class CityDiscribtion extends StatelessWidget {
         Text(
           city,
           style: TextStyle(
-              fontSize: 22.sp,
+              fontSize: 45.sp,
               fontWeight: FontWeight.bold,
               color: kprimarycolor),
         ),
         SizedBox(height: 5.h),
-        Text(
-          subtitle,
-          style: TextStyle(
-            color: kprimarycolor,
-            fontSize: 15.sp,
-          ),
-          textAlign: TextAlign.start,
-        ),
+        // Text(
+        //   subtitle,
+        //   style: TextStyle(
+        //     color: kprimarycolor,
+        //     fontSize: 15.sp,
+        //   ),
+        //   textAlign: TextAlign.start,
+        // ),
       ],
     );
   }

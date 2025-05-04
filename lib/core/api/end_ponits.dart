@@ -24,6 +24,10 @@ class EndPoint {
     return "User/Follow?followedId=$userId";
   }
 
+  static String getPlacesCount({required String city}) {
+    return "Places/PlacesCount?city=$city";
+  }
+
   static String getCityActivities(
       {required String city, required String pageNum}) {
     return "Places/GetActivitiesByCity?city=$city&pageNumber=$pageNum&pageSize=10";

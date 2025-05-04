@@ -2,14 +2,12 @@ import 'package:equatable/equatable.dart';
 import 'package:journijots/features/explore/data/place_model/place_model.dart';
 
 class PagginationPlace extends Equatable {
-  final int? totalCount;
   final int? pageNumber;
   final int? pageSize;
   final bool? hasNext;
   final List<PlaceModel>? places;
 
   const PagginationPlace({
-    this.totalCount,
     this.pageNumber,
     this.pageSize,
     this.hasNext,
@@ -18,7 +16,6 @@ class PagginationPlace extends Equatable {
 
   factory PagginationPlace.fromJson(Map<String, dynamic> json) {
     return PagginationPlace(
-      totalCount: json['totalCount'] as int?,
       pageNumber: json['pageNumber'] as int?,
       pageSize: json['pageSize'] as int?,
       hasNext: json['hasNext'] as bool?,
@@ -29,7 +26,6 @@ class PagginationPlace extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-        'totalCount': totalCount,
         'pageNumber': pageNumber,
         'pageSize': pageSize,
         'hasNext': hasNext,
@@ -39,7 +35,6 @@ class PagginationPlace extends Equatable {
   @override
   List<Object?> get props {
     return [
-      totalCount,
       pageNumber,
       pageSize,
       hasNext,
