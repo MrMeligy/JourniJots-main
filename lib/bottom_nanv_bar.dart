@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:journijots/core/api/end_ponits.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
+import 'package:journijots/core/helper/extensions.dart';
+import 'package:journijots/core/routes/routes.dart';
 import 'package:journijots/core/services/service_locator.dart';
+import 'package:journijots/features/chatbot/peresntation/screens/journi_bot_screen.dart';
 import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/profile/presentation/screens/profile_page.dart';
@@ -17,13 +21,12 @@ class BottomNavBarPage extends StatefulWidget {
 class _BottomNavBarPageState extends State<BottomNavBarPage> {
   int _selectedIndex = 0;
 
-  // Use PageController to manage page state
   final PageController _pageController = PageController();
 
-  // Pages to navigate between (wrapped with AutomaticKeepAliveClientMixin)
   late final List<Widget> _pages = [
     const KeepAlivePage(child: HomeScreen()),
     const KeepAlivePage(child: ExploreScreen()),
+    const KeepAlivePage(child: JourniBotScreen()),
     KeepAlivePage(
       child: ProfilePage(
         id: getIt<CacheHelper>().getData(key: ApiKey.id.toString()),
@@ -35,78 +38,94 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
     setState(() {
       _selectedIndex = index;
     });
-    // Use PageController to maintain state
-    _pageController.jumpToPage(index);
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut, // ممكن تجرب Curves.easeOutCubic مثلاً
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        body: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: _pages, // Prevent swiping
-        ),
-        bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 5,
-              )
-            ],
-          ),
-          child: SafeArea(
-            child: Stack(
+    final bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
+    return Scaffold(
+      body: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: _pages,
+      ),
+      floatingActionButton: isKeyboardOpen
+          ? null
+          : SpeedDial(
+              backgroundColor: const Color(0xff4183BF),
+              icon: Icons.add,
+              iconTheme: const IconThemeData(color: Colors.white),
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _buildNavItem(0, Icons.home, 'Home'),
-                    _buildNavItem(1, Icons.explore, 'Explore'),
-                    _buildNavItem(2, Icons.person, 'Profile'),
-                  ],
+                SpeedDialChild(
+                  child: const Icon(Icons.edit),
+                  shape: const CircleBorder(),
+                  label: 'Add Post',
+                  labelStyle: const TextStyle(color: Colors.white),
+                  backgroundColor: const Color(0xff4183BF),
+                  foregroundColor: Colors.white,
+                  labelBackgroundColor: const Color(0xff4183BF),
+                  onTap: () {
+                    context.pushNamed(Routes.addPostScreen);
+                  },
                 ),
-                AnimatedPositioned(
-                  duration: const Duration(milliseconds: 250),
-                  curve: Curves.easeInOut,
-                  bottom: 0,
-                  left: MediaQuery.of(context).size.width / 3 * _selectedIndex +
-                      (MediaQuery.of(context).size.width / 6 - 10),
-                  child: Container(
-                    width: 20,
-                    height: 3,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
+                SpeedDialChild(
+                  child: const Icon(Icons.travel_explore),
+                  shape: const CircleBorder(),
+                  label: 'Add Trip',
+                  labelStyle: const TextStyle(color: Colors.white),
+                  backgroundColor: const Color(0xff4183BF),
+                  foregroundColor: Colors.white,
+                  labelBackgroundColor: const Color(0xff4183BF),
+                  onTap: () {},
                 ),
               ],
             ),
+      // FloatingActionButton(
+      //     onPressed: () {
+      //       // Action when + is pressed
+      //     },
+      //     shape: const CircleBorder(),
+      //     backgroundColor: const Color(0xff4183BF),
+      //     elevation: 5,
+      //     child: const Icon(Icons.add, size: 30, color: Colors.white),
+      //   ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        height: 80.h,
+        notchMargin: 8,
+        color: const Color(0xff4183BF),
+        child: SizedBox(
+          height: 70.h,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              _buildNavItem(0, Icons.home),
+              _buildNavItem(1, Icons.explore),
+              const SizedBox(width: 40), // Space for FAB
+              _buildNavItem(2, Icons.smart_toy_outlined),
+              _buildNavItem(3, Icons.person),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildNavItem(int index, IconData icon, String label) {
+  Widget _buildNavItem(int index, IconData icon) {
+    bool isSelected = _selectedIndex == index;
     return GestureDetector(
       onTap: () => _onItemTapped(index),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: _selectedIndex == index ? Colors.blue : Colors.grey,
-              size: 30.h,
-            ),
-          ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+        child: Icon(
+          icon,
+          size: 28,
+          color: isSelected ? Colors.white : Colors.white70,
         ),
       ),
     );
@@ -119,7 +138,6 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   }
 }
 
-// Wrapper to preserve state
 class KeepAlivePage extends StatefulWidget {
   final Widget child;
 

@@ -118,20 +118,19 @@ class ProfileHeader extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                profileModel.userName!,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.sp,
-                  color: const Color.fromARGB(255, 6, 6, 6),
+              Flexible(
+                child: Text(
+                  profileModel.userName!,
+                  style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.sp,
+                    color: const Color.fromARGB(255, 6, 6, 6),
+                  ),
                 ),
               ),
               SizedBox(
                 width: 5.w,
-              ),
-              const Icon(
-                Icons.verified,
-                color: Colors.blueAccent,
               ),
             ],
           ),

@@ -35,11 +35,6 @@ class PostProfile extends StatelessWidget {
                 SizedBox(
                   width: 5.w,
                 ),
-                Icon(
-                  Icons.verified,
-                  color: Colors.blueAccent,
-                  size: 20.w,
-                ),
               ],
             ),
             Text(

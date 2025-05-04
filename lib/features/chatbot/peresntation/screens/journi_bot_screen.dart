@@ -46,24 +46,28 @@ class _JourniBotScreenState extends State<JourniBotScreen> {
   }
 
   Widget _buildUI() {
-    return DashChat(
-      currentUser: currentUser,
-      onSend: _sendMessage,
-      messages: messages,
-      messageOptions: const MessageOptions(
-        containerColor: Color(0xffD9D9D9),
-      ),
-      inputOptions: const InputOptions(
-        inputDecoration: InputDecoration(
-          hintText: "Ask about Egypt tourism...",
-          hintStyle: TextStyle(
-            color: Color(0xff535353),
-          ),
-          fillColor: Color(0xffC6BDBD),
-          filled: true,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15),
+    return Padding(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.04),
+      child: DashChat(
+        currentUser: currentUser,
+        onSend: _sendMessage,
+        messages: messages,
+        messageOptions: const MessageOptions(
+          containerColor: Color(0xffD9D9D9),
+        ),
+        inputOptions: const InputOptions(
+          inputDecoration: InputDecoration(
+            hintText: "Ask about Egypt tourism...",
+            hintStyle: TextStyle(
+              color: Color(0xff535353),
+            ),
+            fillColor: Color(0xffC6BDBD),
+            filled: true,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(15),
+              ),
             ),
           ),
         ),
