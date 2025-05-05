@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:journijots/core/api/end_ponits.dart';
@@ -10,18 +11,32 @@ import 'package:journijots/features/chatbot/peresntation/screens/journi_bot_scre
 import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/profile/presentation/screens/profile_page.dart';
+import 'package:journijots/features/trip/presentation/managers/add_trip_cubit/add_trip_cubit.dart';
+import 'package:journijots/features/trip/presentation/managers/repos/add_trip_repo_impl.dart';
+import 'package:journijots/features/trip/presentation/screens/add_trip.dart';
 
 class BottomNavBarPage extends StatefulWidget {
-  const BottomNavBarPage({super.key});
+  final int? initialPageIndex,
+      initialTapIndex; // Optional parameter for initial page index
+
+  const BottomNavBarPage(
+      {super.key, this.initialPageIndex, this.initialTapIndex});
 
   @override
   State<BottomNavBarPage> createState() => _BottomNavBarPageState();
 }
 
 class _BottomNavBarPageState extends State<BottomNavBarPage> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
+  late final PageController _pageController;
 
-  final PageController _pageController = PageController();
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex =
+        widget.initialPageIndex ?? 0; // Default to 0 if not provided
+    _pageController = PageController(initialPage: _selectedIndex);
+  }
 
   late final List<Widget> _pages = [
     const KeepAlivePage(child: HomeScreen()),
@@ -30,6 +45,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
     KeepAlivePage(
       child: ProfilePage(
         id: getIt<CacheHelper>().getData(key: ApiKey.id.toString()),
+        initialTabIndex: widget.initialTapIndex ?? 0,
       ),
     ),
   ];
@@ -81,7 +97,17 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                   backgroundColor: const Color(0xff4183BF),
                   foregroundColor: Colors.white,
                   labelBackgroundColor: const Color(0xff4183BF),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider(
+                          create: (_) => AddTripCubit(getIt<AddTripRepoImpl>()),
+                          child: const AddTripPage(),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

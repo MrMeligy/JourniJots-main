@@ -13,8 +13,9 @@ import 'package:journijots/features/profile/presentation/screens/widgets/trips_v
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key, required this.id});
+  const ProfilePage({super.key, required this.id, this.initialTabIndex = 0});
   final String id;
+  final int initialTabIndex; // Optional parameter for initial tab index
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -61,6 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ],
       child: DefaultTabController(
         length: 3,
+        initialIndex: widget.initialTabIndex, // Set the initial tab index
         child: Scaffold(
           backgroundColor: Colors.white,
           body: SafeArea(

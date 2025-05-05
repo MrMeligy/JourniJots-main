@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/core/utils/text_styles.dart';
+import 'package:journijots/features/explore/presentation/screens/widgets/popular_cities_swiper.dart';
 
 class TripWidget extends StatelessWidget {
   const TripWidget({
@@ -14,16 +16,26 @@ class TripWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.horizontal(left: Radius.circular(16)),
-              image: DecorationImage(
-                image: AssetImage("assets/images/alex.png"),
-                fit: BoxFit.cover,
-              )),
-          width: MediaQuery.of(context).size.width * 0.3,
-          height: MediaQuery.of(context).size.height * 0.12,
-        ),
+        Builder(builder: (context) {
+          CardItem? cityData;
+          for (var card in kcitycards) {
+            if (card.title.toLowerCase() == city.toLowerCase()) {
+              cityData = card;
+              break;
+            }
+          }
+          return Container(
+            decoration: BoxDecoration(
+                borderRadius:
+                    const BorderRadius.horizontal(left: Radius.circular(16)),
+                image: DecorationImage(
+                  image: AssetImage(cityData!.imagePath),
+                  fit: BoxFit.cover,
+                )),
+            width: MediaQuery.of(context).size.width * 0.3,
+            height: MediaQuery.of(context).size.height * 0.12,
+          );
+        }),
         Expanded(
           child: Container(
             decoration: const BoxDecoration(
@@ -59,22 +71,6 @@ class TripWidget extends StatelessWidget {
                         ),
                         Text(
                           date,
-                          style: TextStyles.font18White,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_pin,
-                          color: Colors.white,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Text(
-                          "250 Km",
                           style: TextStyles.font18White,
                         ),
                       ],

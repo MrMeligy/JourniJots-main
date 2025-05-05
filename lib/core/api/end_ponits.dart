@@ -46,6 +46,10 @@ class EndPoint {
     return "user/GetPopularPlacesInCity?city=$city";
   }
 
+  static String addTrip() {
+    return "Trip/CreateTrip";
+  }
+
   static String search({required String text, String? city}) {
     if (city != null) {
       return "User/searchByCity?name=$text&city=$city";
@@ -68,6 +72,7 @@ class ApiKey {
   static String firstName = "firstName";
   static String lastName = "lastName";
   static String city = "city";
+  static String startDate = "startDate";
   static String profilePicture = "profilePicture";
   static String intersts = "intersts";
   static String follow = "follow";

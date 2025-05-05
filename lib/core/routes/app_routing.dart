@@ -13,6 +13,7 @@ import 'package:journijots/features/onboarding/presentation/screens/onboarding2.
 import 'package:journijots/features/onboarding/presentation/screens/onboarding3.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:journijots/features/profile/presentation/screens/profile_page.dart';
+import 'package:journijots/features/trip/presentation/screens/add_trip.dart';
 
 class AppRouting {
   Route generateRoute(RouteSettings settings) {
@@ -39,6 +40,8 @@ class AppRouting {
         return MaterialPageRoute(builder: (_) => const BottomNavBarPage());
       case Routes.addPostScreen:
         return MaterialPageRoute(builder: (_) => const CreatePostPage());
+      case Routes.addTripScreen:
+        return MaterialPageRoute(builder: (_) => const AddTripPage());
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.exploreScreen:
