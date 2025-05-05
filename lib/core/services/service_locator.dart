@@ -12,6 +12,7 @@ import 'package:journijots/features/home/presentation/screens/manager/repos/post
 import 'package:journijots/features/interests/presentation/manager/cubit/customize_user_cubit.dart';
 import 'package:journijots/features/interests/presentation/manager/repos/customize_user_repo_impl.dart';
 import 'package:journijots/features/profile/presentation/manager/repose/profile_repo_impl.dart';
+import 'package:journijots/features/trip/presentation/managers/repos/add_trip_repo_impl.dart';
 
 final getIt = GetIt.instance;
 
@@ -49,5 +50,8 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<PlacesCountRepoImol>(
     PlacesCountRepoImol(api: getIt<DioConsumer>()),
+  );
+  getIt.registerSingleton<AddTripRepoImpl>(
+    AddTripRepoImpl(api: getIt<DioConsumer>()),
   );
 }

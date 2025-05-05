@@ -221,6 +221,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       child: TextField(
         controller: _controller,
         focusNode: _focusNode,
+        autofocus: false,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,

@@ -12,4 +12,5 @@ class Routes {
   static const cityScreen = '/City';
   static const profileScreen = '/profile';
   static const addPostScreen = '/addPost';
+  static const addTripScreen = '/addTrip';
 }
