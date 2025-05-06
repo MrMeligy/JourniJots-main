@@ -64,83 +64,87 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   @override
   Widget build(BuildContext context) {
     final bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
-    return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: _pages,
-      ),
-      floatingActionButton: isKeyboardOpen
-          ? null
-          : SpeedDial(
-              backgroundColor: const Color(0xff4183BF),
-              icon: Icons.add,
-              iconTheme: const IconThemeData(color: Colors.white),
-              children: [
-                SpeedDialChild(
-                  child: const Icon(Icons.edit),
-                  shape: const CircleBorder(),
-                  label: 'Add Post',
-                  labelStyle: const TextStyle(color: Colors.white),
-                  backgroundColor: const Color(0xff4183BF),
-                  foregroundColor: Colors.white,
-                  labelBackgroundColor: const Color(0xff4183BF),
-                  onTap: () {
-                    context.pushNamed(Routes.addPostScreen);
-                  },
-                ),
-                SpeedDialChild(
-                  child: const Icon(Icons.travel_explore),
-                  shape: const CircleBorder(),
-                  label: 'Add Trip',
-                  labelStyle: const TextStyle(color: Colors.white),
-                  backgroundColor: const Color(0xff4183BF),
-                  foregroundColor: Colors.white,
-                  labelBackgroundColor: const Color(0xff4183BF),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BlocProvider(
-                          create: (_) => AddTripCubit(getIt<AddTripRepoImpl>()),
-                          child: const AddTripPage(),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-      // FloatingActionButton(
-      //     onPressed: () {
-      //       // Action when + is pressed
-      //     },
-      //     shape: const CircleBorder(),
-      //     backgroundColor: const Color(0xff4183BF),
-      //     elevation: 5,
-      //     child: const Icon(Icons.add, size: 30, color: Colors.white),
-      //   ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(24),
-          topRight: Radius.circular(24),
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: _pages,
         ),
-        child: BottomAppBar(
-          height: 80.h,
-          notchMargin: 8,
-          color: const Color(0xff4183BF),
-          child: SizedBox(
-            height: 70.h,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                _buildNavItem(0, Icons.home),
-                _buildNavItem(1, Icons.explore),
-                const SizedBox(width: 40), // Space for FAB
-                _buildNavItem(2, Icons.smart_toy_outlined),
-                _buildNavItem(3, Icons.person),
-              ],
+        floatingActionButton: isKeyboardOpen
+            ? null
+            : SpeedDial(
+                backgroundColor: const Color(0xff4183BF),
+                icon: Icons.add,
+                iconTheme: const IconThemeData(color: Colors.white),
+                children: [
+                  SpeedDialChild(
+                    child: const Icon(Icons.edit),
+                    shape: const CircleBorder(),
+                    label: 'Add Post',
+                    labelStyle: const TextStyle(color: Colors.white),
+                    backgroundColor: const Color(0xff4183BF),
+                    foregroundColor: Colors.white,
+                    labelBackgroundColor: const Color(0xff4183BF),
+                    onTap: () {
+                      context.pushNamed(Routes.addPostScreen);
+                    },
+                  ),
+                  SpeedDialChild(
+                    child: const Icon(Icons.travel_explore),
+                    shape: const CircleBorder(),
+                    label: 'Add Trip',
+                    labelStyle: const TextStyle(color: Colors.white),
+                    backgroundColor: const Color(0xff4183BF),
+                    foregroundColor: Colors.white,
+                    labelBackgroundColor: const Color(0xff4183BF),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider(
+                            create: (_) =>
+                                AddTripCubit(getIt<AddTripRepoImpl>()),
+                            child: const AddTripPage(),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+        // FloatingActionButton(
+        //     onPressed: () {
+        //       // Action when + is pressed
+        //     },
+        //     shape: const CircleBorder(),
+        //     backgroundColor: const Color(0xff4183BF),
+        //     elevation: 5,
+        //     child: const Icon(Icons.add, size: 30, color: Colors.white),
+        //   ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+          child: BottomAppBar(
+            height: 80.h,
+            notchMargin: 8,
+            color: const Color(0xff4183BF),
+            child: SizedBox(
+              height: 70.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  _buildNavItem(0, Icons.home),
+                  _buildNavItem(1, Icons.explore),
+                  const SizedBox(width: 40), // Space for FAB
+                  _buildNavItem(2, Icons.smart_toy_outlined),
+                  _buildNavItem(3, Icons.person),
+                ],
+              ),
             ),
           ),
         ),
