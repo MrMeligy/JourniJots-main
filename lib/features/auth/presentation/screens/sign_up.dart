@@ -1,7 +1,9 @@
 // ignore_for_file: unused_import
 
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
 // ignore: duplicate_ignore
 // ignore: unused_import
@@ -278,10 +280,63 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: screenHeight * 0.001),
-                          CustomTextField(
-                            label: "City",
-                            icon: Icons.location_city,
-                            controller: context.read<UserCubit>().city,
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade300),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: DropDownTextField(
+                              initialValue: "Cairo",
+                              clearOption: false,
+                              textFieldDecoration: const InputDecoration(
+                                hintText: "Select City",
+                                contentPadding: EdgeInsets.all(8),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.location_city,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                              onChanged: (value) {
+                                if (value is DropDownValueModel) {
+                                  context.read<UserCubit>().city.text =
+                                      value.value;
+                                }
+                              },
+                              dropDownList: const [
+                                DropDownValueModel(
+                                    name: "Cairo", value: "Cairo"),
+                                DropDownValueModel(name: "Giza", value: "Giza"),
+                                DropDownValueModel(
+                                    name: "Alexandria", value: "Alexandria"),
+                                DropDownValueModel(
+                                    name: "Dahab", value: "Dahab"),
+                                DropDownValueModel(name: "Taba", value: "Taba"),
+                                DropDownValueModel(
+                                    name: "Luxor", value: "Luxor"),
+                                DropDownValueModel(
+                                    name: "Aswan", value: "Aswan"),
+                                DropDownValueModel(
+                                    name: "Sharm Elsheikh",
+                                    value: "Sharm Elsheikh"),
+                                DropDownValueModel(
+                                    name: "Hurghada", value: "Hurghada"),
+                                DropDownValueModel(
+                                    name: "Alamein", value: "Alamein"),
+                                DropDownValueModel(
+                                    name: "Port Said", value: "Port Said"),
+                                DropDownValueModel(name: "Suez", value: "Suez"),
+                                DropDownValueModel(
+                                    name: "Marsa Alam", value: "Marsa Alam"),
+                                DropDownValueModel(
+                                    name: "Fayoum", value: "Fayoum"),
+                              ],
+                            ),
                           ),
                           SizedBox(height: screenHeight * 0.02),
                           Center(
