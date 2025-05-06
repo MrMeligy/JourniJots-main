@@ -26,6 +26,10 @@ class UserRepoImpl extends UserRepo {
       final decodedToken = JwtDecoder.decode(user.token!);
       getIt<CacheHelper>().saveData(key: ApiKey.token, value: user.token);
       getIt<CacheHelper>().saveData(key: ApiKey.city, value: user.city);
+      if (user.profilePic != null) {
+        getIt<CacheHelper>()
+            .saveData(key: ApiKey.profilePic, value: user.profilePic);
+      }
       getIt<CacheHelper>()
           .saveData(key: ApiKey.id, value: decodedToken[ApiKey.tokenId]);
       return (right(user));

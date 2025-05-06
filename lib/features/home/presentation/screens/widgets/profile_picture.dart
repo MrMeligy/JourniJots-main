@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:journijots/core/utils/widgets/image_base.dart';
 
 class ProfilePicture extends StatelessWidget {
   const ProfilePicture({
@@ -24,13 +24,17 @@ class ProfilePicture extends StatelessWidget {
             width: isProfileView ?? false ? 4 : 0,
             color: Colors.white,
           ),
-          borderRadius: BorderRadius.circular(80)),
+          borderRadius: BorderRadius.circular(100)),
       child: ClipOval(
-        child: Base64Image(
-          base64String: picture, // Paste your full base64 string
-          width: width ?? 60.w,
-          height: height ?? 60.h,
+        child: CachedNetworkImage(
+          imageUrl: picture ?? '',
           fit: BoxFit.cover,
+          width: isProfileView ?? false ? 80.w : 50.w,
+          placeholder: (context, url) => const Center(
+            child: CircularProgressIndicator(),
+          ),
+          errorWidget: (context, url, error) =>
+              Image.asset("assets/images/avatar.png"),
         ),
       ),
     );

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:journijots/core/api/end_ponits.dart';
+import 'package:journijots/core/cache/cache_helper.dart';
+import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'dart:io';
 
 import 'package:journijots/core/utils/widgets/custom_appbar.dart';
+import 'package:journijots/features/home/presentation/screens/widgets/profile_picture.dart';
 
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({super.key});
@@ -93,10 +97,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       // User info row
                       Row(
                         children: [
-                          CircleAvatar(
-                            radius: 20.r,
-                            backgroundImage:
-                                const AssetImage('assets/images/pp.jpg'),
+                          ProfilePicture(
+                            picture: getIt<CacheHelper>()
+                                .getDataString(key: ApiKey.profilePic),
                           ),
                           SizedBox(width: 12.w),
                         ],

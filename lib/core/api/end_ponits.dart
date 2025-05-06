@@ -74,6 +74,7 @@ class ApiKey {
   static String city = "city";
   static String startDate = "startDate";
   static String profilePicture = "profilePicture";
+  static String profilePic = "profilePic";
   static String intersts = "intersts";
   static String follow = "follow";
   static String followed = "followed";

@@ -121,21 +121,27 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
       //     child: const Icon(Icons.add, size: 30, color: Colors.white),
       //   ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        height: 80.h,
-        notchMargin: 8,
-        color: const Color(0xff4183BF),
-        child: SizedBox(
-          height: 70.h,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              _buildNavItem(0, Icons.home),
-              _buildNavItem(1, Icons.explore),
-              const SizedBox(width: 40), // Space for FAB
-              _buildNavItem(2, Icons.smart_toy_outlined),
-              _buildNavItem(3, Icons.person),
-            ],
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+        child: BottomAppBar(
+          height: 80.h,
+          notchMargin: 8,
+          color: const Color(0xff4183BF),
+          child: SizedBox(
+            height: 70.h,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                _buildNavItem(0, Icons.home),
+                _buildNavItem(1, Icons.explore),
+                const SizedBox(width: 40), // Space for FAB
+                _buildNavItem(2, Icons.smart_toy_outlined),
+                _buildNavItem(3, Icons.person),
+              ],
+            ),
           ),
         ),
       ),
