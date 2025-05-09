@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:journijots/bottom_nanv_bar.dart';
 import 'package:journijots/core/api/end_ponits.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'dart:io';
-
 import 'package:journijots/core/utils/widgets/custom_appbar.dart';
+import 'package:journijots/features/actions/presentation/manager/cubits/cubit/add_post_cubit.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/profile_picture.dart';
 
 class CreatePostPage extends StatefulWidget {
@@ -218,12 +220,16 @@ class _CreatePostPageState extends State<CreatePostPage> {
               child: ElevatedButton(
                 onPressed: () {
                   // Implement post functionality
-                  if (_postController.text.isNotEmpty ||
-                      _selectedImages.isNotEmpty) {
-                    // Handle post creation
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Post created successfully!')),
+                  if (_postController.text.isNotEmpty) {
+                    _uploadPost(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BottomNavBarPage(
+                          initialPageIndex: 3,
+                          initialTapIndex: 0,
+                        ),
+                      ),
                     );
                   }
                 },
@@ -249,5 +255,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
         ),
       ),
     );
+  }
+
+  void _uploadPost(BuildContext context) async {
+    await context.read<AddPostCubit>().addPost(post: _postController.text);
   }
 }

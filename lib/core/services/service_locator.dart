@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:journijots/core/api/dio_consumer.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/core/services/cloudinary_service.dart';
+import 'package:journijots/features/actions/presentation/manager/repos/create_post_repo_impl.dart';
 import 'package:journijots/features/auth/presentation/manager/repos/user_repo_impl.dart';
 import 'package:journijots/features/explore/presentation/manager/repos/city/city_repo_impl.dart';
 import 'package:journijots/features/explore/presentation/manager/repos/nearby_places/nearby_places_repo_imp.dart';
@@ -54,6 +55,9 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<AddTripRepoImpl>(
     AddTripRepoImpl(api: getIt<DioConsumer>()),
+  );
+  getIt.registerSingleton<CreatePostRepoImpl>(
+    CreatePostRepoImpl(api: getIt<DioConsumer>()),
   );
   getIt.registerSingleton<CloudinaryService>(
     CloudinaryService(dio: getIt<Dio>()),
