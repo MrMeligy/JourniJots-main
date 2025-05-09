@@ -1,5 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:journijots/core/utils/widgets/image_base.dart';
 import 'package:journijots/features/home/data/post_model/post_image.dart';
 
 class ImageSwiper extends StatelessWidget {
@@ -15,8 +15,8 @@ class ImageSwiper extends StatelessWidget {
         itemBuilder: (context, index) {
           return ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Base64Image(
-              base64String: imageUrls![index].imageData,
+            child: CachedNetworkImage(
+              imageUrl: imageUrls![index].imageData!,
               fit: BoxFit.cover,
               width: double.infinity,
             ),

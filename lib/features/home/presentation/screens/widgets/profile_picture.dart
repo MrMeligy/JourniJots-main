@@ -29,7 +29,8 @@ class ProfilePicture extends StatelessWidget {
         child: CachedNetworkImage(
           imageUrl: picture ?? '',
           fit: BoxFit.cover,
-          width: isProfileView ?? false ? 80.w : 50.w,
+          width: isProfileView ?? false ? 90.w : 60.w,
+          height: isProfileView ?? false ? 100.h : 70.h,
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
           ),
