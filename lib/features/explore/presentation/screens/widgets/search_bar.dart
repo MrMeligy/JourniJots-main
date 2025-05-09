@@ -143,7 +143,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                                     : Container(
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(50)),
+                                                BorderRadius.circular(150)),
                                         child: ClipOval(
                                           child: (state.results[index].image !=
                                                       null &&
@@ -158,8 +158,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                                                   fit: BoxFit.cover,
                                                 )
                                               : CachedNetworkImage(
-                                                  height: 50.h,
-                                                  width: 50.w,
+                                                  height: 70.h,
+                                                  width: 60.w,
                                                   imageUrl: state
                                                       .results[index].image!,
                                                   fit: BoxFit.cover,

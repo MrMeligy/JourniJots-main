@@ -22,7 +22,8 @@ class CustomizeUserCubit extends Cubit<CustomizeUserState> {
     emit(ProfilePicUploadLoading());
 
     // Use the repository to upload the image
-    final response = await customizeUserRepo.uploadProfilePicture(image: image);
+    final response =
+        await customizeUserRepo.uploadProfilePicture(imagePath: image.path);
 
     // Handle the result
     response.fold(
