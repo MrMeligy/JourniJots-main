@@ -49,6 +49,10 @@ class EndPoint {
     return "user/GetPopularPlacesInCity?city=$city";
   }
 
+  static String editPost({required int postId}) {
+    return "Post/EditPost?postId=$postId";
+  }
+
   static String addTrip() {
     return "Trip/CreateTrip";
   }

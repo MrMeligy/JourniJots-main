@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:journijots/core/api/end_ponits.dart';
 import 'package:journijots/core/cache/cache_helper.dart';
-import 'package:journijots/core/helper/extensions.dart';
-import 'package:journijots/core/routes/routes.dart';
 import 'package:journijots/core/services/service_locator.dart';
+import 'package:journijots/features/actions/presentation/manager/cubits/cubit/add_post_cubit.dart';
+import 'package:journijots/features/actions/presentation/manager/repos/create_post_repo_impl.dart';
+import 'package:journijots/features/actions/presentation/screens/create_post_page.dart';
 import 'package:journijots/features/chatbot/peresntation/screens/journi_bot_screen.dart';
 import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
@@ -88,7 +89,16 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                     foregroundColor: Colors.white,
                     labelBackgroundColor: const Color(0xff4183BF),
                     onTap: () {
-                      context.pushNamed(Routes.addPostScreen);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider(
+                            create: (_) =>
+                                AddPostCubit(getIt<CreatePostRepoImpl>()),
+                            child: const CreatePostPage(),
+                          ),
+                        ),
+                      );
                     },
                   ),
                   SpeedDialChild(

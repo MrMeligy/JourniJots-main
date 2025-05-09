@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:journijots/core/api/api_consumer.dart';
 import 'package:journijots/core/api/end_ponits.dart';
+import 'package:journijots/core/cache/cache_helper.dart';
 import 'package:journijots/core/errors/exceptions.dart';
 import 'package:journijots/core/services/cloudinary_service.dart';
 import 'package:journijots/core/services/service_locator.dart';
@@ -29,6 +30,10 @@ class CustomizeUserRepoImpl extends CustomizeUserRepo {
           await api.post(EndPoint.uploadProfilePic(profilePic: profilePicUrl));
       // Parse and return the response
       final profilePicResponse = ProfilePictureResponse.fromJson(response);
+
+      getIt<CacheHelper>().saveData(
+          key: ApiKey.profilePic, value: profilePicResponse.profilePic);
+
       return right(profilePicResponse);
     } on ServerException catch (e) {
       return left(e.errModel.errorMessage);
