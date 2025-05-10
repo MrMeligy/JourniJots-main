@@ -8,6 +8,6 @@ String formatTimeAgo(DateTime date) {
   if (difference.inHours < 24) return "${difference.inHours}h";
   if (difference.inDays < 7) return "${difference.inDays}d";
   if (difference.inDays < 30) return "${(difference.inDays / 7).floor()}w";
-  if (difference.inDays < 365) return "${(difference.inDays / 30).floor()}m";
+  if (difference.inDays < 365) return "${(difference.inDays / 30).floor()}mo";
   return "${(difference.inDays / 365).floor()}y";
 }
