@@ -23,6 +23,7 @@ class CreatePostPage extends StatefulWidget {
 class _CreatePostPageState extends State<CreatePostPage> {
   final TextEditingController _postController = TextEditingController();
   final List<File> _selectedImages = [];
+  List<String>? _imagePaths;
   bool _isLoading = false;
   bool _postLoading = false;
   Future<void> _pickImages() async {
@@ -38,11 +39,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
       final List<XFile> images = await picker.pickMultiImage();
 
       if (images.isNotEmpty) {
+        _imagePaths = [];
         // Make sure widget is still mounted before updating state
         if (mounted) {
           setState(() {
             for (var image in images) {
               _selectedImages.add(File(image.path));
+              _imagePaths!.add(image.path);
             }
           });
         }
@@ -65,6 +68,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
   void _removeImage(int index) {
     setState(() {
       _selectedImages.removeAt(index);
+      _imagePaths!.removeAt(index);
     });
   }
 
@@ -273,6 +277,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
   }
 
   void _uploadPost(BuildContext context) async {
-    await context.read<AddPostCubit>().addPost(post: _postController.text);
+    await context
+        .read<AddPostCubit>()
+        .addPost(post: _postController.text, imagePaths: _imagePaths);
   }
 }

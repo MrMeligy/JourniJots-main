@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:journijots/core/api/api_consumer.dart';
 import 'package:journijots/core/api/end_ponits.dart';
 import 'package:journijots/core/errors/exceptions.dart';
+import 'package:journijots/core/services/cloudinary_service.dart';
 import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/features/actions/data/models/create_post_model.dart';
 import 'package:journijots/features/actions/presentation/manager/repos/create_post_repo.dart';
@@ -13,11 +14,28 @@ class CreatePostRepoImpl extends CreatePostRepo {
   CreatePostRepoImpl({required this.api});
   @override
   Future<Either<String, CreatePostModel>> addPost(
-      {required String post, required String category}) async {
+      {required String post,
+      required String category,
+      List<String>? imagePaths}) async {
     try {
+      List<String>? imageUrls;
+      if (imagePaths != null) {
+        imageUrls =
+            await CloudinaryService(dio: getIt<Dio>(), postPics: imagePaths)
+                .uploadPostPics();
+      }
+
       var response = await api.post(EndPoint.addPost,
           data: {"content": post, "category": category});
       final postResponse = CreatePostModel.fromJson(response);
+
+      if (imageUrls != null) {
+        if (imageUrls.isNotEmpty) {
+          await api.post(EndPoint.postImages(),
+              data: {"id": postResponse.postId, "imagesUrl": imageUrls});
+        }
+      }
+
       return (right(postResponse));
     } on ServerException catch (e) {
       return (left(e.errModel.errorMessage));

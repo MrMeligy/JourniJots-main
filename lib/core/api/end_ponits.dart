@@ -53,6 +53,10 @@ class EndPoint {
     return "Post/EditPost?postId=$postId";
   }
 
+  static String postImages() {
+    return "Post/PostImage";
+  }
+
   static String addTrip() {
     return "Trip/CreateTrip";
   }

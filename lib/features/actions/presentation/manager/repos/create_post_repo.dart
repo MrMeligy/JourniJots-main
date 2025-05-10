@@ -3,7 +3,9 @@ import 'package:journijots/features/actions/data/models/create_post_model.dart';
 
 abstract class CreatePostRepo {
   Future<Either<String, CreatePostModel>> addPost(
-      {required String post, required String category});
+      {required String post,
+      required String category,
+      List<String>? imagePaths});
   Future<String> classifyPost({required String post});
   Future<void> updatePost({required int postId, required String category});
 }
