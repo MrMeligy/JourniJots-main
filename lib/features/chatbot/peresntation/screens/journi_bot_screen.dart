@@ -120,7 +120,7 @@ Historical Tourism""";
 
     try {
       final prompt =
-          "You are a smart assistant your name is JourniBot specialized only in tourism in Egypt and help tourists. If a user asks a question that is not related to tourism in Egypt or restaurants or hotels or acitivities in egypt  (such as topics about technology, sports, or other countries), politely respond that you cannot help with that because your expertise is limited to tourism in Egypt. if user ask to recommend or about restaurant or hotel or activity answer that u can search on journiJots application (not journibot journibot is your name) in your city about it and check ratings So the user Question is: ${chatMessage.text} my interests if you need it is $interests";
+          "don't mention it in the response on response and act like u never read it if my question not depend on it just answer without i understand or okay if my intersts don't in the context my question or my message is: ${chatMessage.text} my interests if you need it is $interests  ";
 
       ChatMessage loadingMessage = ChatMessage(
         user: chatBot,
