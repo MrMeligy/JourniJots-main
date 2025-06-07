@@ -105,8 +105,6 @@ class ProfileHeader extends StatelessWidget {
   Widget _buildProfilePicture() {
     return ProfilePicture(
       picture: profileModel.profilePicture,
-      width: 90.w,
-      height: 90.h,
       isProfileView: true,
     );
   }

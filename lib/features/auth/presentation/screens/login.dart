@@ -68,11 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is LogInSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Login Success'),
-            ),
-          );
           getIt<CacheHelper>().saveData(key: "LoggedIn", value: true);
           context.pushNamed(Routes.mainScreen);
         } else if (state is LogInFailure) {

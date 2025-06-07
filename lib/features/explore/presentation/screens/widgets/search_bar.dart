@@ -138,6 +138,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                               return ListTile(
                                 leading: (state.results[index].type == "User")
                                     ? ProfilePicture(
+                                        width: 60.w,
+                                        height: 70.h,
                                         picture: state.results[index].image,
                                       )
                                     : Container(
