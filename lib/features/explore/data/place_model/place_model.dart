@@ -7,6 +7,7 @@ class PlaceModel extends Equatable {
   final String? image;
   final String? address;
   final String? city;
+  final String? type;
   final double? rating;
   final int? ratingCount;
   final double? longitude;
@@ -19,6 +20,7 @@ class PlaceModel extends Equatable {
     this.image,
     this.address,
     this.city,
+    this.type,
     this.rating,
     this.ratingCount,
     this.longitude,
@@ -32,6 +34,7 @@ class PlaceModel extends Equatable {
       name: json['name'] as String?,
       image: json['image'] as String?,
       address: json['address'] as String?,
+      type: json['type'] as String?,
       city: json['city'] as String?,
       rating: (json['rating'] as num?)?.toDouble(),
       ratingCount: json['ratingCount'] as int?,
@@ -47,6 +50,7 @@ class PlaceModel extends Equatable {
         'image': image,
         'address': address,
         'city': city,
+        'type': type,
         'rating': rating,
         'ratingCount': ratingCount,
         'longitude': longitude,
@@ -61,6 +65,7 @@ class PlaceModel extends Equatable {
       name,
       image,
       address,
+      type,
       city,
       rating,
       ratingCount,

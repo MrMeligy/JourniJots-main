@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:journijots/core/funcs/doubles_rates.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/data/place_model/place_model.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/image_handler.dart';
@@ -87,7 +88,7 @@ class PlaceCard extends StatelessWidget {
                       size: 26.w,
                     ),
                     Text(
-                      placeModel.rating.toString(),
+                      truncateToFirstDecimal(placeModel.rating!).toString(),
                       style: TextStyle(
                         fontSize: 24.sp,
                       ),

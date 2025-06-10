@@ -75,6 +75,16 @@ class EndPoint {
     }
     return "User/search?name=$text";
   }
+
+  static String addPlaceToTrip({required String placeType}) {
+    if (placeType == "Restaurant") {
+      return "Trip/Addrestaurant";
+    } else if (placeType == "Hotel") {
+      return "Trip/AddHotel";
+    } else {
+      return "Trip/AddActivity";
+    }
+  }
 }
 
 class ApiKey {

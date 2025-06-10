@@ -3,6 +3,7 @@ import 'package:flutter_rating/flutter_rating.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/api/dio_consumer.dart';
 import 'package:journijots/core/api/end_ponits.dart';
+import 'package:journijots/core/funcs/doubles_rates.dart';
 import 'package:journijots/core/services/service_locator.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/data/place_model/place_model.dart';
@@ -69,7 +70,8 @@ class _PlaceInfoState extends State<PlaceInfo> {
               SizedBox(
                 width: 70,
                 child: PlaceInfoElement(
-                  text: widget.placeModel.rating.toString(),
+                  text: truncateToFirstDecimal(widget.placeModel.rating!)
+                      .toString(),
                   textSize: 22.sp,
                   icon: Icons.star,
                 ),
@@ -77,7 +79,9 @@ class _PlaceInfoState extends State<PlaceInfo> {
               SizedBox(
                 width: 150,
                 child: PlaceInfoElement(
-                  text: (widget.placeModel.ratingCount).toString(),
+                  text: (isRated)
+                      ? (widget.placeModel.ratingCount!.toInt() + 1).toString()
+                      : widget.placeModel.ratingCount.toString(),
                   textSize: 22.sp,
                   icon: Icons.people,
                 ),
@@ -120,14 +124,15 @@ class _PlaceInfoState extends State<PlaceInfo> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      setState(() {});
                       ratingCount += 1;
                       isRated = true;
+                      setState(() {});
                       await getIt<DioConsumer>().post(
                         EndPoint.rate(),
                         data: {
                           "placeId": widget.placeModel.id,
                           "rate": rating.toInt(),
+                          "type": widget.placeModel.type,
                         },
                       );
                     },
