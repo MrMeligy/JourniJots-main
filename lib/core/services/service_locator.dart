@@ -13,6 +13,7 @@ import 'package:journijots/features/home/presentation/screens/manager/repos/comm
 import 'package:journijots/features/home/presentation/screens/manager/repos/post_repo/post_repo_impl.dart';
 import 'package:journijots/features/interests/presentation/manager/cubit/customize_user_cubit.dart';
 import 'package:journijots/features/interests/presentation/manager/repos/customize_user_repo_impl.dart';
+import 'package:journijots/features/place/presentation/manager/repos/place_repo_impl.dart';
 import 'package:journijots/features/profile/presentation/manager/repose/profile_repo_impl.dart';
 import 'package:journijots/features/trip/presentation/managers/repos/add_trip_repo_impl.dart';
 
@@ -58,6 +59,9 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<CreatePostRepoImpl>(
     CreatePostRepoImpl(api: getIt<DioConsumer>()),
+  );
+  getIt.registerSingleton<PlaceRepoImpl>(
+    PlaceRepoImpl(api: getIt<DioConsumer>()),
   );
   getIt.registerSingleton<CloudinaryService>(
     CloudinaryService(dio: getIt<Dio>()),

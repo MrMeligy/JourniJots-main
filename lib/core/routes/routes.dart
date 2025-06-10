@@ -9,6 +9,7 @@ class Routes {
   static const mainScreen = '/MainScreen';
   static const homeScreen = '/home';
   static const exploreScreen = '/Explore';
+  static const placeScreen = '/Place';
   static const cityScreen = '/City';
   static const profileScreen = '/profile';
   static const addPostScreen = '/addPost';

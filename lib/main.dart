@@ -10,6 +10,8 @@ import 'package:journijots/features/auth/presentation/manager/repos/user_repo_im
 import 'package:journijots/features/auth/presentation/manager/user_cubit/user_cubit.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/search_cubit/search_cubit.dart';
 import 'package:journijots/features/explore/presentation/manager/repos/search_repo/search_repo_impl.dart';
+import 'package:journijots/features/place/presentation/manager/place_cubit/place_cubit.dart';
+import 'package:journijots/features/place/presentation/manager/repos/place_repo_impl.dart';
 import 'package:journijots/journijots_app.dart';
 
 void main() async {
@@ -27,6 +29,9 @@ void main() async {
         ),
         BlocProvider(
           create: (context) => SearchCubit(getIt<SearchRepoImpl>()),
+        ),
+        BlocProvider(
+          create: (context) => PlaceCubit(getIt<PlaceRepoImpl>()),
         ),
       ],
       child: JournijotsApp(

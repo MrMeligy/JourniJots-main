@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:journijots/features/explore/data/place_model/place_model.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/place_card.dart';
+import 'package:journijots/features/place/presentation/screens/place_screen.dart';
 
 class CityPlaces extends StatelessWidget {
   const CityPlaces({
@@ -29,7 +30,18 @@ class CityPlaces extends StatelessWidget {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: PlaceCard(placeModel: places[index]),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PlaceScreen(
+                              placeModel: places[index],
+                            )),
+                  );
+                },
+                child: PlaceCard(placeModel: places[index]),
+              ),
             );
           },
         ),

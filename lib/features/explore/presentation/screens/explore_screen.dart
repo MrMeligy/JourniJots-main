@@ -13,17 +13,29 @@ import 'package:journijots/features/explore/presentation/screens/city_screen.dar
 import 'package:journijots/features/explore/presentation/screens/widgets/nearby_place_card.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/popular_cities_swiper.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/search_bar.dart';
+import 'package:journijots/features/place/presentation/manager/place_cubit/place_cubit.dart';
+import 'package:journijots/features/place/presentation/manager/repos/place_repo_impl.dart';
+import 'package:journijots/features/place/presentation/screens/place_screen.dart';
 
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NearplacesCubit(getIt<NearbyPlacesRepoImp>())
-        ..getNearPlaces(
-          city: getIt<CacheHelper>().getData(key: ApiKey.city),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NearplacesCubit(getIt<NearbyPlacesRepoImp>())
+            ..getNearPlaces(
+              city: getIt<CacheHelper>().getData(key: ApiKey.city),
+            ),
         ),
+        BlocProvider(
+          create: (context) => PlaceCubit(
+            getIt<PlaceRepoImpl>(),
+          ),
+        ),
+      ],
       child: Scaffold(
         body: Stack(
           children: [
@@ -150,12 +162,10 @@ class ExploreScreen extends StatelessWidget {
                                             ),
                                       child: Builder(
                                         builder: (context) {
-                                          // الحصول على اسم المدينة من CacheHelper
                                           final String cityName =
                                               getIt<CacheHelper>()
                                                   .getData(key: ApiKey.city);
 
-                                          // البحث عن المدينة في قائمة kcitycards
                                           CardItem? cityData;
                                           for (var card in kcitycards) {
                                             if (card.title.toLowerCase() ==
@@ -165,9 +175,7 @@ class ExploreScreen extends StatelessWidget {
                                             }
                                           }
 
-                                          // إذا لم يتم العثور على المدينة، استخدم القاهرة كافتراضي
-                                          cityData ??= kcitycards
-                                              .first; // القاهرة هي الأولى في القائمة
+                                          cityData ??= kcitycards.first;
 
                                           return CityScreen(
                                             city: cityName.replaceFirst(
@@ -202,8 +210,17 @@ class ExploreScreen extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: state.places.length,
                                   itemBuilder: (context, index) {
-                                    return nearPlaceCard(
-                                        state.places[index], () {});
+                                    return nearPlaceCard(state.places[index],
+                                        () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PlaceScreen(
+                                            placeId: state.places[index].id,
+                                          ),
+                                        ),
+                                      );
+                                    });
                                   },
                                 ),
                               );

@@ -14,19 +14,24 @@ class ImageHandler extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      child: (imageUrl!.contains("data:image"))
-          ? Base64Image(
-              base64String: imageUrl,
-            )
-          : CachedNetworkImage(
-              imageUrl: imageUrl!,
+      child: (imageUrl == null)
+          ? Image.asset(
+              "assets/images/defImg.png",
               fit: BoxFit.cover,
-              placeholder: (context, url) => const Center(
-                child: CircularProgressIndicator(),
-              ),
-              errorWidget: (context, url, error) =>
-                  Image.asset("assets/images/defImg.png"),
-            ),
+            )
+          : (imageUrl!.contains("data:image"))
+              ? Base64Image(
+                  base64String: imageUrl,
+                )
+              : CachedNetworkImage(
+                  imageUrl: imageUrl!,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) =>
+                      Image.asset("assets/images/defImg.png"),
+                ),
     );
   }
 }

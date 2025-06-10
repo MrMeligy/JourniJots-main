@@ -20,6 +20,14 @@ class EndPoint {
     return "User/GetUserProfile?userId=$id";
   }
 
+  static String rate() {
+    return "User/Rate";
+  }
+
+  static String getPlace({required int placeId}) {
+    return "Places/place?id=$placeId";
+  }
+
   static String toggleLike = "Post/ToggleLike?postId=";
   static String postComment = "Post/Comment?postId=";
   static String getComment = "Post/GetPostComments?postId=";

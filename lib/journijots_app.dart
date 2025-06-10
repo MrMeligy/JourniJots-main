@@ -12,6 +12,7 @@ import 'package:journijots/features/explore/presentation/screens/explore_screen.
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/auth/presentation/screens/login.dart';
 import 'package:journijots/features/onboarding/presentation/screens/onboarding1.dart';
+import 'package:journijots/features/place/presentation/screens/place_screen.dart';
 
 class JournijotsApp extends StatelessWidget {
   const JournijotsApp({super.key, required this.appRouting});

@@ -9,6 +9,7 @@ import 'package:journijots/core/utils/debouncer.dart';
 import 'package:journijots/core/utils/widgets/image_base.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/search_cubit/search_cubit.dart';
 import 'package:journijots/features/home/presentation/screens/widgets/profile_picture.dart';
+import 'package:journijots/features/place/presentation/screens/place_screen.dart';
 
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({super.key, this.city, this.hintText});
@@ -183,12 +184,21 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 dense: true,
-                                onTap: () {
+                                onTap: () async {
                                   // Handle selection - e.g., navigate to detail page
                                   if (state.results[index].type == "User") {
                                     context.pushNamed(Routes.profileScreen,
                                         arguments:
                                             state.results[index].id.toString());
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PlaceScreen(
+                                                placeId:
+                                                    state.results[index].id,
+                                              )),
+                                    );
                                   }
                                   _hideOverlay();
                                   // Navigate or perform action with selected result

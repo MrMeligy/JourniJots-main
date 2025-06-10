@@ -44,6 +44,7 @@ dependencies:
   flutter_debouncer: ^2.0.0
   flutter_gemini: ^3.0.0
   flutter_native_splash: ^2.4.5
+  flutter_rating: ^2.0.2
   flutter_screenutil: ^5.9.3
   flutter_speed_dial: ^7.0.0
   flutter_svg: ^2.0.17
@@ -61,10 +62,10 @@ dependencies:
   timeago: ^3.2.2
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.14.3"
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.14.3"
 
 flutter_launcher_icons:
   android: "launcher_icon"

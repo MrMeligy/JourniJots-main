@@ -76,6 +76,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
         floatingActionButton: isKeyboardOpen
             ? null
             : SpeedDial(
+                heroTag: "floatingActionButton",
                 backgroundColor: const Color(0xff4183BF),
                 icon: Icons.add,
                 iconTheme: const IconThemeData(color: Colors.white),
