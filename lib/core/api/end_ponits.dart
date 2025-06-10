@@ -28,6 +28,10 @@ class EndPoint {
     return "Places/place?id=$placeId";
   }
 
+  static String getTripPlaces({required int tripId}) {
+    return "Trip/GetTripById?tripId=$tripId";
+  }
+
   static String toggleLike = "Post/ToggleLike?postId=";
   static String postComment = "Post/Comment?postId=";
   static String getComment = "Post/GetPostComments?postId=";

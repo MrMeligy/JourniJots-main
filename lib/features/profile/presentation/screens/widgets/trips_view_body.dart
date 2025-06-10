@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/profile/presentation/manager/profile_posts_cubit/profile_posts_cubit.dart';
 import 'package:journijots/features/profile/presentation/screens/widgets/trip_widget.dart';
+import 'package:journijots/features/trip/presentation/screens/trip_places.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class TripsViewBody extends StatelessWidget {
@@ -30,9 +31,23 @@ class TripsViewBody extends StatelessWidget {
                       return Padding(
                         padding: EdgeInsets.symmetric(
                             vertical: 16.0.h, horizontal: 16.0.w),
-                        child: TripWidget(
-                          city: state.profileModel.trips![index].city!,
-                          date: state.profileModel.trips![index].startDate!,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TripPlacesScreen(
+                                        city: state
+                                            .profileModel.trips![index].city!,
+                                        tripId: state
+                                            .profileModel.trips![index].id!,
+                                      )),
+                            );
+                          },
+                          child: TripWidget(
+                            city: state.profileModel.trips![index].city!,
+                            date: state.profileModel.trips![index].startDate!,
+                          ),
                         ),
                       );
                     })

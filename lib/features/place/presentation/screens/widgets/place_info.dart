@@ -76,15 +76,12 @@ class _PlaceInfoState extends State<PlaceInfo> {
                   icon: Icons.star,
                 ),
               ), // Space between rating and count
-              SizedBox(
-                width: 150,
-                child: PlaceInfoElement(
-                  text: (isRated)
-                      ? (widget.placeModel.ratingCount!.toInt() + 1).toString()
-                      : widget.placeModel.ratingCount.toString(),
-                  textSize: 22.sp,
-                  icon: Icons.people,
-                ),
+              PlaceInfoElement(
+                text: (isRated)
+                    ? (widget.placeModel.ratingCount!.toInt() + 1).toString()
+                    : widget.placeModel.ratingCount.toString(),
+                textSize: 22.sp,
+                icon: Icons.people,
               ),
             ],
           ),

@@ -217,6 +217,8 @@ class ExploreScreen extends StatelessWidget {
                                         MaterialPageRoute(
                                           builder: (context) => PlaceScreen(
                                             placeId: state.places[index].id,
+                                            city: getIt<CacheHelper>()
+                                                .getData(key: ApiKey.city),
                                           ),
                                         ),
                                       );

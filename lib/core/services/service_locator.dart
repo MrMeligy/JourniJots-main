@@ -16,6 +16,7 @@ import 'package:journijots/features/interests/presentation/manager/repos/customi
 import 'package:journijots/features/place/presentation/manager/repos/place_repo_impl.dart';
 import 'package:journijots/features/profile/presentation/manager/repose/profile_repo_impl.dart';
 import 'package:journijots/features/trip/presentation/managers/repos/add_trip_repo_impl.dart';
+import 'package:journijots/features/trip/presentation/managers/repos/trip_places_repo/trip_places_repo_impl.dart';
 
 final getIt = GetIt.instance;
 
@@ -62,6 +63,9 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<PlaceRepoImpl>(
     PlaceRepoImpl(api: getIt<DioConsumer>()),
+  );
+  getIt.registerSingleton<TripPlacesRepoImpl>(
+    TripPlacesRepoImpl(api: getIt<DioConsumer>()),
   );
   getIt.registerSingleton<CloudinaryService>(
     CloudinaryService(dio: getIt<Dio>()),

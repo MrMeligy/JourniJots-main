@@ -12,7 +12,7 @@ import 'package:journijots/features/chatbot/peresntation/screens/journi_bot_scre
 import 'package:journijots/features/explore/presentation/screens/explore_screen.dart';
 import 'package:journijots/features/home/presentation/screens/home_screen.dart';
 import 'package:journijots/features/profile/presentation/screens/profile_page.dart';
-import 'package:journijots/features/trip/presentation/managers/add_trip_cubit/add_trip_cubit.dart';
+import 'package:journijots/features/trip/presentation/managers/cubits/add_trip_cubit/add_trip_cubit.dart';
 import 'package:journijots/features/trip/presentation/managers/repos/add_trip_repo_impl.dart';
 import 'package:journijots/features/trip/presentation/screens/add_trip.dart';
 

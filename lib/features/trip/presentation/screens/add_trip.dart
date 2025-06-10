@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:journijots/bottom_nanv_bar.dart';
 import 'package:journijots/core/utils/widgets/custom_appbar.dart';
-import 'package:journijots/features/trip/presentation/managers/add_trip_cubit/add_trip_cubit.dart';
+import 'package:journijots/features/trip/presentation/managers/cubits/add_trip_cubit/add_trip_cubit.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
