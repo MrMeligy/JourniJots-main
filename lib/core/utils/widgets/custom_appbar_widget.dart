@@ -22,7 +22,7 @@ class CustomAppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height *
-          0.1222.h, // fixed height like AppBar
+          0.12.h, // fixed height like AppBar
       decoration: BoxDecoration(
         color: color,
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(15)),

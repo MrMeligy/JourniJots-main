@@ -58,7 +58,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
     _pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut, // ممكن تجرب Curves.easeOutCubic مثلاً
+      curve: Curves.easeInOut,
     );
   }
 
@@ -80,10 +80,15 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                 backgroundColor: const Color(0xff4183BF),
                 icon: Icons.add,
                 iconTheme: const IconThemeData(color: Colors.white),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 children: [
                   SpeedDialChild(
                     child: const Icon(Icons.edit),
-                    shape: const CircleBorder(),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     label: 'Add Post',
                     labelStyle: const TextStyle(color: Colors.white),
                     backgroundColor: const Color(0xff4183BF),
@@ -104,7 +109,9 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                   ),
                   SpeedDialChild(
                     child: const Icon(Icons.travel_explore),
-                    shape: const CircleBorder(),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     label: 'Add Trip',
                     labelStyle: const TextStyle(color: Colors.white),
                     backgroundColor: const Color(0xff4183BF),
@@ -125,54 +132,11 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                   ),
                 ],
               ),
-        // FloatingActionButton(
-        //     onPressed: () {
-        //       // Action when + is pressed
-        //     },
-        //     shape: const CircleBorder(),
-        //     backgroundColor: const Color(0xff4183BF),
-        //     elevation: 5,
-        //     child: const Icon(Icons.add, size: 30, color: Colors.white),
-        //   ),
+        // Use centerDocked to position FAB in the notch with no separation
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(24),
-            topRight: Radius.circular(24),
-          ),
-          child: BottomAppBar(
-            height: 80.h,
-            notchMargin: 8,
-            color: const Color(0xff4183BF),
-            child: SizedBox(
-              height: 70.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  _buildNavItem(0, Icons.home),
-                  _buildNavItem(1, Icons.explore),
-                  const SizedBox(width: 40), // Space for FAB
-                  _buildNavItem(2, Icons.smart_toy_outlined),
-                  _buildNavItem(3, Icons.person),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(int index, IconData icon) {
-    bool isSelected = _selectedIndex == index;
-    return GestureDetector(
-      onTap: () => _onItemTapped(index),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
-        child: Icon(
-          icon,
-          size: 28,
-          color: isSelected ? Colors.white : Colors.white70,
+        bottomNavigationBar: CustomBottomAppBar(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
         ),
       ),
     );
@@ -182,6 +146,104 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+}
+
+class CustomBottomAppBar extends StatelessWidget {
+  final int selectedIndex;
+  final Function(int) onItemTapped;
+
+  const CustomBottomAppBar({
+    super.key,
+    required this.selectedIndex,
+    required this.onItemTapped,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      size: Size(MediaQuery.of(context).size.width, 75.h),
+      painter: BottomNavBarPainter(),
+      child: SizedBox(
+        height: 75.h,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            _buildNavItem(0, Icons.home),
+            _buildNavItem(1, Icons.explore),
+            const SizedBox(width: 80), // Increased space for larger FAB cutout
+            _buildNavItem(2, Icons.smart_toy_outlined),
+            _buildNavItem(3, Icons.person),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(int index, IconData icon) {
+    bool isSelected = selectedIndex == index;
+    return GestureDetector(
+      onTap: () => onItemTapped(index),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+        child: Icon(
+          icon,
+          size: 37,
+          color: isSelected ? Colors.white : Colors.white70,
+        ),
+      ),
+    );
+  }
+}
+
+class BottomNavBarPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..color = const Color(0xff4183BF)
+      ..style = PaintingStyle.fill;
+
+    Path path = Path();
+
+    // Start from bottom left
+    path.moveTo(0, size.height);
+
+    // Go to top left with rounded corner
+    path.lineTo(0, 24);
+    path.quadraticBezierTo(0, 0, 24, 0);
+
+    // Go to the start of the larger notch (wider cutout for FAB)
+    path.lineTo(size.width * 0.28, 0);
+
+    // Create a bigger curved notch for FAB with smoother transitions
+    // Left side of the notch - gradual curve down
+    path.quadraticBezierTo(size.width * 0.32, 0, size.width * 0.35, 8);
+    path.quadraticBezierTo(size.width * 0.38, 18, size.width * 0.42, 28);
+
+    // Bottom of the notch - deeper curve
+    path.quadraticBezierTo(size.width * 0.46, 38, size.width * 0.50, 42);
+    path.quadraticBezierTo(size.width * 0.54, 38, size.width * 0.58, 28);
+
+    // Right side of the notch - gradual curve up
+    path.quadraticBezierTo(size.width * 0.62, 18, size.width * 0.65, 8);
+    path.quadraticBezierTo(size.width * 0.68, 0, size.width * 0.72, 0);
+
+    // Go to top right with rounded corner
+    path.lineTo(size.width - 24, 0);
+    path.quadraticBezierTo(size.width, 0, size.width, 24);
+
+    // Go to bottom right
+    path.lineTo(size.width, size.height);
+
+    // Close the path
+    path.close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
 

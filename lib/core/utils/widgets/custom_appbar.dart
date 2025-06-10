@@ -12,14 +12,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.icon = true,
   });
+
   final IconButton? leading;
   final String? title;
   final Color? color, titleColor, iconColor;
   final bool? icon;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: color,
+      backgroundColor: color ?? const Color(0xFFFAFAFA),
       toolbarHeight: preferredSize.height,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
@@ -33,20 +35,63 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       leading: Padding(
-        padding: const EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 5),
         child: leading ??
-            Image.asset(
-              "assets/images/logo.png",
+            Container(
+              width: 50,
+              height: 50,
+              margin: const EdgeInsets.all(7),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade300,
+                ),
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade200,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Image.asset(
+                  "assets/images/logo.png",
+                  fit: BoxFit.contain,
+                ),
+              ),
             ),
       ),
       actions: [
         (icon ?? false)
             ? Padding(
                 padding: const EdgeInsets.only(right: 8),
-                child: Icon(
-                  Icons.notifications_on_outlined,
-                  size: 35.h,
-                  color: iconColor,
+                child: Container(
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade200,
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.notifications_on_outlined,
+                      size: 27.h, // Adjusted size to fit better in the border
+                      color: iconColor ?? Colors.grey.shade700,
+                    ),
+                  ),
                 ),
               )
             : const Padding(padding: EdgeInsets.only(right: 8))

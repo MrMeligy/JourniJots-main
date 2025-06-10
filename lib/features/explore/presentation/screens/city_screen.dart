@@ -4,7 +4,6 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/services/service_locator.dart';
-import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/city_cubit/city_cubit.dart';
 import 'package:journijots/features/explore/presentation/manager/cubits/places_count/places_count_cubit.dart';
 import 'package:journijots/features/explore/presentation/manager/repos/places_count/places_count_repo_imol.dart';
@@ -51,7 +50,7 @@ class _CityScreenState extends State<CityScreen> {
       create: (context) => PlacesCountCubit(getIt<PlacesCountRepoImol>())
         ..getPlacesCount(city: widget.city),
       child: Scaffold(
-        backgroundColor: kscaffoldcolor,
+        backgroundColor: const Color.fromARGB(255, 134, 166, 193),
         body: Stack(
           children: [
             Positioned(
@@ -116,13 +115,13 @@ class _CityScreenState extends State<CityScreen> {
                             clipper:
                                 OvalTopBorderClipper(), // أو جرّب WaveClipperTwo، WaveClipperOneReverse ...
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.37,
                               width: double.infinity,
                               color: Colors.white,
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: 25.h,
+                                    height: 40.h,
                                   ),
                                   CityDiscribtion(
                                     city: widget.city,
@@ -186,9 +185,9 @@ class _CityScreenState extends State<CityScreen> {
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 20.0),
+                                            const EdgeInsets.only(left: 45),
                                         child: Row(
-                                          spacing: 5,
+                                          spacing: 10,
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
@@ -239,13 +238,17 @@ class _CityScreenState extends State<CityScreen> {
                                                             .spaceAround,
                                                     children: [
                                                       CircleAvatar(
-                                                        radius: 20,
+                                                        radius: 30,
                                                         backgroundColor: (state
                                                                     .pagDetails
                                                                     .pageNumber ==
                                                                 1)
-                                                            ? kscaffoldcolor
-                                                            : kprimarycolor,
+                                                            ? const Color
+                                                                .fromARGB(255,
+                                                                78, 127, 182)
+                                                            : const Color
+                                                                .fromARGB(255,
+                                                                94, 136, 168),
                                                         child: IconButton(
                                                           onPressed: () {
                                                             if (state.pagDetails
@@ -265,12 +268,16 @@ class _CityScreenState extends State<CityScreen> {
                                                         ),
                                                       ),
                                                       CircleAvatar(
-                                                        radius: 20,
+                                                        radius: 30,
                                                         backgroundColor: (state
                                                                 .pagDetails
                                                                 .hasNext!)
-                                                            ? kprimarycolor
-                                                            : kscaffoldcolor,
+                                                            ? const Color
+                                                                .fromARGB(255,
+                                                                78, 127, 182)
+                                                            : const Color
+                                                                .fromARGB(255,
+                                                                94, 136, 168),
                                                         child: IconButton(
                                                           onPressed: () {
                                                             if (!state

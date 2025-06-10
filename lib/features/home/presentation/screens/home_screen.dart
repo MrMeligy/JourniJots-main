@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kscaffoldcolor,
+      backgroundColor: kbodycolor,
       appBar: const CustomAppBar(),
       body: BlocProvider(
         create: (context) => PostCubit(getIt<PostRepoImpl>())..getPosts(1),
