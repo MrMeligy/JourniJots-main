@@ -84,14 +84,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.notifications_on_outlined,
-                      size: 27.h, // Adjusted size to fit better in the border
-                      color: iconColor ?? Colors.grey.shade700,
-                    ),
-                  ),
                 ),
               )
             : const Padding(padding: EdgeInsets.only(right: 8))

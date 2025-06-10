@@ -94,6 +94,7 @@ class _JourniBotScreenState extends State<JourniBotScreen> {
 
   PreferredSizeWidget _buildCustomAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       elevation: 0,
       backgroundColor: const Color.fromARGB(0, 210, 209, 209),
       centerTitle: true, // Centers the title

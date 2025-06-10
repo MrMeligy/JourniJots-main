@@ -79,7 +79,7 @@ class ExploreScreen extends StatelessWidget {
                           ),
                         ),
                         Icon(
-                          Icons.notifications_on_outlined,
+                          Icons.explore,
                           size: 35.h,
                           color: kprimarycolor,
                         ),
