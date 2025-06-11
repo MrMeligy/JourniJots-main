@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/funcs/doubles_rates.dart';
-import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/image_handler.dart';
 
 class PlaceCardTrip extends StatelessWidget {
@@ -26,105 +25,219 @@ class PlaceCardTrip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Colors.black38,
+            color: Colors.black.withOpacity(0.15),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+            spreadRadius: 0,
+          ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 6,
-            offset: Offset(15, 12), // Shadow position
+            offset: const Offset(0, 2),
+            spreadRadius: 0,
           ),
         ],
-        color: kbodycolor,
-        border: Border.all(
-          color: Colors.black54,
-          width: 3,
-        ),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(16),
-        ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.r),
       ),
-      child: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.3,
-            width: double.infinity,
-            child: ImageHandler(
-              imageUrl: image,
-            ),
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              name,
-              style: TextStyle(
-                fontSize: 22.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20.r),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image section with gradient overlay
+            Stack(
               children: [
-                Icon(
-                  Icons.location_pin,
-                  size: 26.w,
-                ),
                 SizedBox(
-                  width: 5.w,
+                  height: MediaQuery.of(context).size.height * 0.28,
+                  width: double.infinity,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(20.r),
+                    ),
+                    child: ImageHandler(
+                      imageUrl: image,
+                    ),
+                  ),
                 ),
-                Flexible(
-                  child: Text(
-                    address.isNotEmpty ? address : city,
-                    style: TextStyle(
-                      fontSize: 19.sp,
+                // Gradient overlay for better text readability
+                Positioned.fill(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withOpacity(0.3),
+                        ],
+                        stops: const [0.6, 1.0],
+                      ),
+                    ),
+                  ),
+                ),
+                // Rating badge
+                Positioned(
+                  top: 12.h,
+                  right: 12.w,
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.9),
+                      borderRadius: BorderRadius.circular(12.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.star_rounded,
+                          color: Colors.amber,
+                          size: 16.w,
+                        ),
+                        SizedBox(width: 2.w),
+                        Text(
+                          truncateToFirstDecimal(rating).toString(),
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.star,
-                      size: 26.w,
+
+            // Content section
+            Padding(
+              padding: EdgeInsets.all(16.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Place name
+                  Text(
+                    name,
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black87,
+                      height: 1.2,
                     ),
-                    Text(
-                      truncateToFirstDecimal(rating).toString(),
-                      style: TextStyle(
-                        fontSize: 24.sp,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+
+                  SizedBox(height: 8.h),
+
+                  // Location
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.location_on_rounded,
+                        size: 18.w,
+                        color: Colors.grey[600],
+                      ),
+                      SizedBox(width: 6.w),
+                      Expanded(
+                        child: Text(
+                          address.isNotEmpty ? address : city,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.grey[600],
+                            height: 1.3,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 12.h),
+
+                  // Rating and reviews section
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(12.r),
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 173, 203, 245),
+                        width: 2,
                       ),
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.people,
-                      size: 26.w,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Rating
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(4.w),
+                              decoration: BoxDecoration(
+                                color: Colors.amber,
+                                borderRadius: BorderRadius.circular(6.r),
+                              ),
+                              child: Icon(
+                                Icons.star_rounded,
+                                size: 16.w,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(width: 6.w),
+                            Text(
+                              truncateToFirstDecimal(rating).toString(),
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // Review count
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.people,
+                              size: 21.w,
+                              color: const Color.fromARGB(255, 64, 111, 164),
+                            ),
+                            SizedBox(width: 4.w),
+                            Text(
+                              '$ratingCount reviews',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: const Color.fromARGB(255, 64, 111, 164),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 3.w),
-                    Text(
-                      ratingCount.toString(),
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                      ),
-                    )
-                  ],
-                )
-              ],
+                  ),
+                ],
+              ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

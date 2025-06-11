@@ -4,7 +4,6 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journijots/core/helper/extensions.dart';
 import 'package:journijots/core/services/service_locator.dart';
-import 'package:journijots/core/utils/constants.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/category_chip.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/category_count.dart';
 import 'package:journijots/features/explore/presentation/screens/widgets/city_describtion.dart';
@@ -82,7 +81,7 @@ class _TripPlacesScreenState extends State<TripPlacesScreen> {
       create: (context) => TripPlacesCubit(getIt<TripPlacesRepoImpl>())
         ..getTripPlaces(tripId: widget.tripId),
       child: Scaffold(
-        backgroundColor: kscaffoldcolor,
+        backgroundColor: const Color.fromARGB(255, 134, 166, 193),
         body: Stack(
           children: [
             Positioned(
@@ -201,9 +200,9 @@ class _TripPlacesScreenState extends State<TripPlacesScreen> {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 20.0),
+                                    padding: const EdgeInsets.only(left: 45),
                                     child: Row(
-                                      spacing: 5,
+                                      spacing: 10,
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [

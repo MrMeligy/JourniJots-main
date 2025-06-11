@@ -75,13 +75,25 @@ class ExploreScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 40.sp,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue.shade900,
+                            color: const Color.fromARGB(255, 49, 128, 192),
                           ),
                         ),
-                        Icon(
-                          Icons.explore,
-                          size: 35.h,
-                          color: kprimarycolor,
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [
+                                Color.fromARGB(255, 57, 130, 189),
+                                Color.fromARGB(255, 163, 210, 252),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(
+                            Icons.explore_rounded,
+                            color: Colors.white,
+                            size: 23,
+                          ),
                         ),
                       ],
                     ),
@@ -103,142 +115,269 @@ class ExploreScreen extends StatelessWidget {
 
                   SizedBox(height: 25.h),
                   // Popular Cities Section with Different Background
+                  // Replace the existing Container with this enhanced version
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 15),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
+                      // Clean white background
                       color: Colors.white,
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30),
                       ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Section Title and "See More"
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Popular Cities",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff8CB6DC)),
-                            ),
-                          ],
+                      // Add subtle shadow for depth
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blue.shade100.withOpacity(0.5),
+                          blurRadius: 20,
+                          offset: const Offset(0, -5),
+                          spreadRadius: 0,
                         ),
-                        SizedBox(height: 30.h),
-
-                        // Stacked Images
-                        const PopularCitiesSwiper(),
-                        SizedBox(height: 30.h),
-
-                        // Nearby Places Section
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Popular Places in ${getIt<CacheHelper>().getData(key: ApiKey.city)}",
-                              style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff8CB6DC)),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => BlocProvider(
-                                      create: (_) =>
-                                          CityCubit(getIt<CityRepoImpl>())
-                                            ..getActivities(
-                                              city: getIt<CacheHelper>()
-                                                  .getData(key: ApiKey.city),
-                                              pageNum: '1',
-                                            ),
-                                      child: Builder(
-                                        builder: (context) {
-                                          final String cityName =
-                                              getIt<CacheHelper>()
-                                                  .getData(key: ApiKey.city);
-
-                                          CardItem? cityData;
-                                          for (var card in kcitycards) {
-                                            if (card.title.toLowerCase() ==
-                                                cityName.toLowerCase()) {
-                                              cityData = card;
-                                              break;
-                                            }
-                                          }
-
-                                          cityData ??= kcitycards.first;
-
-                                          return CityScreen(
-                                            city: cityName.replaceFirst(
-                                                cityName[0],
-                                                cityName[0].toUpperCase()),
-                                            cityImage: cityData.imagePath,
-                                            desc: cityData.subtitle,
-                                          );
-                                        },
+                      ],
+                      // Add subtle border
+                      border: Border(
+                        top: BorderSide(
+                          color: Colors.blue.shade100.withOpacity(0.3),
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 15),
+                      decoration: BoxDecoration(
+                        // Inner decoration for layered effect
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                        // Subtle inner glow
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.white.withOpacity(0.8),
+                            blurRadius: 10,
+                            offset: const Offset(0, 1),
+                            spreadRadius: -2,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Enhanced Section Title with decorative elements
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  // Decorative icon
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        colors: [
+                                          Color.fromARGB(255, 57, 130, 189),
+                                          Color.fromARGB(255, 163, 210, 252),
+                                        ],
                                       ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: const Icon(
+                                      Icons.location_city,
+                                      color: Colors.white,
+                                      size: 20,
                                     ),
                                   ),
-                                );
-                              },
-                              child: const Text(
-                                "See more..",
-                                style: TextStyle(
-                                    fontSize: 14, color: Color(0xff8CB6DC)),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 10.h),
-
-                        // Horizontal Scrollable Cards
-                        BlocBuilder<NearplacesCubit, NearplacesState>(
-                          builder: (context, state) {
-                            if (state is NearplacesSuccess) {
-                              return SizedBox(
-                                height: 230.h, // Fixed height for the ListView
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: state.places.length,
-                                  itemBuilder: (context, index) {
-                                    return nearPlaceCard(state.places[index],
-                                        () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => PlaceScreen(
-                                            placeId: state.places[index].id,
-                                            city: getIt<CacheHelper>()
-                                                .getData(key: ApiKey.city),
-                                          ),
+                                  const SizedBox(width: 12),
+                                  // Enhanced title
+                                  Text(
+                                    "Popular Cities",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xff8CB6DC),
+                                      shadows: [
+                                        Shadow(
+                                          color: Colors.blue.shade100,
+                                          offset: const Offset(0, 1),
+                                          blurRadius: 2,
                                         ),
-                                      );
-                                    });
-                                  },
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 30.h),
+
+                          // Existing PopularCitiesSwiper (unchanged)
+                          const PopularCitiesSwiper(),
+                          SizedBox(height: 30.h),
+
+                          // Enhanced Nearby Places Section
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    // Location pin icon
+                                    Container(
+                                      padding: const EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                          colors: [
+                                            Color.fromARGB(255, 57, 130, 189),
+                                            Color.fromARGB(255, 163, 210, 252),
+                                          ],
+                                        ),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: const Icon(
+                                        Icons.place,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        "Popular Places in ${getIt<CacheHelper>().getData(key: ApiKey.city)}",
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xff8CB6DC),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              );
-                            } else {
-                              return SizedBox(
-                                height: 200.h,
-                                child: const Center(
-                                    child: CircularProgressIndicator()),
-                              );
-                            }
-                          },
-                        ),
-                        SizedBox(height: 55.h),
-                      ],
+                              ),
+                              // Enhanced "See more" button
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider(
+                                        create: (_) =>
+                                            CityCubit(getIt<CityRepoImpl>())
+                                              ..getActivities(
+                                                city: getIt<CacheHelper>()
+                                                    .getData(key: ApiKey.city),
+                                                pageNum: '1',
+                                              ),
+                                        child: Builder(
+                                          builder: (context) {
+                                            final String cityName =
+                                                getIt<CacheHelper>()
+                                                    .getData(key: ApiKey.city);
+
+                                            CardItem? cityData;
+                                            for (var card in kcitycards) {
+                                              if (card.title.toLowerCase() ==
+                                                  cityName.toLowerCase()) {
+                                                cityData = card;
+                                                break;
+                                              }
+                                            }
+
+                                            cityData ??= kcitycards.first;
+
+                                            return CityScreen(
+                                              city: cityName.replaceFirst(
+                                                  cityName[0],
+                                                  cityName[0].toUpperCase()),
+                                              cityImage: cityData.imagePath,
+                                              desc: cityData.subtitle,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 6,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(255, 57, 130, 189),
+                                        Color.fromARGB(255, 163, 210, 252),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: const Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "See more",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      SizedBox(width: 4),
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Colors.white,
+                                        size: 12,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10.h),
+
+                          // Existing BlocBuilder (unchanged functionality)
+                          BlocBuilder<NearplacesCubit, NearplacesState>(
+                            builder: (context, state) {
+                              if (state is NearplacesSuccess) {
+                                return SizedBox(
+                                  height:
+                                      230.h, // Fixed height for the ListView
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: state.places.length,
+                                    itemBuilder: (context, index) {
+                                      return nearPlaceCard(state.places[index],
+                                          () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => PlaceScreen(
+                                              placeId: state.places[index].id,
+                                              city: getIt<CacheHelper>()
+                                                  .getData(key: ApiKey.city),
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                    },
+                                  ),
+                                );
+                              } else {
+                                return SizedBox(
+                                  height: 200.h,
+                                  child: const Center(
+                                      child: CircularProgressIndicator()),
+                                );
+                              }
+                            },
+                          ),
+                          SizedBox(height: 55.h),
+                        ],
+                      ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
